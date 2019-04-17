@@ -11,5 +11,12 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-   .sass('resources/sass/app.scss', 'public/css');
+mix.js('resources/js/app.js', 'public/frontend/js')
+   .sass('resources/sass/app.scss', 'public/frontend/css')
+   .copyDirectory('resources/assets/frontend/css', 'public/frontend/css')
+   .copyDirectory('resources/assets/frontend/js', 'public/frontend/js')
+   .copyDirectory('resources/assets/frontend/fonts', 'public/frontend/fonts')
+   .copyDirectory('resources/assets/frontend/images', 'public/frontend/images')
+   .copyDirectory('resources/assets/frontend/vendor', 'public/frontend/vendor')
+   .copyDirectory('node_modules/font-awesome', 'public/frontend/vendor/font-awesome')
+   .version();

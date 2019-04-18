@@ -9,7 +9,7 @@
     <!-- Fav icon -->
     {{ Html::favicon(asset('frontend/fonts/fav.png')) }}
     <!-- Bootstrap core CSS -->
-    {{ Html::style(asset('frontend/css/app.css')) }}
+    {{ Html::style(asset('frontend/vendor/bootstrap/dist/css/bootstrap.min.css')) }}
     <!-- Preloader CSS -->
     {{ Html::style(asset('frontend/css/preloader.css')) }}
     <!-- DL Menu CSS -->
@@ -42,12 +42,24 @@
     {{ Html::style(asset('frontend/css/style.css')) }}
     <!-- Color CSS -->
     {{ Html::style(asset('frontend/css/color.css')) }}
+
+    <script type="text/javascript">
+        Window.Laravel = {!! json_encode([
+            'csrfToken' => csrf_token(),
+            'locale' => config('app.locale'),
+            'base_url' => url('/'),
+            'settings' => [
+                'images' => config('setting.images'),
+            ],
+        ]) !!};
+    </script>
 </head>
 <body class="msl-black">
     <div id="app"></div>
-
-    <!--Jquery & Bootstrap core JavaScript-->
-    {{ Html::script(asset('frontend/js/app.js')) }}
+    <!-- Jquery ver 1.11.3 -->
+    {{ Html::script(asset('frontend/js/jquery.js')) }}
+    <!--Bootstrap core JavaScript-->
+    {{ Html::script(asset('frontend/vendor/bootstrap/dist/js/bootstrap.min.js')) }}
     <!--Slick Slider JavaScript-->
     {{ Html::script(asset('frontend/js/slick.min.js')) }}
     <!-- Player JavaScript -->
@@ -79,5 +91,7 @@
     {{ Html::script(asset('frontend/js/waypoint.js')) }}
     <!--Custom JavaScript-->
     {{ Html::script(asset('frontend/js/custom.js')) }}
+    <!-- Vue -->
+    {{ Html::script(asset('frontend/js/app.js')) }}
 </body>
 </html>

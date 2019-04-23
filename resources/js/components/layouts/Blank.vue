@@ -8,6 +8,7 @@
         </div>
         <div class="kode_wrapper">
             <app-header></app-header>
+            <router-view></router-view>
             <app-footer></app-footer>
         </div>
     </div>
@@ -15,14 +16,14 @@
 <script>
     import AppHeader from './partials/Header.vue'
     import AppFooter from './partials/Footer.vue'
-    
+
     export default {
         components: {
             AppHeader,
-            AppFooter
+            AppFooter,
         }
     }
 </script>
 <style scoped>
-    
+
 </style>

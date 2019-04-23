@@ -28,10 +28,10 @@ $factory->define(User::class, function (Faker $faker) {
         'email_verified_at' => now(),
         'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         'remember_token' => Str::random(10),
-        'avatar' => '',
+        'avatar' => $faker->imageUrl(100, 100),
         'gender' => 3,
         'description' => '',
-        'role_id' => 2,
+        'role_id' => $faker->randomElement([1, 2]),
         'background' => '',
         'status' => 1,
     ];
@@ -42,7 +42,7 @@ $factory->define(Album::class, function (Faker $faker) {
         'user_id' => User::all()->random()->id,
         'region_id' => Region::all()->random()->id,
         'name' => implode(' ', $faker->words(3)),
-        'cover_image' => '',
+        'cover_image' => $faker->imageUrl(640, 480),
         'status' => 1,
     ];
 });
@@ -57,8 +57,9 @@ $factory->define(Media::class, function (Faker $faker) {
         'type' => $faker->randomElement([1, 2]),
         'lyrics' => '',
         'artist_name' => User::all()->random()->name,
-        'cover_image' => '',
+        'cover_image' => $faker->imageUrl(640, 300),
         'status' => 1,
+        'views' => $faker->numberBetween(100, 10000),
     ];
 });
 

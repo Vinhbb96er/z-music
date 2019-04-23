@@ -1,0 +1,9 @@
+{
+    "home": {
+        "view": "Xem",
+        "listen": "Nghe"
+    },
+    "footer": {
+    "copy_right": "© 2018 Z-Music. All Right Reserved."
+    }
+}

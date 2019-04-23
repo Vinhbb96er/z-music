@@ -6,7 +6,7 @@ import HomeIndex from '../components/home/Index.vue'
 
 Vue.use(VueRouter)
 
-var routes = [
+const routes = [
     {
         path: '/',
         name: 'homepage',

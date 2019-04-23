@@ -69,8 +69,8 @@ body.msl-black .logo-drak{
 	float: left;
 	width: 100%;
 	margin: 0 0 37px;
-	border:none; 
-	overflow:hidden; 
+	border:none;
+	overflow:hidden;
 }
 .msl-black .msl-heading h5{
 	color: #fff;
@@ -110,7 +110,7 @@ body.msl-black .logo-drak{
 	padding: 0 15px 30px;
 }
 .msl-black .widget_categories ul{
-	padding-bottom: 8px; 
+	padding-bottom: 8px;
 }
 .msl-black .msl-concert-list .text-overflow{
 	padding: 18px 160px 18px 25px;
@@ -119,12 +119,12 @@ body.msl-black .logo-drak{
 	opacity: 0;
 }
 .msl-black .widget-player .jp-interface{
-	border-top:1px solid; 
+	border-top:1px solid;
 }
 .msl-black .widget-player .jp-playlist .jp-playlist-current .jp-playlist-item-cover{
-	border-color:#000; 
+	border-color:#000;
 }
-.msl-black .widget-player .jp-viewstate-control button, 
+.msl-black .widget-player .jp-viewstate-control button,
 .msl-black .widget-player .jp-interface{
 	background-color: transparent;
 }
@@ -143,7 +143,7 @@ body.msl-black .logo-drak{
 .msl-featured-thumb3-outer,
 .msl-featured-thumb-large2-wrap .msl-featured-thumb-large2{
 	padding: 15px;
-} 
+}
 .msl-black .concert-list2 .text-overflow{
 	padding-right: 25px;
 }
@@ -153,7 +153,7 @@ body.msl-black .logo-drak{
 }
 .msl-black .blog-detail-caption .blog-post-meta .blog-info *{
 	color: #fff;
-	font-size:15px; 
+	font-size:15px;
 }
 .msl-black .featured-title{
 	font-size: 20px;
@@ -193,7 +193,7 @@ body.msl-black .logo-drak{
 	  ============================================================
 */
 body.msl-black .upcoming-event article{
-	background: url("images/pettren_img1.png") repeat scroll 0 0%, #0f0f0f;
+	background: url("../images/pettren_img1.png") repeat scroll 0 0%, #0f0f0f;
 }
 .msl-black .heading-2,
 .msl-black .album-list-thumb *,
@@ -215,13 +215,13 @@ body.msl-black .upcoming-event article{
 	background-color: transparent !important;
 }
 /*Black Version White Color Start*/
-.msl-black .widget-contact .kode-textarea textarea::-webkit-input-placeholder, 
+.msl-black .widget-contact .kode-textarea textarea::-webkit-input-placeholder,
 .msl-black .widget-contact .kf_commet_field input[type="text"]::-webkit-input-placeholder{
 	color: #fff;
 }
 
 
-.msl-black .widget-contact .kode-textarea textarea::-moz-placeholder, 
+.msl-black .widget-contact .kode-textarea textarea::-moz-placeholder,
 .msl-black .widget-contact .kf_commet_field input[type="text"]::-moz-placeholder{
 	color: #fff;
 }
@@ -241,7 +241,7 @@ body.msl-black .header-element-2 div.top-logo:before{
 body.msl-black .single-video{
 	background-color: #131313;
 }
-body.msl-black .video-playlist-wrap, 
+body.msl-black .video-playlist-wrap,
 body.msl-black .video-player-contant{
 
 }
@@ -293,7 +293,7 @@ body.msl-black .kf_contact_meta li p,
 body.msl-black .comment-reply-link,
 body.msl-black .comment_item .kode-author-content h5 a,
 body.msl-black .widget-player .jp-playlist .jp-playlist-current a .jp-artist,
-body.msl-black .widget-player .jp-jukebox a, 
+body.msl-black .widget-player .jp-jukebox a,
 body.msl-black .widget-player .jp-controls button.jp-play,
 body.msl-black .msl-blog-full .text .btn-1,
 body.msl-black .kode-author-content span,
@@ -307,14 +307,14 @@ body.msl-black .widget-event-info li h6{
 /*Black Version White Color End*/
 .eventlist2-link .btn-1,
 .msl-black .widget-player .jp-jukebox a .jp-artist,
-.msl-black .widget-player .jp-jukebox, 
+.msl-black .widget-player .jp-jukebox,
 .msl-black .widget-player .jp-jukebox .jp-viewstate-control,
-.msl-black .widget-player .jp_column-right-inner button, 
+.msl-black .widget-player .jp_column-right-inner button,
 .msl-black .widget-player .jp-controls button,
 .msl-black .widget-player .opt-ui-cover .jp-details .jp-title{
 	color: #45535d;
 }
-.msl-black .widget-player .jp-current-time, 
+.msl-black .widget-player .jp-current-time,
 .msl-black .widget-player .jp-duration{
 	color: #45535d !important;
 }
@@ -419,7 +419,7 @@ body.msl-black .new-album-thumb .new-album-caption,
 .msl-black .product-items .product-content,
 .msl-black .album-list-thumb-outer.active,
 .msl-black .msl-video-thumb,
-.msl-black .video-playlist-wrap, 
+.msl-black .video-playlist-wrap,
 .msl-black .video-player-contant,
 .msl-black .video-list-thumb,
 .msl-black  .mp3-list-table li:hover > div:before,
@@ -508,8 +508,8 @@ body.msl-black .caption-info{
 	float: left;
 	width: 100%;
 	margin: 0 0 15px;
-	border:none; 
-	overflow:hidden; 
+	border:none;
+	overflow:hidden;
 }
 .msl-black .msl-heading h5{
 	color: #fff;
@@ -551,7 +551,7 @@ body.msl-black .caption-info{
 	margin: 0;
 	float: left;
 	width: 100%;
-	overflow:hidden; 
+	overflow:hidden;
 	padding: 0 0px 0 0;
 }
 .msl-black .widget .msl-heading h5 span{
@@ -586,7 +586,7 @@ body.msl-black .caption-info{
 	padding: 0px;
 }
 .msl-black .widget_categories ul{
-	padding-bottom: 8px; 
+	padding-bottom: 8px;
 }
 .msl-black .msl-concert-list .text-overflow{
 	padding: 18px 160px 18px 25px;
@@ -595,12 +595,12 @@ body.msl-black .caption-info{
 	opacity: 0;
 }
 .msl-black .widget-player .jp-interface{
-	border-top:1px solid; 
+	border-top:1px solid;
 }
 .msl-black .widget-player .jp-playlist .jp-playlist-current .jp-playlist-item-cover{
-	border-color:#000; 
+	border-color:#000;
 }
-.msl-black .widget-player .jp-viewstate-control button, 
+.msl-black .widget-player .jp-viewstate-control button,
 .msl-black .widget-player .jp-interface{
 	background-color: transparent;
 }
@@ -632,7 +632,7 @@ aside .widget.widget-social{
 .msl-featured-thumb3-outer,
 .msl-featured-thumb-large2-wrap .msl-featured-thumb-large2{
 	padding: 15px;
-} 
+}
 .msl-black .concert-list2 .text-overflow{
 	padding-right: 25px;
 }
@@ -642,7 +642,7 @@ aside .widget.widget-social{
 }
 .msl-black .blog-detail-caption .blog-post-meta .blog-info *{
 	color: #fff;
-	font-size:15px; 
+	font-size:15px;
 }
 .msl-black .featured-title{
 	font-size: 20px;
@@ -733,7 +733,7 @@ body.msl-black .latest-album article .text{
 			Back version style
 	====================================
 */
-body.msl-black div.msl-black .light-color.msl-heading h5:after, 
+body.msl-black div.msl-black .light-color.msl-heading h5:after,
 body.msl-black div.msl-black .light-color.msl-heading h5:before{
 	background-color:#fff;
 }

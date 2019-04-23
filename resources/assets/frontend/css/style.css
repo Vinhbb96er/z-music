@@ -20,7 +20,7 @@
 		* 2.9 - Flicker Css Start #Flicker
 		* 2.10 - Footer Css Start #footer
 		* 2.11 - Copy Right Css Start #Copy Right
-	* 3.0 - Artist Page Start #Artist Page 
+	* 3.0 - Artist Page Start #Artist Page
 	* 4.0 - Blog Full Page Start #Blog Full
 	* 5.0 - Blog Small Page Start #Blog Small
 	* 6.0 - Concert List Page Start #Concert List
@@ -57,7 +57,7 @@
 		* 21.15 - testimonial blog 2 Start #testimonial blog 2
 		* 21.16 - Subscribe Blog Start #Subscribe Blog
 		* 21.17 - Footer 2 Start #Footer 2
-		
+
 		Copyrights by kodeforest
 
 	[Color codes]
@@ -73,7 +73,7 @@
 	a (active): #333 (light black)
 
 	[Typography]
-	  
+
 	Body copy:  15px/ 'Roboto',sans-serif
 	Headers:  'Roboto',sans-serif
 	Input, textarea: 'Roboto',sans-serif
@@ -104,8 +104,8 @@ header,
 section{
 	float:left;
 	width:100%;
-	
-	position:relative;	
+
+	position:relative;
 }
 .kode_content_wrap,
 .kode_wrapper{
@@ -119,7 +119,7 @@ section{
 	padding:40px 0px 20px;
 }
 .no_padding{
-	padding:0px;	
+	padding:0px;
 }
 .margin-0{
 	margin: 0!important;
@@ -150,8 +150,8 @@ section{
 .top-player .jp-interface .jp-controls{
 	height: 40px;
 }
-.top-player .jp-playlist ul, 
-.top-player .jp-viewstate-control button, 
+.top-player .jp-playlist ul,
+.top-player .jp-viewstate-control button,
 .top-player .jp-interface{
 	float: left;
 	width: 100%;
@@ -240,7 +240,7 @@ section{
 .top-player .jp_container-bar-s > div:first-child:before{
 	display: none;
 }
-.top-player .jp-current-time, 
+.top-player .jp-current-time,
 .top-player .jp-duration{
 	color: #fff !important;
 	width: auto;
@@ -266,7 +266,7 @@ section{
 .jp_column-right-inner .jp-toggles > button:first-child{
 	margin-left: 0;
 }
-.top-player .jp-jukebox .jp-toggles button, 
+.top-player .jp-jukebox .jp-toggles button,
 .top-player .jp-jukebox .jp-volume-controls button{
 	color: #fff;
 }
@@ -505,7 +505,7 @@ section{
 .main_banner figure{
 	overflow: hidden;
 	margin: 0 0 11px;
-	border:5px solid #eee; 
+	border:5px solid #eee;
 }
 .main_banner figure,
 .main_banner figure img{
@@ -729,7 +729,7 @@ section{
 .msl-google-add a{
 	float: none;
 	width: auto;
-	margin:0 0 -5px; 
+	margin:0 0 -5px;
 	display: inline-block;
 }
 .msl-google-add a img{
@@ -770,7 +770,7 @@ section{
 	overflow: hidden;
 }
 .featured-slider-nav .slick-list{
-	margin: -25px 0;	
+	margin: -25px 0;
 }
 .featured-thumb-list{
 	border-top:1px solid #cbcbcb;
@@ -790,7 +790,7 @@ section{
 }
 .featured-thumb-list .featured-title{
 	font-size: 20px;
-	margin:0 0 15px; 
+	margin:0 0 15px;
 }
 .featured-thumb-list .blog-post-meta{
 	margin: 0;
@@ -849,7 +849,7 @@ section{
 }
 .flicker-link a.btn-1{
 	color: #fff;
-} 
+}
 /*
 	  ============================================================
 		   Footer Css Start #footer
@@ -1022,7 +1022,7 @@ section{
 .msl-artist-thumb:hover .text.ab{
 	top: auto;
 	bottom: 50%;
-	padding-top:0; 
+	padding-top:0;
 	background-color: transparent;
 	transform: translateY(51.3%);
 	-o-transform: translateY(51.3%);
@@ -1444,7 +1444,7 @@ section{
 	float: left;
 }
 .blog-detail-caption p{
-	margin: 0 0 27px; 
+	margin: 0 0 27px;
 }
 .blog-detail-caption p:last-child{
 	margin: 0 0 33px;
@@ -1620,7 +1620,7 @@ section{
 	padding-top:0;
 }
 .kode-comments .children .kode-author{
-	border-width: 0 0 0 1px; 
+	border-width: 0 0 0 1px;
 	padding: 0 0 0 30px;
 }
 .comment-reply-link,
@@ -1956,10 +1956,10 @@ p.form-submit {
 	margin: 0 8px;
 }
 .music-album-nav li:first-child{
-	margin-left:0; 
+	margin-left:0;
 }
 .music-album-nav li:last-child{
-	margin-right:0; 
+	margin-right:0;
 }
 .music-album-nav li a{
 	margin: 0;
@@ -1995,7 +1995,7 @@ p.form-submit {
 	width: 100%;
 }
 .album-inner .msl-tab-nav li:first-child{
-	margin-left:0; 
+	margin-left:0;
 }
 .album-inner .msl-tab-nav{
 	margin: 0 0 33px;
@@ -2029,7 +2029,7 @@ p.form-submit {
 	text-align: right;
 }
 .album-list-thumb > div *{
-	
+
 }
 .album-list-thumb > div p{
 	margin: 0;
@@ -2244,7 +2244,7 @@ div.title h5{
 	box-shadow:0px 0px 3px 2px rgba(0,0,0,0.3);
 }
 .artist-banner-thumb .text-overflow{
-	padding-top:12px; 
+	padding-top:12px;
 }
 .artist-banner-thumb .text-overflow *{
 	color: #fff;
@@ -2338,7 +2338,7 @@ div.title h5{
     width: auto;
 }
 .artist-bio .heading3{
-	margin-bottom: 24px; 
+	margin-bottom: 24px;
 }
 .artist-bio{
 	float: left;
@@ -2368,7 +2368,7 @@ div.title h5{
 	margin: 0 0 28px;
 }
 .artist-bio .widget-event-info li:last-child{
-	margin-bottom: 0; 
+	margin-bottom: 0;
 }
 .artist-bio .widget-event-info li i{
 	margin: 0 10px 0 0;
@@ -2459,10 +2459,10 @@ div.title h5{
 	margin: 0 20px;
 }
 .mp3-data-list li:first-child{
-	margin-left:0; 
+	margin-left:0;
 }
 .mp3-data-list li:last-child{
-	margin-right:0; 
+	margin-right:0;
 }
 .mp3-data-list li a{
 	float: left;
@@ -2506,7 +2506,7 @@ div.title h5{
 	height: 30px;
 	min-height: 30px;
 	line-height: 30px;
-	padding:0 10px; 
+	padding:0 10px;
 	font-size: 13px;
 	background-color: transparent;
 }
@@ -2669,7 +2669,7 @@ div.title h5{
 	background-color: rgba(255,255,255,0.1);
 }
 .video-player-contant .text{
-	padding:15px 20px 20px; 
+	padding:15px 20px 20px;
 }
 .video-title{
 	float: left;
@@ -2745,7 +2745,7 @@ div.title h5{
 .video-player-links li > div{
 	display: table-cell;
 	height: 58px;
-	padding:0 20px; 
+	padding:0 20px;
 	border-width: 1px 1px 1px 0;
 	border-style: solid;
 	vertical-align: middle;
@@ -2837,17 +2837,17 @@ body.msl-black blockquote{
 	max-height: 446px;
 }
 #playlist .featured-thumb-list{
-	padding:25px 20px; 
+	padding:25px 20px;
 }
 #playlist .featured-thumb-list:first-child{
 	 padding-top:0px;
 }
 #playlist .featured-thumb-list:last-child{
-	padding-bottom:0; 
+	padding-bottom:0;
 }
 .video-playlist-wrap,
 .video-player-contant{
-	margin:0 0 30px; 
+	margin:0 0 30px;
 	background-color: #fff;
 }
 
@@ -2891,7 +2891,7 @@ body.msl-black blockquote{
 	float: left;
 	width: 100%;
 	position: relative;
-	overflow:hidden; 
+	overflow:hidden;
 	margin: 0 0 30px;
 }
 .new-album-thumb:hover img{
@@ -2932,7 +2932,7 @@ body.msl-black blockquote{
 	border-radius: 0%;
 	display: inline-block;
 	text-align: center;
-	overflow:hidden; 
+	overflow:hidden;
 }
 .new-album-thumb:hover .new-album{
 	height: 39px;
@@ -3047,7 +3047,7 @@ body.msl-black blockquote{
 	margin: 0 0 20px;
 }
 .msl-featured-thumb3-outer > .msl-featured-thumb .text .btn-1{
-	margin-bottom: 30px; 
+	margin-bottom: 30px;
 }
 .msl-featured-thumb3-outer > .msl-featured-thumb .text .btn-1:hover{
 	color: #fff;
@@ -3119,7 +3119,7 @@ body.msl-black blockquote{
 }
 .eventlist2-date{
 	text-align: center;
-	padding: 3px 30px 1px; 
+	padding: 3px 30px 1px;
 	border-width: 0 1px;
 	border-style: solid;
 	border-color: #fff;
@@ -3179,7 +3179,7 @@ body.msl-black blockquote{
 .bg-color-bk{
 	float: left;
 	width: 100%;
-	background: url("images/pettren_img1.png") repeat scroll 0 0%, #0f0f0f none repeat scroll 0 0;
+	background: url("../images/pettren_img1.png") repeat scroll 0 0%, #0f0f0f none repeat scroll 0 0;
 	text-align: center;
 }
 .white h3{
@@ -3239,7 +3239,7 @@ div.kode_jplayer #jplayer_jukeboxwidget{
 	display:block;
 }
 .header_top {
-	padding:35px 0px ;	
+	padding:35px 0px ;
 }
 /*
 	  ============================================================
@@ -3367,14 +3367,14 @@ div.kode_jplayer #jplayer_jukeboxwidget{
 	right: 0px;
 	bottom: 0px;
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f19100+25,d12813+100 */
-	/*background: #f19100; /* Old browsers 
-	background: -moz-linear-gradient(45deg,  #f19100 25%, #d12813 100%); 
-	background: -webkit-linear-gradient(45deg,  #f19100 25%,#d12813 100%); /* Chrome10-25,Safari5.1-6 
-	background: linear-gradient(45deg,  #f19100 25%,#d12813 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ 
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f19100', endColorstr='#d12813',GradientType=1 ); /* IE6-9 fallback on horizontal gradient 
+	/*background: #f19100; /* Old browsers
+	background: -moz-linear-gradient(45deg,  #f19100 25%, #d12813 100%);
+	background: -webkit-linear-gradient(45deg,  #f19100 25%,#d12813 100%); /* Chrome10-25,Safari5.1-6
+	background: linear-gradient(45deg,  #f19100 25%,#d12813 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f19100', endColorstr='#d12813',GradientType=1 ); /* IE6-9 fallback on horizontal gradient
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#006572+25,18f7f7+100 */
-	opacity: 0.85;
-	background:url("images/pettren_img1.png") repeat scroll 0 0%, #0f0f0f;
+	opacity: 0.65;
+	background:url("../images/pettren_img1.png") repeat scroll 0 0%, #0f0f0f;
 	z-index: 1;
 }
 /*
@@ -3534,7 +3534,7 @@ div.banner_slider div.slide.slick-slide.slick-current.slick-active a{
 	left: 0px;
 	right: 0px;
 	bottom: 0px;
-	background-image: url(images/pettren_img1.png);
+	background-image: url(../images/pettren_img1.png);
 	z-index: 1;
 	opacity: 0;
 }
@@ -3745,7 +3745,7 @@ border-color: transparent;
 	float: left;
 	width: 100%;
 	border-bottom: 1px solid #e6e6e6;
-	border-top:1px solid #e6e6e6; 
+	border-top:1px solid #e6e6e6;
 }
 .kode_tabs a{
 	float: left;
@@ -4073,10 +4073,10 @@ border-color: transparent;
 	transform: rotatey(0deg);
 }
 .kode_blog_column:hover figure img{
-	-o-transform: rotatey(182deg);	
-	-moz-transform: rotatey(182deg);	
-	-webkit-transform: rotatey(182deg);	
-	transform: rotatey(182deg);	
+	-o-transform: rotatey(182deg);
+	-moz-transform: rotatey(182deg);
+	-webkit-transform: rotatey(182deg);
+	transform: rotatey(182deg);
 }
 .kode_blog_content h5 a{
 	display: inline-block;
@@ -4470,7 +4470,7 @@ a.facebook{
 }
 .featured-artist .user-text .sec{
 	padding: 12px 0 3px 89px;
-	
+
 }
 .featured-artist article:hover .user-text .sec{
 	background-color: #171e22;
@@ -4521,7 +4521,7 @@ a.facebook{
 	      -o-transform:scale(1.2) rotate(5deg);
 }
 .featured-artist.dj-listing article:hover figure{
-	
+
 }
 .featured-artist.dj-listing article figure figcaption:before{
 	display: none;
@@ -4905,7 +4905,7 @@ a.facebook{
 	width: 100%;
 	padding: 54px 0px 58px;
 	border-top: 10px solid;
-	background:url("images/pettren_img1.png") repeat scroll 0 0%, #0f0f0f;
+	background:url("../images/pettren_img1.png") repeat scroll 0 0%, #0f0f0f;
 }
 .footer-title{
 	font-weight: bold;
@@ -5292,7 +5292,7 @@ div.login_list,
 .checkbox_radio input[type="checkbox"]:checked + span:before{
 	opacity: 1;
 }
-.checkbox_radio input[type="checkbox"]:checked ~ span:before{	
+.checkbox_radio input[type="checkbox"]:checked ~ span:before{
 
 }
 .checkbox_radio label{
@@ -5487,8 +5487,8 @@ div.login_list,
 	float:left;
 	width:auto;
 }
-.add_cart .nav .open > a, 
-.add_cart .nav .open > a:focus, 
+.add_cart .nav .open > a,
+.add_cart .nav .open > a:focus,
 .add_cart .nav .open > a:hover{
 	color:#fff;
 }
@@ -5505,7 +5505,7 @@ ul.dropdown-cart li .item{
 }
 ul.dropdown-cart li .item:hover{
     background-color:#f9f9f9;
-    
+
 }
 ul.dropdown-cart li .item:after{
     visibility: hidden;
@@ -5522,8 +5522,8 @@ ul.dropdown-cart li .item:after{
 	padding:0px 0px;
 	line-height:35px;
 }
-.add_cart .nav .open > a, 
-.add_cart .nav .open > a:focus, 
+.add_cart .nav .open > a,
+.add_cart .nav .open > a:focus,
 .add_cart .nav .open > a:hover{
 	background:none;
 	border:none;
@@ -5535,7 +5535,7 @@ ul.dropdown-cart li .item-left span.item-info{
     float:left;
 }
 ul.dropdown-cart li .item-left span.item-info{
-    margin-left:10px; 
+    margin-left:10px;
 	margin-top:5px;
 }
 ul.dropdown-cart li .item-left span.item-info span{
@@ -5546,10 +5546,10 @@ ul.dropdown-cart li .item-right{
 }
 ul.dropdown-cart li .item-right button{
     margin-top:11px;
-}  
+}
 .add_cart .item-left > img {
     margin-left: 15px;
-} 
+}
 
 /*
 	  ============================================================
@@ -5686,7 +5686,7 @@ ul.dropdown-cart li .item-right button{
 .mega_slide_albume .slick-slide{
 	padding:0px 10px;
 }
-.mega_slide_albume .slick-prev, 
+.mega_slide_albume .slick-prev,
 .mega_slide_albume .slick-next{
 	display:none !important;
 }
@@ -5756,7 +5756,7 @@ div.light-color.msl-heading h5:after, div.light-color.msl-heading h5:before{
 		margin-bottom: 0px;
 		font-weight: 500;
 	}
-	.social-icons ul{	
+	.social-icons ul{
 		margin-right: 20px;
 	}
 	.social-icons ul li{
@@ -5901,7 +5901,7 @@ div.light-color.msl-heading h5:after, div.light-color.msl-heading h5:before{
 	nav.navigation-1 ul li:hover ul{
 		visibility: visible;
 		opacity: 1;
-	} 
+	}
 	nav.navigation-1 ul li ul li a{
 		border-bottom: 1px solid #2f3539;
 	    color: #fff;
@@ -6378,7 +6378,7 @@ div.top-logo:before{
 	padding: 15px 15px 16px;
 }
 .header-style-5 .navigation-1 ul > li > a{
-	
+
 }
 .header-style-5 .playlist_menu_bar li a{
 	padding: 20px 25px;
@@ -7240,7 +7240,7 @@ blockquote{
 	position:absolute;
 	top:50%;
 	left:0px;
-	margin:-51px auto 0 auto; 
+	margin:-51px auto 0 auto;
 	transition:all 0.3s ease-in-out;
 	transform:scale(10);
 	opacity:0;
@@ -7395,25 +7395,25 @@ blockquote{
 	  ==============================================================
 */
 .facebook{
-	background-color:#215b9a;	
+	background-color:#215b9a;
 }
 .twitter{
-	background-color:#00adf2;	
+	background-color:#00adf2;
 }
 .youtube{
-	background-color:#dd332c;	
+	background-color:#dd332c;
 }
 .dribble{
-	background-color:#f85993;	
+	background-color:#f85993;
 }
 .behance{
-	background-color:#5383e9;	
+	background-color:#5383e9;
 }
 .gplus{
-	background-color:#d84f3b;	
+	background-color:#d84f3b;
 }
 .instagram{
-	background-color:#ae968b;	
+	background-color:#ae968b;
 }
 /*aside bar Heading Style*/
 .aside_widget_hdg,
@@ -7430,13 +7430,13 @@ blockquote{
 	font-weight:normal;
 	text-transform:uppercase;
 	border-bottom:1px solid #eaeaea;
-	padding:15px 0px;	
+	padding:15px 0px;
 }
 
 /*Connect Me Style*/
 .kf_connect{
 	padding:30px 0px;
-	text-align:center;	
+	text-align:center;
 }
 .kf_connect li{
 	display:inline-block;
@@ -7454,7 +7454,7 @@ blockquote{
 	color:#fff;
 	width:40px;
 	height:40px;
-	line-height:38px;	
+	line-height:38px;
 }
 
 /*
@@ -7470,38 +7470,38 @@ blockquote{
 }
 .aside_speaker figure{
 	margin-bottom:10px;
-	display:inline-block;	
+	display:inline-block;
 }
 .aside_speaker figure img{
 	width:auto;
-	height:auto;	
+	height:auto;
 	float:none;
 }
 .aside_spekr_des{
 	float:left;
-	width:100%;	
+	width:100%;
 }
 .aside_spekr_des h6{
 	font-size:14px;
 	color:#2a2a2a;
 	margin-bottom:4px;
-	text-transform:uppercase;	
+	text-transform:uppercase;
 }
 .aside_spekr_des span{
 	display:inline-block;
 	color:#333333;
-	margin:0px 0px 30px;	
+	margin:0px 0px 30px;
 }
 ul.kf_conference{
 	float:left;
 	width:100%;
 	border-top:1px solid #eaeaea;
 	border-bottom:1px solid #eaeaea;
-	margin-bottom:20px;	
+	margin-bottom:20px;
 }
 ul.kf_conference li{
 	float:left;
-	border-right:1px solid #eaeaea;	
+	border-right:1px solid #eaeaea;
 	color:#8c8b8b;
 	padding:10px 0px;
 	width:33%;
@@ -7511,19 +7511,19 @@ ul.kf_conference li span{
 	font-weight:bold;
 	color:#2a2a2a;
 	margin-bottom:4px;
-	display:block;	
+	display:block;
 }
 ul.kf_conference li:last-child{
-	border-right:0px;	
+	border-right:0px;
 }
 .kf_comment_meta{
 	float:left;
 	width:100%;
-	padding:0px 30px;	
+	padding:0px 30px;
 }
 .kf_comment_meta > span{
 	float:left;
-	margin-right:7px;	
+	margin-right:7px;
 }
 .slick-slide img{
 	width:100%;
@@ -7534,19 +7534,19 @@ ul.kf_conference li:last-child{
 	height:30px;
 	padding:0px 9px;
 	color:#333333;
-	line-height:26px;	
+	line-height:26px;
 }
 .kf_comment_meta > span > a > i{
-	
+
 }
 ul.kf_social_icon{
 	border:1px solid #e6e6e6;
-	float:left;	
+	float:left;
 }
 ul.kf_social_icon > li{
 	float:left;
 	position:relative;
-	border-left:1px solid #e6e6e6;	
+	border-left:1px solid #e6e6e6;
 }
 ul.kf_social_icon > li > a{
 	display:block;
@@ -7560,7 +7560,7 @@ ul.kf_social_icon > li:hover a{
 	color:#fff;
 }
 ul.kf_social_icon > li:first-child{
-	border-left:0px;	
+	border-left:0px;
 }
 /*
 	  ==============================================================
@@ -7576,7 +7576,7 @@ ul.kf_social_icon > li:first-child{
 */
 .kf_aside_twitter{
 	float:left;
-	width:100%;	
+	width:100%;
 	padding:15px 30px 30px;
 }
 .kf_aside_twitter h6{
@@ -7584,17 +7584,17 @@ ul.kf_social_icon > li:first-child{
 	color:#fff;
 	text-transform:capitalize;
 	border-bottom:1px solid #fff;
-	margin-bottom:35px;	
+	margin-bottom:35px;
 }
 .kf_aside_twitter h6 i{
-	margin-right:20px;	
+	margin-right:20px;
 }
 .kf_aside_twitter .bx-wrapper{
-	padding:0px 30px 40px;	
+	padding:0px 30px 40px;
 }
 .kf_aside_twitter ul li{
 	float:left;
-	position:relative;	
+	position:relative;
 }
 .kf_aside_twitter ul li p{
 	color:#fff;
@@ -7603,23 +7603,23 @@ ul.kf_social_icon > li:first-child{
 }
 .kf_aside_twitter span{
 	color:#fff;
-	display:inline-block;	
+	display:inline-block;
 }
 /*BX style*/
 .kf_aside_twitter .bx-wrapper .bx-pager{
-	padding:0px;	
+	padding:0px;
 }
 .kf_aside_twitter .bx-wrapper .bx-pager, .bx-wrapper .bx-controls-auto{
 	bottom:37px;
 	width:auto;
-	right:30px;	
+	right:30px;
 }
 .kf_aside_twitter .bx-wrapper .bx-pager.bx-default-pager a{
-	background-color:#000;	
+	background-color:#000;
 }
 .bx-wrapper .bx-pager.bx-default-pager a:hover,
 .bx-wrapper .bx-pager.bx-default-pager a.active{
-	background-color:#fff;	
+	background-color:#fff;
 }
 /*
 	  ==============================================================
@@ -7640,7 +7640,7 @@ ul.kf_social_icon > li:first-child{
 .kf_aside_folwer ul
 {
 	float:left;
-	width:100%;	
+	width:100%;
 }
 .kf_aside_folwer ul li{
 	float:left;
@@ -7657,21 +7657,21 @@ ul.kf_social_icon > li:first-child{
 	-webkit-box-shadow:0px 5px 10px 0px rgba(0,0,0,0.2);
 }
 .kf_aside_folwer ul li:first-child{
-	border-top:0px;	
+	border-top:0px;
 }
 .like_fb,
 .like_amount{
-	float:left	
+	float:left
 }
 .kf_aside_folwer .like_fb{
 	margin-right:15px;
 }
 .like_page{
-	float:right;	
+	float:right;
 }
 .like_fb,
 .like_amount{
-	
+
 }
 .like_fb a{
 	 border-radius: 4px;
@@ -7682,7 +7682,7 @@ ul.kf_social_icon > li:first-child{
     line-height: 40px;
     text-align: center;
     width: 40px;
-    font-weight:600;	
+    font-weight:600;
 }
 .like_amount p{
 	color:#2a2a2a;
@@ -7703,7 +7703,7 @@ ul.kf_social_icon > li:first-child{
 	border:1px solid #e6e6e6;
 	text-transform:uppercase;
 	line-height:normal;
-	box-shadow:0 1px 8px 0px rgba(0, 0, 0, 0.18);	
+	box-shadow:0 1px 8px 0px rgba(0, 0, 0, 0.18);
 }
 /*
 	  ==============================================================
@@ -7788,7 +7788,7 @@ ul.kf_social_icon > li:first-child{
 .kode_calender{
 	float:left;
 	width:100%;
-	
+
 }
 
 .kode_calender .fc-toolbar{
@@ -7825,7 +7825,7 @@ ul.kf_social_icon > li:first-child{
 
 }
 .kode_volunteer_btn a:hover{
-	opacity:0.9;	
+	opacity:0.9;
 }
 /*
 	  ==============================================================
@@ -7852,9 +7852,9 @@ ul.kf_social_icon > li:first-child{
 	display:table;
 }
 .ticket-section h3{
-	font-size:30px;	
+	font-size:30px;
 	margin-bottom:30px;
-}	
+}
 div.tickets ul,
 .tickets ul.ticket-column{
     float: none;
@@ -7927,7 +7927,7 @@ body.msl-black .ticket-column:hover li a{
 	box-shadow:0px 0px 6px 4px rgba(114,114,114,0.18);
 }
 .ticket-column:hover li span{
-	
+
 }
 .ticket-column input.input-qty-type{
 	width:65px;
@@ -7979,7 +7979,7 @@ body.msl-black .ticket-column:hover li a{
 }
 
 .count-down-timer .countdown{
-	padding:24px 0 34px 20px;	
+	padding:24px 0 34px 20px;
 	position:relative;
 	z-index:100;
 	float:left;
@@ -8005,7 +8005,7 @@ body.msl-black .ticket-column:hover li a{
 	overflow:hidden;
 }
 .caption-info h5{
-	font-size:16px;	
+	font-size:16px;
 	color:#444;
 	line-height:normal;
 }
@@ -8094,7 +8094,7 @@ body.msl-black .ticket-column:hover li a{
 	padding:0px;
 	height:30px;
 	width:80px;
-	
+
 }
 
 .kode_content_wrap .widget-02{
@@ -8110,24 +8110,24 @@ body.msl-black .ticket-column:hover li a{
 .kf_comment
 {
 	box-shadow:0 2px 7px 3px rgba(0, 0, 0, 0.15);
-	margin-bottom:60px;	
+	margin-bottom:60px;
 }
 .kf_blog_detail,
 .kf_blog_detail_des{
 	float:left;
 	width:100%;
-	position:relative	
+	position:relative
 }
 .kf_blog_detail figure{
 	float:left;
 	width:100%;
 	position:relative;
 	border-bottom:4px solid;
-	margin-bottom:35px;	
+	margin-bottom:35px;
 }
 .kf_blog_detail figure img{
 	width:100%;
-	height:auto;	
+	height:auto;
 }
 .blog_img_year{
 	position:absolute;
@@ -8135,7 +8135,7 @@ body.msl-black .ticket-column:hover li a{
 	left:0px;
 	width:60px;
 	height:70px;
-	z-index:9;	
+	z-index:9;
 }
 .blog_img_year:before{
 	content:"";
@@ -8144,7 +8144,7 @@ body.msl-black .ticket-column:hover li a{
 	right:-6px;
 	width:100%;
 	height:100%;
-	border:1px solid;	
+	border:1px solid;
 }
 .blog_img_year a{
 	color:#fff;
@@ -8153,51 +8153,51 @@ body.msl-black .ticket-column:hover li a{
 	font-size:18px;
 	display:inline-block;
 	padding:10px;
-	text-align:center	
+	text-align:center
 }
 .kf_blog_detail_des{
-	padding:0px 20px 30px;	
+	padding:0px 20px 30px;
 }
 .kf_blog_detail_des h5{
 	font-weight:bold;
-	margin-bottom:20px;	
+	margin-bottom:20px;
 }
 .kf_blog_detail_des ul{
 	float:left;
 	width:100%;
-	margin-bottom:25px;	
+	margin-bottom:25px;
 }
 .kf_blog_detail_des ul li{
 	float:left;
-	position:relative;	
+	position:relative;
 }
 .kf_blog_detail_des ul li a span{
 	display:inline-block;
-	margin-right:5px;	
+	margin-right:5px;
 }
 .kf_blog_detail_des ul li a{
 	display:inline-block;
 	text-transform:capitalize;
-	color:#6d6d6d;	
+	color:#6d6d6d;
 	padding:0px 15px;
 	border-left:1px solid #6d6d6d;
 	line-height:15px;
 }
 .kf_blog_detail_des ul li:first-child a{
 	padding-left:0px;
-	border-left:0px;	
+	border-left:0px;
 }
 .kf_blog_detail_des p{
 	font-size:14px;
 	line-height:28px;
-	word-break:break-all;	
+	word-break:break-all;
 }
 .kf_blog_detail_des blockquote{
 	margin:30px 0px;
 	border:0px;
 	text-align:center;
 	position:relative;
-	padding:100px 20px 30px;	
+	padding:100px 20px 30px;
 }
 .kf_blog_detail_des blockquote:before{
 	content:"\f10e";
@@ -8213,7 +8213,7 @@ body.msl-black .ticket-column:hover li a{
 	border-radius:100%;
 	line-height:65px;
 	margin:auto;
-	font-size:24px;	
+	font-size:24px;
 }
 .kf_blog_detail_des blockquote:after{
 	content:"";
@@ -8224,11 +8224,11 @@ body.msl-black .ticket-column:hover li a{
 	margin:auto;
 	width:200px;
 	height:1px;
-	background-color:#c2c2c2;	
+	background-color:#c2c2c2;
 }
 .kf_blog_detail_des blockquote p{
 	font-size:18px;
-	color:#666;	
+	color:#666;
 }
 
 /*
@@ -8249,7 +8249,7 @@ body.msl-black .ticket-column:hover li a{
 .music-top-cover-wrapper{
 	padding:15px 0px 0px;
 	float:left;
-	width:100%;	
+	width:100%;
 }
 .music-top-chart-list{
 	float:left;
@@ -8271,7 +8271,7 @@ body.msl-black .ticket-column:hover li a{
     width: 160%;
 	background-color:rgba(55,45,44,0.65);
 	z-index:9;
-	box-shadow:0px 0px 0px 7px rgba(0,0,0,0.65);	
+	box-shadow:0px 0px 0px 7px rgba(0,0,0,0.65);
 }
 .music-top-chart-list:after{
 	content:"";
@@ -8282,11 +8282,11 @@ body.msl-black .ticket-column:hover li a{
 	bottom:0px;
 	margin:auto;
 	width:0px;
-	height:0px;	
+	height:0px;
 }
 .music-top-chart-list figure img{
 	width:100%;
-	height:auto;	
+	height:auto;
 }
 .music-top-chart-des{
 	position:absolute;
@@ -8295,23 +8295,23 @@ body.msl-black .ticket-column:hover li a{
 	width:100%;
 	height:100%;
 	padding:30px 0 0 30px;
-	z-index:99999;	
+	z-index:99999;
 }
 .music-top-chart-des h5{
 	color:#fff;
 	font-weight:bold;
 	text-transform:uppercase;
 	line-height:20px;
-	margin-bottom:15px;	
+	margin-bottom:15px;
 }
 .music-top-chart-des p{
 	color:#fff;
 	margin:0 0 15px;
-	line-height:16px;	
+	line-height:16px;
 }
 .music-top-chart-des i{
 	color:#fff;
-	font-size:100px;	
+	font-size:100px;
 }
 .music-top-chart-hover{
 	position:absolute;
@@ -8322,14 +8322,14 @@ body.msl-black .ticket-column:hover li a{
 	text-align:center;
 	z-index:99999;
 	padding:0px 40px;
-	opacity:0;	
+	opacity:0;
 }
 .music-top-chart-hover h5{
 	color:#fff;
 	text-transform:uppercase;
 	font-weight:bold;
 	margin:0 0 19px;
-	line-height:20px;	
+	line-height:20px;
 }
 .music-top-chart-hover p{
 	color:#fff;
@@ -8339,24 +8339,24 @@ body.msl-black .ticket-column:hover li a{
 }
 .music-top-chart-list:hover .music-top-chart-des{
 	top:50%;
-	opacity:0;	
+	opacity:0;
 }
 .music-top-chart-list:hover:before{
 	top:-100%;
 	left:-100%;
-	opacity:0;	
+	opacity:0;
 }
 .music-top-chart-list:hover .music-top-chart-hover{
 	top:50%;
-	opacity:1;	
+	opacity:1;
 }
 .music-top-chart-list:hover:after{
 	width:100%;
 	height:100%;
-	opacity:0.7;	
+	opacity:0.7;
 }
 .music-top-chart-list a:hover{
-	color:#000000;	
+	color:#000000;
 }
 .music-top-chart-list figure:before,
 .music-top-chart-list figure:after {
@@ -8404,7 +8404,7 @@ body.msl-black .ticket-column:hover li a{
 	width:100%;
 	text-align:center;
 }
-.pagination > li:last-child > a, 
+.pagination > li:last-child > a,
 .pagination > li:last-child > span,
 .pagination > li:first-child > a,
 .pagination > li:first-child > span {
@@ -8422,10 +8422,10 @@ body.msl-black .ticket-column:hover li a{
 	margin-left: 0;
 }
 .pagination li:first-child  span i{
-	margin-right:12px; 
+	margin-right:12px;
 }
 .pagination li:last-child  span i{
-	margin-left:12px; 
+	margin-left:12px;
 }
 .pagination > li > a,
 .pagination > li > span {
@@ -8454,7 +8454,7 @@ body.msl-black .pagination > li > span{
 	color:#fff;
 }
 
-.pagination > .active > a, 
+.pagination > .active > a,
 .pagination > .active > a:focus,
 .pagination > .active > a:hover,
 .pagination > .active > span,
@@ -8467,7 +8467,7 @@ body.msl-black .pagination > li > span{
 }
 
 
-.title-style-2 .msl-heading h5:after, 
+.title-style-2 .msl-heading h5:after,
 .title-style-2 .msl-heading h5:before{
 	width:100%;
 }
@@ -8551,7 +8551,7 @@ body.msl-black .albums-tables ul li span{
 	padding-right:25px;
 }
 .albums-tables .like-btns span{
-	
+
 }
 .albums-tables .play-btn {
 	margin:10px 0px 0px;
@@ -8628,28 +8628,40 @@ body.msl-black .albums-tables ul li span{
 	padding-bottom:29px;
 }
 
+.banner_slider .slick-prev, .banner_slider .slick-next {
+    height: 60px;
+    width: 35px;
+    border-radius: 4px;
+}
 
+.banner_slider .slick-prev {
+    left: 10px;
+}
 
+.banner_slider .slick-next {
+    right: 10px;
+}
 
+.banner_slider .slider-nav-thumbnails {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+}
 
+.banner_slider .slider-nav-thumbnails .slick-slide {
+    opacity: 0.5;
+    margin-left: 5px;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+}
 
+.banner_slider .slider-nav-thumbnails .slick-slide img {
+    width: 64px;
+    height: 48px;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.banner_slider .slider-nav-thumbnails .slick-slide.slick-current {
+    opacity: 1;
+    border-color: #fff;
+}

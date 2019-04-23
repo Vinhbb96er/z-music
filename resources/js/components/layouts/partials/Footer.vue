@@ -18,7 +18,7 @@
         <!--Copy Right Wrap Start-->
         <div class="msl-copyright theme-bg">
             <div class="container">
-                <p class="pull-left">© 2018 musicforest. All Right Reserved. <a href="kodeforest.net">KODEFOREST</a></p>
+                <p class="pull-left">{{ $t('footer.copy_right') }}</p>
                 <!--Navigation Start-->
                 <nav class="navigation pull-right">
                     <ul>

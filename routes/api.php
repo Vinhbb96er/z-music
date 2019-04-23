@@ -18,6 +18,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::group(['namespace' => 'Api'], function () {
-    Route::get('/media/hot', 'HomeController@getHotMedia');
-    Route::get('/media/new', 'HomeController@getNewMedia');
+    Route::get('/home/hot', 'HomeController@getHotMedia');
+    Route::get('/home/new', 'HomeController@getNewMedia');
+
+    Route::get('/home/get-slider', 'HomeController@getSlider');
 });

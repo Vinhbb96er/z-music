@@ -6,6 +6,11 @@ return [
             'man' => 1,
             'woman' => 2,
             'other' => 3,
+        ],
+        'role' => [
+            'admin' => 1,
+            'artist' => 2,
+            'member' => 3,
         ]
     ],
 

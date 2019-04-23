@@ -14,26 +14,15 @@
     $('body').addClass('loaded');
   }, 1000);
 
-  	/* 
+  	/*
   	=======================================================================
-		  		 Chosen Script 
+		  		 Chosen Script
 	=======================================================================
-	*/	
+	*/
 	if($(".selecter-menu").length){
 		$(".selecter-menu").chosen()
 	}
 
-  /*====================================================*/
-  /*==========HOME PAGE 2 SCRIPT'S======================*/
-
-  if($('.banner_slider').length){
-    $('.banner_slider').slick({
-      fade: true,
-      autoplay:true,
-      arrows:false,
-      centerMode:true
-    });
-  }
   /*
   ==============================================================
    COUNTDOWN  Script Start
@@ -43,10 +32,10 @@
     $('.ho2-countdown').downCount({ date: '8/8/2018 12:00:00', offset: +1 });
   }
 
-  /* 
+  /*
   ==============================================================
-      Slick Slider Main Banner Script Start   
-  ============================================================== 
+      Slick Slider Main Banner Script Start
+  ==============================================================
   */
   if($('.kode_testimonial_slider').length){
     $('.kode_testimonial_slider').slick({
@@ -92,14 +81,14 @@
 
   /*jQuery(document).ready(function($){
     var isLateralNavAnimating = false;
-    
+
     //open/close lateral navigation
     $('.kf_menu_button').on('click', function(event){
       event.preventDefault();
-      //stop if nav animation is running 
+      //stop if nav animation is running
       if( !isLateralNavAnimating ) {
-        if($(this).parents('.csstransitions').length > 0 ) isLateralNavAnimating = true; 
-        
+        if($(this).parents('.csstransitions').length > 0 ) isLateralNavAnimating = true;
+
         $('body').toggleClass('navigation-is-open');
         $('.kf_menu_nav').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
           //animation is over
@@ -109,10 +98,10 @@
     });
   });*/
 
-  /* 
+  /*
   ==============================================================
-      Slick Slider Main Banner Script Start   
-  ============================================================== 
+      Slick Slider Main Banner Script Start
+  ==============================================================
   */
   if($('.new-album-slider').length){
     $('.new-album-slider').slick({
@@ -191,10 +180,10 @@
       ]
     });
   }
-  /* 
+  /*
   ==============================================================
-      Slick Slider Main Banner Script Start   
-  ============================================================== 
+      Slick Slider Main Banner Script Start
+  ==============================================================
   */
   if($('.msl-eventlist2-slider').length){
     $('.msl-eventlist2-slider').slick({
@@ -236,10 +225,10 @@
       ]
     });
   }
-  /* 
+  /*
   ==============================================================
       Slick Slider Main Banner Script Start   bottom-arrow
-  ============================================================== 
+  ==============================================================
   */
   if($('.featured-thumb3-silder').length){
     $('.featured-thumb3-silder').slick({
@@ -279,10 +268,10 @@
       ]
     });
   }
-	/* 
+	/*
 	==============================================================
 			Slick Slider Main Banner Script Start
-	============================================================== 
+	==============================================================
 	*/
   if($('.main_banner').length){
     $('.main_banner').slick({
@@ -322,10 +311,10 @@
       ]
     });
   }
-  /* 
+  /*
   ==============================================================
       Slick Slider Main Banner Script Start
-  ============================================================== 
+  ==============================================================
   */
   if($('.msl-album-slider').length){
     $('.msl-album-slider').slick({
@@ -333,10 +322,10 @@
     });
   }
 
-    /* 
+    /*
   ==============================================================
       Slick Slider Main Banner Script Start
-  ============================================================== 
+  ==============================================================
   */
   if($('.msl-lifestyle-slider').length){
     $('.msl-lifestyle-slider').slick({
@@ -484,11 +473,11 @@
       $('.featured-slider-nav').resize();
     });
   }
-  
-   /* 
+
+   /*
   ==============================================================
-      Slick Slider Main Banner Script Start   
-  ============================================================== 
+      Slick Slider Main Banner Script Start
+  ==============================================================
   */
   if($('.mega-slider').length){
     $('.mega-slider').slick({
@@ -566,7 +555,7 @@
 			modal: false, /* If set to true, only the close button will close the window */
 			deeplinking: true, /* Allow prettyPhoto to update the url to enable deeplinking. */
 			overlay_gallery: true, /* If set to true, a gallery will overlay the fullscreen image on mouse over */
-			keyboard_shortcuts: true /* Set to false if you open forms inside prettyPhoto */	
+			keyboard_shortcuts: true /* Set to false if you open forms inside prettyPhoto */
 		});
 	}
 
@@ -579,9 +568,9 @@
     google.maps.event.addDomListener(window, 'load', initialize);
   }
   /*
-  ============================================================== 
+  ==============================================================
       DL Responsive Menu
-  ============================================================== 
+  ==============================================================
   */
   if(typeof($.fn.dlmenu) == 'function'){
     $('#kode-responsive-navigation').each(function(){
@@ -589,14 +578,14 @@
         if( $(this).siblings('a').attr('href') && $(this).siblings('a').attr('href') != '#' ){
           var parent_nav = $('<li class="menu-item kode-parent-menu"></li>');
           parent_nav.append($(this).siblings('a').clone());
-          
+
           $(this).prepend(parent_nav);
         }
       });
       $(this).dlmenu();
     });
   }
- 
+
   /*
     ==============================================================
       Masonry  Script Start
@@ -694,20 +683,20 @@
 	      parent_box.find('.album-play-list').slideToggle(500, 'swing')
 	    });
 	  }
-    
+
 
       // Initialize jPlayerJukebox
 	var jpjb = new jPlayerJukebox({
 	  'swfPath': 'jplayer',
 	  'jukeboxOptions': {
-	    'autoAdvance': true,    
+	    'autoAdvance': true,
 	    'position': 'static'
 	  }
 	});
 });
- 
-  
-  
+
+
+
 
 
 
@@ -721,9 +710,9 @@
     =======================================================================
   */
   function initialize() {
-        
+
     "use strict";
-    
+
     var MY_MAPTYPE_ID = 'custom_style';
     var map;
     var brooklyn = new google.maps.LatLng(40.6743890, -73.9455);

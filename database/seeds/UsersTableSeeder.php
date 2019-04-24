@@ -8,6 +8,7 @@ use App\Models\Kind;
 use App\Models\Tag;
 use App\Models\Album;
 use App\Models\Media;
+use App\Models\Like;
 
 class UsersTableSeeder extends Seeder
 {
@@ -37,6 +38,24 @@ class UsersTableSeeder extends Seeder
             $kindId = Kind::all()->random()->id;
             $media->kinds()->attach($kindId);
         });
+
+        Like::truncate();
+        for ($i = 1; $i <= 500; $i++) {
+            $rand = $faker->randomElement([0, 1]);
+
+            if ($rand) {
+                $likeableType = 'App\Models\Media';
+                $likeableId = Media::all()->random()->id;
+            } else {
+                $likeableType = 'App\Models\Album';
+                $likeableId = Album::all()->random()->id;
+            }
+
+            factory(Like::class, 1)->create([
+                'likeable_id' => $likeableId,
+                'likeable_type' => $likeableType,
+            ]);
+        }
     }
 
     public function createRoles($faker)

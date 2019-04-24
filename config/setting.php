@@ -19,5 +19,12 @@ return [
             'music' => 1,
             'video' => 2,
         ]
+    ],
+
+    'album' => [
+        'type' => [
+            'single' => 1,
+            'normal' => 2,
+        ]
     ]
 ];

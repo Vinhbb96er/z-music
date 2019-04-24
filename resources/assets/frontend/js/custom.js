@@ -142,44 +142,6 @@
     });
   }
 
-  if($('.new-album-slider-4').length){
-    $('.new-album-slider-4').slick({
-      centerMode: false,
-      arrows: true,
-      dots: true,
-      centerPadding: '0px',
-      slidesToShow: 3,
-      responsive: [
-        {
-          breakpoint: 1200,
-          settings: {
-            arrows: true,
-            centerMode: false,
-            centerPadding: '0px',
-            slidesToShow: 2
-          }
-        },
-        {
-          breakpoint: 768,
-          settings: {
-            arrows: true,
-            centerMode: true,
-            centerPadding: '0px',
-            slidesToShow: 2
-          }
-        },
-        {
-          breakpoint: 481,
-          settings: {
-            arrows: true,
-            centerMode: true,
-            centerPadding: '0px',
-            slidesToShow: 1
-          }
-        }
-      ]
-    });
-  }
   /*
   ==============================================================
       Slick Slider Main Banner Script Start

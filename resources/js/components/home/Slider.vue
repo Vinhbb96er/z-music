@@ -8,6 +8,10 @@
                     <a href="index.html" class="btn_normal border_btn animated">{{ $t('home.view') }}</a>
                     <a href="index.html" class="btn_normal border_btn animated">{{ $t('home.listen') }}</a>
                 </div>
+                <div class="media-info">
+                    <span><i class="fa fa-play-circle-o play-icon"></i> {{ media.views }}</span>
+                    <span><i class="fa fa-heart like-icon"></i> {{ media.likes.length }}</span>
+                </div>
             </div>
         </div>
         <div class="slider-nav-thumbnails">

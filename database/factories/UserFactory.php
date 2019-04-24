@@ -6,6 +6,7 @@ use App\Models\Role;
 use App\Models\Region;
 use App\Models\Kind;
 use App\Models\Album;
+use App\Models\Like;
 
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
@@ -44,6 +45,8 @@ $factory->define(Album::class, function (Faker $faker) {
         'name' => implode(' ', $faker->words(3)),
         'cover_image' => $faker->imageUrl(640, 480),
         'status' => 1,
+        'type' => $faker->randomElement([1, 2]),
+        'views' => $faker->numberBetween(100, 10000),
     ];
 });
 
@@ -73,4 +76,11 @@ $factory->define(Region::class, function (Faker $faker) {
 
 $factory->define(Kind::class, function (Faker $faker) {
     return [];
+});
+
+$factory->define(Like::class, function (Faker $faker) {
+    return [
+        'user_id' => User::all()->random()->id,
+        'status' => 1,
+    ];
 });

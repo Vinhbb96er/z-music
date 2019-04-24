@@ -17,6 +17,11 @@ class RepositoryServiceProvider extends ServiceProvider
             'App\Repositories\Media\MediaInterface',
             'App\Repositories\Media\MediaRepository'
         );
+
+        $this->app->bind(
+            'App\Repositories\Album\AlbumInterface',
+            'App\Repositories\Album\AlbumRepository'
+        );
     }
 
     /**

@@ -3,15 +3,23 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Album extends Model
 {
     protected $fillable = [
-        'user_id', 
-        'region_id', 
+        'user_id',
+        'region_id',
         'name',
         'cover_image',
         'status',
+        'views',
+        'type',
+    ];
+
+    protected $appends = [
+        'created_at_date',
+        'kinds_text'
     ];
 
     public function media()
@@ -57,5 +65,15 @@ class Album extends Model
     public function ranking()
     {
         return $this->morphTo(Ranking::class, 'rankingable');
+    }
+
+    public function getCreatedAtDateAttribute()
+    {
+        return Carbon::parse($this->attributes['created_at'])->format(trans('F Y'));
+    }
+
+    public function getKindsTextAttribute()
+    {
+        return implode(', ', $this->kinds->pluck('name')->all());
     }
 }

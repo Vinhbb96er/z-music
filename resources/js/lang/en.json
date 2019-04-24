@@ -1,7 +1,11 @@
 {
     "home": {
         "view": "View",
-        "listen": "Listen"
+        "listen": "Listen",
+        "new_releases_albums": "New Releases Albums"
+    },
+    "album": {
+        "track": "Track"
     },
     "footer": {
     "copy_right": "© 2018 Z-Music. All Right Reserved."

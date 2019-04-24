@@ -1,7 +1,11 @@
 {
     "home": {
         "view": "Xem",
-        "listen": "Nghe"
+        "listen": "Nghe",
+        "new_releases_albums": "Albums mới phát hành"
+    },
+    "album": {
+        "track": "Bài hát"
     },
     "footer": {
     "copy_right": "© 2018 Z-Music. All Right Reserved."

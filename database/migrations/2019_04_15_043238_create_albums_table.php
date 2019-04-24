@@ -19,6 +19,8 @@ class CreateAlbumsTable extends Migration
             $table->integer('region_id')->nullable();
             $table->string('name');
             $table->string('cover_image')->nullable();
+            $table->bigInteger('views')->default(0);
+            $table->tinyInteger('type')->default(config('setting.album.type.normal'));
             $table->tinyInteger('status');
             $table->timestamps();
         });

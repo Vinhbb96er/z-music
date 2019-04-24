@@ -21,5 +21,6 @@ Route::group(['namespace' => 'Api'], function () {
     Route::get('/home/hot', 'HomeController@getHotMedia');
     Route::get('/home/new', 'HomeController@getNewMedia');
 
-    Route::get('/home/get-slider', 'HomeController@getSlider');
+    Route::get('/home/slider', 'HomeController@getSliders');
+    Route::get('/home/new-albums', 'HomeController@getNewAlbums');
 });

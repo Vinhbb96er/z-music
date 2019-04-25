@@ -2,10 +2,22 @@
     "home": {
         "view": "Xem",
         "listen": "Nghe",
-        "new_releases_albums": "Albums mới phát hành"
+        "new_releases_albums": "Albums mới phát hành",
+        "hot_media": "Musics / Videos / Albums Hot",
+        "selective": "Chọn lọc"
     },
     "album": {
-        "track": "Bài hát"
+        "name": "Album",
+        "track": "Bài hát",
+        "album_hot": "Album hot"
+    },
+    "music_video": {
+        "name": "Music Video",
+        "video_hot": "Video hot"
+    },
+    "music": {
+        "name": "Music",
+        "music_hot": "Music hot"
     },
     "footer": {
     "copy_right": "© 2018 Z-Music. All Right Reserved."

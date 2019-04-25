@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Media from './modules/media.js'
+import Region from './modules/region.js'
 
 Vue.use(Vuex);
 
@@ -18,6 +19,7 @@ export const store = new Vuex.Store({
 
     },
     modules: {
-        Media
+        Media,
+        Region
     }
 })

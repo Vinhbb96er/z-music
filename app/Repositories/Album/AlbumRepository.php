@@ -12,7 +12,7 @@ class AlbumRepository extends BaseRepository implements AlbumInterface
         return Album::class;
     }
 
-    public function search($params)
+    public function search($params = [])
     {
         $query = $this->model->newQuery();
 
@@ -26,6 +26,14 @@ class AlbumRepository extends BaseRepository implements AlbumInterface
             });
         }
 
+        if (!empty($params['region'])) {
+            $query->where('region_id', $params['region']);
+        }
+
+        if (isset($params['with_count'])) {
+            $query->withCount($params['with_count']);
+        }
+
         if (isset($params['eagle_loading'])) {
             $query->with($params['eagle_loading']);
         }
@@ -35,5 +43,21 @@ class AlbumRepository extends BaseRepository implements AlbumInterface
         }
 
         return isset($params['size']) ? $query->paginate($params['size']) : $query->paginate(10);
+    }
+
+    public function getHotAlbum($params = [])
+    {
+        unset($params['type']);
+        $params['is_artist'] = true;
+        $params['with_count'] = 'likes';
+        $params['sort_field'] = 'likes_count';
+        $params['sort_type'] = 'desc';
+        $params['eagle_loading'] = [
+            'user',
+            'kinds',
+            'media',
+        ];
+
+        return $this->search($params);
     }
 }

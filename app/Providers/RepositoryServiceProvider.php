@@ -22,6 +22,11 @@ class RepositoryServiceProvider extends ServiceProvider
             'App\Repositories\Album\AlbumInterface',
             'App\Repositories\Album\AlbumRepository'
         );
+
+        $this->app->bind(
+            'App\Repositories\Region\RegionInterface',
+            'App\Repositories\Region\RegionRepository'
+        );
     }
 
     /**

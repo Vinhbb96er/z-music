@@ -69,4 +69,9 @@ class Media extends Model
     {
         return $this->morphTo(Ranking::class, 'rankingable');
     }
+
+    public function getNameAttribute()
+    {
+        return ucwords($this->attributes['name']);
+    }
 }

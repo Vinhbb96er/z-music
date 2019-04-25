@@ -48,8 +48,11 @@
             'csrfToken' => csrf_token(),
             'locale' => config('app.locale'),
             'base_url' => url('/'),
-            'settings' => [
+            'setting' => [
                 'images' => config('setting.images'),
+                'media' => config('setting.media'),
+                'album' => config('setting.album'),
+                'media_filter_size' => config('setting.media_filter_size'),
             ],
         ]) !!};
     </script>

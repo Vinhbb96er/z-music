@@ -2,7 +2,9 @@ import {get} from '../../api/base_api.js'
 
 const state = {
     sliderItems: [],
-    newAlbums: []
+    newAlbums: [],
+    mediaHot: [],
+    mediaNew: []
 }
 
 const getters = {
@@ -11,6 +13,13 @@ const getters = {
     },
     newAlbums(state) {
         return state.newAlbums;
+    },
+    mediaHot() {
+        return state.mediaHot;
+    }
+    ,
+    mediaNew() {
+        return state.mediaNew;
     }
 }
 
@@ -20,29 +29,46 @@ const mutations = {
     },
     setNewAlbums(state, payload) {
         state.newAlbums = payload;
+    },
+    setMediaHot(state, payload) {
+        state.mediaHot = payload;
+    },
+    setMediaNew(state, payload) {
+        state.mediaNew = payload;
     }
 }
 
 const actions = {
     getSliders({commit}) {
         return new Promise((resolve, reject) => {
-            get('home/slider')
+            get('media/slider')
                 .then(res => {
                     commit('setSliders', res.data.data);
                 })
                 .catch(err => {
-                    reject(err)
+                    reject(err);
                 });
         });
     },
     getNewAlbums({commit}) {
         return new Promise((resolve, reject) => {
-            get('home/new-albums')
+            get('media/new-albums')
                 .then(res => {
                     commit('setNewAlbums', res.data.data);
                 })
                 .catch(err => {
-                    reject(err)
+                    reject(err);
+                });
+        });
+    },
+    getMediaHot({commit}, data) {
+        return new Promise((resolve, reject) => {
+            get(`media/hot?type=${data.type}&region=${data.region}&size=${data.size}`)
+                .then(res => {
+                    commit('setMediaHot', res.data.data);
+                })
+                .catch(err => {
+                    reject(err);
                 });
         });
     }

@@ -12,16 +12,18 @@ class MediaRepository extends BaseRepository implements MediaInterface
         return Media::class;
     }
 
-    public function getTopFiveMedia()
+    public function getHotMedia($params = [])
     {
+        $params['is_artist'] = true;
+        $params['with_count'] = 'likes';
+        $params['sort_field'] = 'likes_count';
+        $params['sort_type'] = 'desc';
+        $params['eagle_loading'] = [
+            'user',
+            'kinds',
+        ];
 
-    }
-
-    public function getHotMedia($type = null)
-    {
-        $type = $type ?? config('setting.media.type.music');
-
-        return $this->model->where('type', $type)->orderBy('views', 'desc')->paginate(10);
+        return $this->search($params);
     }
 
     public function getNewMedia($type = null)
@@ -31,7 +33,7 @@ class MediaRepository extends BaseRepository implements MediaInterface
         return $this->model->where('type', $type)->orderBy('created_at', 'desc')->paginate(10);
     }
 
-    public function search($params)
+    public function search($params = [])
     {
         $query = $this->model->newQuery();
 
@@ -43,6 +45,14 @@ class MediaRepository extends BaseRepository implements MediaInterface
             $query->whereHas('user', function($query) {
                 $query->where('role_id', config('setting.user.role.artist'));
             });
+        }
+
+        if (!empty($params['region'])) {
+            $query->where('region_id', $params['region']);
+        }
+
+        if (isset($params['with_count'])) {
+            $query->withCount($params['with_count']);
         }
 
         if (isset($params['eagle_loading'])) {

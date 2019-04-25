@@ -1,3 +1,35 @@
+.nav-tabs > li > a:hover {
+  border-color: unset;
+}
+
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus {
+    color: unset;
+    cursor: pointer;
+    background-color: unset;
+    border: unset;
+}
+
+.nav-tabs.nav-justified {
+    width: unset;
+    border-bottom: unset;
+}
+
+.nav-tabs.nav-justified > li {
+    float: unset;
+}
+
+.nav-tabs.nav-justified > li > a {
+    margin-bottom: unset;
+    text-align: unset;
+}
+
+.nav-tabs.nav-justified > .dropdown .dropdown-menu {
+    top: unset;
+    left: unset;
+}
+
 /*
 	  ============================================================
 		   Font Color
@@ -86,7 +118,7 @@ ol.meta_quote li i,
 .product-content span,
 .widget-heading h4
 {
-	color:#db152e ;
+	color:#db152e !important;
 }
 /*
 	  ============================================================

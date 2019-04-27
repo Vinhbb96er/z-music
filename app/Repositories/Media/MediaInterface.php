@@ -8,5 +8,5 @@ interface MediaInterface
 
     public function getNewMedia($type = null);
 
-    public function search($params);
+    public function search($params = []);
 }

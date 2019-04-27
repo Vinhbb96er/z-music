@@ -76,4 +76,15 @@ class Album extends Model
     {
         return implode(', ', $this->kinds->pluck('name')->all());
     }
+
+    public function getNameAttribute()
+    {
+        $name = ucwords($this->attributes['name']);
+
+        if ($this->type == config('setting.album.type.single')) {
+            $name .= ' (Single)';
+        }
+
+        return $name;
+    }
 }

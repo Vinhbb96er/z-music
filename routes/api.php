@@ -18,9 +18,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::group(['namespace' => 'Api'], function () {
-    Route::get('/home/hot', 'HomeController@getHotMedia');
-    Route::get('/home/new', 'HomeController@getNewMedia');
+    Route::get('/media/hot', 'MediaController@getHotMedia');
+    Route::get('/media/new', 'MediaController@getNewMedia');
+    Route::get('/media/slider', 'MediaController@getSliders');
+    Route::get('/media/new-albums', 'MediaController@getNewAlbums');
 
-    Route::get('/home/slider', 'HomeController@getSliders');
-    Route::get('/home/new-albums', 'HomeController@getNewAlbums');
+    Route::get('/region/popular', 'RegionController@getPopularRegions');
 });

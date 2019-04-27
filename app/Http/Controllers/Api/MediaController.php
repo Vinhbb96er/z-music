@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 use App\Repositories\Media\MediaInterface;
 use App\Repositories\Album\AlbumInterface;
 use Exception;
 
-class HomeController extends BaseApiController
+class MediaController extends BaseApiController
 {
     protected $mediaRepository;
     protected $albumRepository;
@@ -24,15 +25,24 @@ class HomeController extends BaseApiController
     public function getHotMedia(Request $request)
     {
         try {
-            $type = $request->type;
+            $params = $request->only(
+                'type',
+                'region',
+                'size'
+            );
 
-            return response()->json([
-                'hot_media' => $this->mediaRepository->getHotMedia($type),
-            ], 200);
+            if ($params['type'] == config('setting.album.media_type')) {
+                $media = $this->albumRepository->getHotAlbum($params);
+            } else {
+                $media = $this->mediaRepository->getHotMedia($params);
+            }
+
+            return response()->json($media, Response::HTTP_OK);
         } catch (Exception $e) {
+            dd($e);
             report($e);
 
-            return response()->json(null, 404);
+            return response()->json(null, Response::HTTP_NOT_FOUND);
         }
     }
 
@@ -43,11 +53,11 @@ class HomeController extends BaseApiController
 
             return response()->json([
                 'hot_media' => $this->mediaRepository->getNewMedia($type),
-            ], 200);
+            ], Response::HTTP_OK);
         } catch (Exception $e) {
             report($e);
 
-            return response()->json(null, 404);
+            return response()->json(null, Response::HTTP_NOT_FOUND);
         }
     }
 
@@ -63,11 +73,11 @@ class HomeController extends BaseApiController
                 ]
             ]);
 
-            return response()->json($media, 200);
+            return response()->json($media, Response::HTTP_OK);
         } catch (Exception $e) {
             report($e);
 
-            return response()->json(null, 404);
+            return response()->json(null, Response::HTTP_NOT_FOUND);
         }
     }
 
@@ -86,11 +96,11 @@ class HomeController extends BaseApiController
                 ]
             ]);
 
-            return response()->json($albums, 200);
+            return response()->json($albums, Response::HTTP_OK);
         } catch (Exception $e) {
             report($e);
 
-            return response()->json(null, 404);
+            return response()->json(null, Response::HTTP_NOT_FOUND);
         }
     }
 }

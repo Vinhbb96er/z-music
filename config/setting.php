@@ -22,9 +22,16 @@ return [
     ],
 
     'album' => [
+        'media_type' => 3,
         'type' => [
             'single' => 1,
             'normal' => 2,
         ]
+    ],
+
+    'media_filter_size' => [
+        'album' => 5,
+        'video' => 6,
+        'music' => 7,
     ]
 ];

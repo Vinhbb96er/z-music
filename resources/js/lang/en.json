@@ -2,10 +2,22 @@
     "home": {
         "view": "View",
         "listen": "Listen",
-        "new_releases_albums": "New Releases Albums"
+        "new_releases_albums": "New Releases Albums",
+        "hot_media": "Musics / Videos / Albums Hot",
+        "selective": "Selective"
     },
     "album": {
-        "track": "Track"
+        "name": "Album",
+        "track": "Track",
+        "album_hot": "Album hot"
+    },
+    "music_video": {
+        "name": "Music Video",
+        "video_hot": "Video hot"
+    },
+    "music": {
+        "name": "Music",
+        "music_hot": "Music hot"
     },
     "footer": {
     "copy_right": "© 2018 Z-Music. All Right Reserved."

@@ -181,7 +181,7 @@ body.msl-black .logo-drak{
 }
 .msl-black .album-inner .msl-tab-nav a,
 .msl-black .music-album-wrap{
-	background-color: #313d46;
+	background-color: #313d46 !important;
 }
 .msl-black .music-album-nav li a::before{
 	bottom: -1px;
@@ -670,7 +670,7 @@ aside .widget.widget-social{
 }
 .msl-black .album-inner .msl-tab-nav a,
 .msl-black .music-album-wrap{
-	background-color: #313d46;
+	background-color: #313d46 !important;
 }
 .msl-black .music-album-nav li a::before{
 	bottom: -1px;

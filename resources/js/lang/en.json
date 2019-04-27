@@ -3,21 +3,25 @@
         "view": "View",
         "listen": "Listen",
         "new_releases_albums": "New Releases Albums",
-        "hot_media": "Musics / Videos / Albums Hot",
+        "hot_media": "Music / Video / Album Hot",
+        "new_media": "Music / Video / Album New",
         "selective": "Selective"
     },
     "album": {
         "name": "Album",
         "track": "Track",
-        "album_hot": "Album hot"
+        "album_hot": "Album hot",
+        "album_new": "Album new"
     },
     "music_video": {
         "name": "Music Video",
-        "video_hot": "Video hot"
+        "video_hot": "Video hot",
+        "video_new": "Video new"
     },
     "music": {
         "name": "Music",
-        "music_hot": "Music hot"
+        "music_hot": "Music hot",
+        "music_new": "Music new"
     },
     "footer": {
     "copy_right": "© 2018 Z-Music. All Right Reserved."

@@ -39,7 +39,6 @@ class MediaController extends BaseApiController
 
             return response()->json($media, Response::HTTP_OK);
         } catch (Exception $e) {
-            dd($e);
             report($e);
 
             return response()->json(null, Response::HTTP_NOT_FOUND);
@@ -49,11 +48,19 @@ class MediaController extends BaseApiController
     public function getNewMedia(Request $request)
     {
         try {
-            $type = $request->type;
+            $params = $request->only(
+                'type',
+                'region',
+                'size'
+            );
 
-            return response()->json([
-                'hot_media' => $this->mediaRepository->getNewMedia($type),
-            ], Response::HTTP_OK);
+            if ($params['type'] == config('setting.album.media_type')) {
+                $media = $this->albumRepository->getNewAlbum($params);
+            } else {
+                $media = $this->mediaRepository->getNewMedia($params);
+            }
+
+            return response()->json($media, Response::HTTP_OK);
         } catch (Exception $e) {
             report($e);
 

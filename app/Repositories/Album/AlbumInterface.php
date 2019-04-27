@@ -7,4 +7,6 @@ interface AlbumInterface
     public function search($params = []);
 
     public function getHotAlbum($params = []);
+
+    public function getNewAlbum($params = []);
 }

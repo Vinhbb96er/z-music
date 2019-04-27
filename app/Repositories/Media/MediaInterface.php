@@ -4,9 +4,9 @@ namespace App\Repositories\Media;
 
 interface MediaInterface
 {
-    public function getHotMedia($type = null);
+    public function getHotMedia($params = []);
 
-    public function getNewMedia($type = null);
+    public function getNewMedia($params = []);
 
     public function search($params = []);
 }

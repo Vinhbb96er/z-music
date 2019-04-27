@@ -71,6 +71,17 @@ const actions = {
                     reject(err);
                 });
         });
+    },
+    getMediaNew({commit}, data) {
+        return new Promise((resolve, reject) => {
+            get(`media/new?type=${data.type}&region=${data.region}&size=${data.size}`)
+                .then(res => {
+                    commit('setMediaNew', res.data.data);
+                })
+                .catch(err => {
+                    reject(err);
+                });
+        });
     }
 }
 

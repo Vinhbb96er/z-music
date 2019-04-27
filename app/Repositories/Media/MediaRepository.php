@@ -26,11 +26,17 @@ class MediaRepository extends BaseRepository implements MediaInterface
         return $this->search($params);
     }
 
-    public function getNewMedia($type = null)
+    public function getNewMedia($params = [])
     {
-        $type = $type ?? config('setting.media.type.music');
+        $params['is_artist'] = true;
+        $params['sort_field'] = 'created_at';
+        $params['sort_type'] = 'desc';
+        $params['eagle_loading'] = [
+            'user',
+            'kinds',
+        ];
 
-        return $this->model->where('type', $type)->orderBy('created_at', 'desc')->paginate(10);
+        return $this->search($params);
     }
 
     public function search($params = [])

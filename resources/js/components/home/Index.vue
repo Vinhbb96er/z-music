@@ -8,6 +8,7 @@
                         <div class="col-md-8">
                             <home-new-album></home-new-album>
                             <home-media-hot></home-media-hot>
+                            <home-media-new></home-media-new>
                         </div>
                         <div class="col-md-4">
                             <aside>
@@ -124,6 +125,7 @@
     import HomeRanking from './rightbars/Ranking.vue'
     import HomePlaylist from './rightbars/Playlist.vue'
     import HomeMediaHot from './media_hot/Index.vue'
+    import HomeMediaNew from './media_new/Index.vue'
 
     export default {
         components: {
@@ -131,7 +133,8 @@
             HomeNewAlbum,
             HomeRanking,
             HomePlaylist,
-            HomeMediaHot
+            HomeMediaHot,
+            HomeMediaNew
         }
     }
 </script>

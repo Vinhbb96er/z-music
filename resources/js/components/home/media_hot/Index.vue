@@ -3,7 +3,10 @@
         <!--Heading Start-->
         <div class="msl-black title-style-2">
             <div class="msl-heading light-color ">
-                <h5><span>{{ $t('home.hot_media') }}</span></h5>
+                <h5>
+                    <span>{{ $t('home.hot_media') }}</span>
+                    <span class="line"></span>
+                </h5>
             </div>
         </div>
         <!--Heading End-->

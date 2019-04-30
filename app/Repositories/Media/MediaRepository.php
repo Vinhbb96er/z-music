@@ -71,4 +71,17 @@ class MediaRepository extends BaseRepository implements MediaInterface
 
         return isset($params['size']) ? $query->paginate($params['size']) : $query->paginate(10);
     }
+
+    public function getRankingMedia($params = [])
+    {
+        $params['is_artist'] = true;
+        $params['sort_field'] = 'views';
+        $params['sort_type'] = 'desc';
+        $params['eagle_loading'] = [
+            'user',
+            'kinds',
+        ];
+
+        return $this->search($params);
+    }
 }

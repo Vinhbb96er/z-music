@@ -705,28 +705,3 @@
     map.mapTypes.set(MY_MAPTYPE_ID, customMapType);
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -80,19 +80,16 @@ body.msl-black .logo-drak{
 	margin: 0 0 0 25px;
 	line-height: normal;
 	background-color: transparent !important;
+    width: 100%;
+    overflow: hidden;
 }
-.msl-black .msl-heading h5:after,
-.msl-black .msl-heading h5:before{
-	position: absolute;
-	top: auto;
-	bottom: 8px;
-	right: 100%;
-	left: auto;
-	height: 3px;
-	width: 300%;
-	background-color: #fff;
-	content: "";
-	min-width: 25px;
+.msl-black .msl-heading h5 .line {
+	width: 100%;
+    border-bottom: 3px solid #fff;
+    display: inline-block;
+    position: absolute;
+    bottom: 8px;
+    margin-left: 20px;
 }
 .msl-black .msl-heading h5:after{
 	left: 100%;
@@ -512,26 +509,23 @@ body.msl-black .caption-info{
 	overflow:hidden;
 }
 .msl-black .msl-heading h5{
-	color: #fff;
-	font-size: 24px;
-	padding: 0px 20px 0 20px;
-	position: relative;
-	margin: 0 0 0 25px;
-	line-height: normal;
-	background-color: transparent !important;
+    color: #fff;
+    font-size: 24px;
+    padding: 0px 20px 0 20px;
+    position: relative;
+    margin: 0 0 0 25px;
+    line-height: normal;
+    background-color: transparent !important;
+    width: 100%;
+    overflow: hidden;
 }
-.msl-black .msl-heading h5:after,
-.msl-black .msl-heading h5:before{
-	position: absolute;
-	top: auto;
-	bottom: 8px;
-	right: 100%;
-	left: auto;
-	height: 3px;
-	width: 300%;
-	background-color: #fff;
-	content: "";
-	min-width: 25px;
+.msl-black .msl-heading h5 .line {
+    width: 100%;
+    border-bottom: 3px solid #fff;
+    display: inline-block;
+    position: absolute;
+    bottom: 8px;
+    margin-left: 20px;
 }
 .msl-black .msl-heading h5:after{
 	left: 100%;
@@ -733,8 +727,7 @@ body.msl-black .latest-album article .text{
 			Back version style
 	====================================
 */
-body.msl-black div.msl-black .light-color.msl-heading h5:after,
-body.msl-black div.msl-black .light-color.msl-heading h5:before{
+body.msl-black div.msl-black .light-color.msl-heading h5 .line {
 	background-color:#fff;
 }
 body.msl-black .header-style-3 .header-2st-row.align-center-nav .container{

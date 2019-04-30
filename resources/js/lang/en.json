@@ -5,23 +5,34 @@
         "new_releases_albums": "New Releases Albums",
         "hot_media": "Music / Video / Album Hot",
         "new_media": "Music / Video / Album New",
-        "selective": "Selective"
+        "selective": "Selective",
+        "region": "Region",
+        "kind": "Kind",
+        "kind_regions": "Regions & Kinds",
+        "topic_hot": "Topic hot",
+        "highlight_artist": "Highlight Artists"
     },
     "album": {
         "name": "Album",
         "track": "Track",
         "album_hot": "Album hot",
-        "album_new": "Album new"
+        "album_new": "Album new",
+        "album_ranking": "Album ranking"
     },
     "music_video": {
         "name": "Music Video",
         "video_hot": "Video hot",
-        "video_new": "Video new"
+        "video_new": "Video new",
+        "video_ranking": "Video ranking"
     },
     "music": {
         "name": "Music",
         "music_hot": "Music hot",
-        "music_new": "Music new"
+        "music_new": "Music new",
+        "music_ranking": "Music ranking"
+    },
+    "button": {
+        "follow": "Follow"
     },
     "footer": {
     "copy_right": "© 2018 Z-Music. All Right Reserved."

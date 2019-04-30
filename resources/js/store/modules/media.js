@@ -1,4 +1,4 @@
-import {get} from '../../api/base_api.js'
+import {get, makePathByParams} from '../../api/base_api.js'
 
 const state = {
     sliderItems: [],
@@ -63,7 +63,7 @@ const actions = {
     },
     getMediaHot({commit}, data) {
         return new Promise((resolve, reject) => {
-            get(`media/hot?type=${data.type}&region=${data.region}&size=${data.size}`)
+            get(makePathByParams('media/hot', data))
                 .then(res => {
                     commit('setMediaHot', res.data.data);
                 })
@@ -74,7 +74,7 @@ const actions = {
     },
     getMediaNew({commit}, data) {
         return new Promise((resolve, reject) => {
-            get(`media/new?type=${data.type}&region=${data.region}&size=${data.size}`)
+            get(makePathByParams('media/new', data))
                 .then(res => {
                     commit('setMediaNew', res.data.data);
                 })

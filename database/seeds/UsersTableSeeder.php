@@ -9,6 +9,7 @@ use App\Models\Tag;
 use App\Models\Album;
 use App\Models\Media;
 use App\Models\Like;
+use App\Models\Follow;
 
 class UsersTableSeeder extends Seeder
 {
@@ -25,7 +26,8 @@ class UsersTableSeeder extends Seeder
         $this->createKinds($faker);
 
         User::truncate();
-        factory(User::class, 30)->create();
+        factory(User::class, 100)->create();
+        factory(Follow::class, 300)->create();
 
         Album::truncate();
         factory(Album::class, 50)->create()->each(function ($album) {
@@ -34,7 +36,7 @@ class UsersTableSeeder extends Seeder
         });
 
         Media::truncate();
-        factory(Media::class, 200)->create()->each(function ($media) {
+        factory(Media::class, 2000)->create()->each(function ($media) {
             $kindId = Kind::all()->random()->id;
             $media->kinds()->attach($kindId);
         });
@@ -73,24 +75,78 @@ class UsersTableSeeder extends Seeder
     public function createRegions($faker)
     {
         Region::truncate();
-        $regions = ['Việt Nam', 'Âu Mỹ', 'Hàn Quốc', 'Nhật Bản', 'Châu Á'];
+        $regions = [
+            [
+                'name' => 'Việt Nam',
+                'cover_image' => '/frontend/images/region_kind/region_bg.jpg'
+            ],
+            [
+                'name' => 'Âu Mỹ',
+                'cover_image' => '/frontend/images/region_kind/region_bg.jpg'
+            ],
+            [
+                'name' => 'Hàn Quốc',
+                'cover_image' => '/frontend/images/region_kind/region_bg.jpg'
+            ],
+            [
+                'name' => 'Nhật Bản',
+                'cover_image' => '/frontend/images/region_kind/region_bg.jpg'
+            ],
+            [
+                'name' => 'Trung Quốc',
+                'cover_image' => '/frontend/images/region_kind/region_bg.jpg'
+            ],
+            [
+                'name' => 'Châu Á',
+                'cover_image' => '/frontend/images/region_kind/region_bg.jpg'
+            ],
+            [
+                'name' => 'Thái Lan',
+                'cover_image' => '/frontend/images/region_kind/region_bg.jpg'
+            ],
+        ];
 
         foreach ($regions as $region) {
-            factory(Region::class)->create([
-                'name' => $region,
-            ]);
+            factory(Region::class)->create($region);
         }
     }
 
     public function createKinds($faker)
     {
         Kind::truncate();
-        $kinds = ['Nhạc trẻ', 'Rap', 'Ballad', 'R&B', 'Dance'];
+        $kinds = [
+            [
+                'name' => 'Nhạc trẻ',
+                'cover_image' => '/frontend/images/region_kind/rock_bg.jpg'
+            ],
+            [
+                'name' => 'Rap',
+                'cover_image' => '/frontend/images/region_kind/rock_bg.jpg'
+            ],
+            [
+                'name' => 'Pop&Ballad',
+                'cover_image' => '/frontend/images/region_kind/rock_bg.jpg'
+            ],
+            [
+                'name' => 'R&B',
+                'cover_image' => '/frontend/images/region_kind/rock_bg.jpg'
+            ],
+            [
+                'name' => 'Dance',
+                'cover_image' => '/frontend/images/region_kind/rock_bg.jpg'
+            ],
+            [
+                'name' => 'Hippot',
+                'cover_image' => '/frontend/images/region_kind/rock_bg.jpg'
+            ],
+            [
+                'name' => 'Remix',
+                'cover_image' => '/frontend/images/region_kind/rock_bg.jpg'
+            ],
+        ];
 
         foreach ($kinds as $kind) {
-            factory(Kind::class)->create([
-                'name' => $kind,
-            ]);
+            factory(Kind::class)->create($kind);
         }
     }
 

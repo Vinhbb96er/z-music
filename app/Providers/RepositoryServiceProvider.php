@@ -27,6 +27,16 @@ class RepositoryServiceProvider extends ServiceProvider
             'App\Repositories\Region\RegionInterface',
             'App\Repositories\Region\RegionRepository'
         );
+
+        $this->app->bind(
+            'App\Repositories\Kind\KindInterface',
+            'App\Repositories\Kind\KindRepository'
+        );
+
+        $this->app->bind(
+            'App\Repositories\User\UserInterface',
+            'App\Repositories\User\UserRepository'
+        );
     }
 
     /**

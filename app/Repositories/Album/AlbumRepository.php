@@ -75,4 +75,18 @@ class AlbumRepository extends BaseRepository implements AlbumInterface
 
         return $this->search($params);
     }
+
+    public function getRankingAlbum($params = [])
+    {
+        unset($params['type']);
+        $params['is_artist'] = true;
+        $params['sort_field'] = 'views';
+        $params['sort_type'] = 'desc';
+        $params['eagle_loading'] = [
+            'user',
+            'kinds',
+        ];
+
+        return $this->search($params);
+    }
 }

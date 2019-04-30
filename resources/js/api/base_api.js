@@ -44,3 +44,24 @@ export function del(url, payload = '') {
         data: payload
     })
 }
+
+export function makePathByParams(path, params) {
+    if (!params) {
+        return path;
+    }
+
+    path = `${path}?`;
+
+    var paramName = Object.keys(params);
+    var paramValue = Object.values(params);
+
+    paramName.forEach(function (name, key) {
+        path += `${name}=${paramValue[key]}`;
+
+        if (key < paramName.length - 1) {
+            path += '&';
+        }
+    });
+
+    return path;
+}

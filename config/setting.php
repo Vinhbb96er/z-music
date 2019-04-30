@@ -33,5 +33,11 @@ return [
         'album' => 5,
         'video' => 6,
         'music' => 7,
+    ],
+
+    'category_type' => [
+        'selective' => 0,
+        'region' => 1,
+        'kind' => 2,
     ]
 ];

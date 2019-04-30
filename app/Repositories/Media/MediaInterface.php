@@ -9,4 +9,6 @@ interface MediaInterface
     public function getNewMedia($params = []);
 
     public function search($params = []);
+
+    public function getRankingMedia($params = []);
 }

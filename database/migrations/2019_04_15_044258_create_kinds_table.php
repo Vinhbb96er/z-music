@@ -16,6 +16,7 @@ class CreateKindsTable extends Migration
         Schema::create('kinds', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
+            $table->string('cover_image');
             $table->timestamps();
         });
     }

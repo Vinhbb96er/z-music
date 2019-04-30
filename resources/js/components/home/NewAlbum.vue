@@ -3,7 +3,10 @@
         <!--Heading Start-->
         <div class="msl-black title-style-2">
             <div class="msl-heading light-color ">
-                <h5><span>{{ $t('home.new_releases_albums') }}</span></h5>
+                <h5>
+                    <span>{{ $t('home.new_releases_albums') }}</span>
+                    <span class="line"></span>
+                </h5>
             </div>
         </div>
         <!--Heading End-->

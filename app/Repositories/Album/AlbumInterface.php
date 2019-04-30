@@ -9,4 +9,6 @@ interface AlbumInterface
     public function getHotAlbum($params = []);
 
     public function getNewAlbum($params = []);
+
+    public function getRankingAlbum($params = []);
 }

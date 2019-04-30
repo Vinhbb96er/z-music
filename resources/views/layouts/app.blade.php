@@ -53,6 +53,7 @@
                 'media' => config('setting.media'),
                 'album' => config('setting.album'),
                 'media_filter_size' => config('setting.media_filter_size'),
+                'category_type' => config('setting.category_type'),
             ],
         ]) !!};
     </script>

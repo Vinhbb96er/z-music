@@ -7,6 +7,7 @@ use App\Models\Region;
 use App\Models\Kind;
 use App\Models\Album;
 use App\Models\Like;
+use App\Models\Follow;
 
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
@@ -82,5 +83,16 @@ $factory->define(Like::class, function (Faker $faker) {
     return [
         'user_id' => User::all()->random()->id,
         'status' => 1,
+    ];
+});
+
+$factory->define(Follow::class, function (Faker $faker) {
+
+    $userId = User::all()->random()->id;
+    $followId = User::where('id', '!=', $userId)->where('role_id', config('setting.user.role.artist'))->get()->random()->id;
+
+    return [
+        'user_id' => $userId,
+        'follow_id' => $followId,
     ];
 });

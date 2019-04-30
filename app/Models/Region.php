@@ -7,7 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Region extends Model
 {
     protected $fillable = [
-        'name', 
+        'name',
+        'cover_image'
+    ];
+
+    protected $appends = [
+        'category_type'
     ];
 
     public function albums()
@@ -18,5 +23,10 @@ class Region extends Model
     public function media()
     {
         return $this->hasMany(Media::class);
+    }
+
+    public function getCategoryTypeAttribute()
+    {
+        return config('setting.category_type.region');
     }
 }

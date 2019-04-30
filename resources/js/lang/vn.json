@@ -5,23 +5,34 @@
         "new_releases_albums": "Albums mới phát hành",
         "hot_media": "Nhạc / Video / Album Hot",
         "new_media": "Nhạc / Video / Album Mới",
-        "selective": "Chọn lọc"
+        "selective": "Chọn lọc",
+        "region": "Khu vực",
+        "kind": "Thể loại",
+        "kind_regions": "Khu vực & Thể loại",
+        "topic_hot": "Chủ đề hot",
+        "highlight_artist": "Nghệ sĩ nổi bật"
     },
     "album": {
         "name": "Album",
         "track": "Bài hát",
         "album_hot": "Album hot",
-        "album_new": "Album mới"
+        "album_new": "Album mới",
+        "album_ranking": "BXH Album"
     },
     "music_video": {
         "name": "Video ca nhạc",
         "video_hot": "Video hot",
-        "video_new": "Video mới"
+        "video_new": "Video mới",
+        "video_ranking": "BXH MV"
     },
     "music": {
         "name": "Bài hát",
         "music_hot": "Bài hát hot",
-        "music_new": "Bài hát mới"
+        "music_new": "Bài hát mới",
+        "music_ranking": "BXH Bài hát"
+    },
+    "button": {
+        "follow": "Theo dõi"
     },
     "footer": {
     "copy_right": "© 2018 Z-Music. All Right Reserved."

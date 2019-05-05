@@ -34,6 +34,18 @@
     "button": {
         "follow": "Theo dõi"
     },
+    "playlist": {
+        "name": "Danh sách phát",
+        "audio_not_support": "Trình duyệt của bạn không hỗ trợ HTML5 Audio 😢",
+        "add_my_favourite": "Thêm vào danh sách yêu thích",
+        "download": "Tải xuống",
+        "remove": "Xóa",
+        "play_random": "Nghe ngẫu nhiên",
+        "repeat": "Lặp lại",
+        "search": "Tìm kiếm",
+        "next": "Tiếp theo",
+        "prev": "Trước"
+    },
     "footer": {
     "copy_right": "© 2018 Z-Music. All Right Reserved."
     }

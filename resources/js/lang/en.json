@@ -34,6 +34,18 @@
     "button": {
         "follow": "Follow"
     },
+    "playlist": {
+        "name": "Playlist",
+        "audio_not_support": "Your browser does not support HTML5 Audio! 😢",
+        "add_my_favourite": "Add to my favourite list",
+        "download": "Download",
+        "remove": "Remove",
+        "play_random": "Play Random",
+        "repeat": "Repeat",
+        "search": "Search",
+        "next": "Next",
+        "prev": "Previous"
+    },
     "footer": {
     "copy_right": "© 2018 Z-Music. All Right Reserved."
     }

@@ -39,5 +39,10 @@ return [
         'selective' => 0,
         'region' => 1,
         'kind' => 2,
+    ],
+
+    'images' => [
+        'track' => '/frontend/images/track.png',
+        'music_playing' => '/frontend/images/music-playing.gif',
     ]
 ];

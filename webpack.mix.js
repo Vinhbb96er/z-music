@@ -20,4 +20,5 @@ mix.js('resources/js/app.js', 'public/frontend/js')
    .copyDirectory('node_modules/font-awesome', 'public/frontend/vendor/font-awesome')
    .copyDirectory('node_modules/font-awesome', 'public/frontend/vendor/font-awesome')
    .copyDirectory('node_modules/bootstrap/', 'public/frontend/vendor/bootstrap')
+   .copyDirectory('node_modules/plyr/', 'public/frontend/vendor/plyr')
    .version();

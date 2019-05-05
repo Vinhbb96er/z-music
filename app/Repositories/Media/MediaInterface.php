@@ -11,4 +11,8 @@ interface MediaInterface
     public function search($params = []);
 
     public function getRankingMedia($params = []);
+
+    public function getMedia($id, $params = []);
+
+    public function getMediaInAlbum($albumId, $params = []);
 }

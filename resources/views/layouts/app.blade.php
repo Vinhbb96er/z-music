@@ -19,8 +19,8 @@
     {{ Html::style(asset('frontend/css/slick-theme.css')) }}
     <!-- jquery.bxslider CSS -->
     {{ Html::style(asset('frontend/css/jquery.bxslider.css')) }}
-    <!--Player Css-->
-    {{ Html::style(asset('frontend/vendor/jplayer/jplayer.uno.css')) }}
+    <!--Plyr Player Css-->
+    {{ Html::style(asset('frontend/vendor/plyr/dist/plyr.css')) }}
     <!--black-style Css-->
     {{ Html::style(asset('frontend/css/black-style.css')) }}
     <!--Font-awesome & icon-->
@@ -42,6 +42,8 @@
     {{ Html::style(asset('frontend/css/style.css')) }}
     <!-- Color CSS -->
     {{ Html::style(asset('frontend/css/color.css')) }}
+    <!-- Playlist CSS -->
+    {{ Html::style(asset('frontend/css/playlist.css')) }}
 
     <script type="text/javascript">
         window.Laravel = {!! json_encode([
@@ -67,9 +69,7 @@
     <!--Slick Slider JavaScript-->
     {{ Html::script(asset('frontend/js/slick.min.js')) }}
     <!-- Player JavaScript -->
-    {{ Html::script(asset('frontend/vendor/jplayer/jplayer.jukebox.js')) }}
-    {{ Html::script(asset('frontend/vendor/jplayer/jquery.jplayer.min.js')) }}
-    {{ Html::script(asset('frontend/vendor/jplayer/jplayer.playlist.min.js')) }}
+    {{ Html::script(asset('frontend/vendor/plyr/dist/plyr.min.js')) }}
     <!--Dl Menu Script-->
     {{ Html::script(asset('frontend/vendor/dl-menu/modernizr.custom.js')) }}
     {{ Html::script(asset('frontend/vendor/dl-menu/jquery.dlmenu.js')) }}

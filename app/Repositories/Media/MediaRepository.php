@@ -84,4 +84,34 @@ class MediaRepository extends BaseRepository implements MediaInterface
 
         return $this->search($params);
     }
+
+    public function getMedia($id, $params = [])
+    {
+        $query = $this->model->newQuery();
+
+        if (isset($params['eagle_loading'])) {
+            $query->with($params['eagle_loading']);
+        }
+
+        if (isset($params['with_count'])) {
+            $query->withCount($params['with_count']);
+        }
+
+        return $query->findOrFail($id);
+    }
+
+    public function getMediaInAlbum($albumId, $params = [])
+    {
+        $query = $this->model->newQuery();
+
+        if (isset($params['eagle_loading'])) {
+            $query->with($params['eagle_loading']);
+        }
+
+        if (isset($params['with_count'])) {
+            $query->withCount($params['with_count']);
+        }
+
+        return $query->where('album_id', $albumId)->get();
+    }
 }

@@ -22,6 +22,7 @@ Route::group(['namespace' => 'Api'], function () {
     Route::get('/media/new', 'MediaController@getNewMedia');
     Route::get('/media/slider', 'MediaController@getSliders');
     Route::get('/media/new-albums', 'MediaController@getNewAlbums');
+    Route::get('/media/{id}/get', 'MediaController@getMedia');
 
     Route::get('/category/region/popular', 'CategoryController@getPopularRegions');
     Route::get('/category/top-view', 'CategoryController@getTopViewCategories');

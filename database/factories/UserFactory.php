@@ -51,14 +51,66 @@ $factory->define(Album::class, function (Faker $faker) {
     ];
 });
 
-$factory->define(Media::class, function (Faker $faker) {
+$musicData = [
+    [
+        'url' => 'https://aredir.nixcdn.com/NhacCuaTui946/DongThoai-MichaelWongQuangLuong-161624_hq.mp3?st=-VcR6k46GfZur5GNgqNYvQ&amp;e=1557152476&amp;download=true',
+        'name' => 'Tong Hua'
+    ],
+    [
+        'url' => 'https://aredir.nixcdn.com/NhacCuaTui956/ThanThoai-ThanhLongJackieChanKimHeeSun-113987_hq.mp3?st=F8oAypasyDhPGWiRC0eZNQ&e=1557152510&download=true',
+        'name' => 'Endless love'
+    ],
+    [
+        'url' => 'https://aredir.nixcdn.com/NhacCuaTui957/SaiNguoiSaiThoiDiem-ThanhHungIdol-5333777.mp3?st=W9yKIoeq5B32WjCMAT5QiA&amp;e=1557152533&amp;download=true',
+        'name' => 'Sai người sai thời điểm'
+    ],
+    [
+        'url' => 'https://aredir.nixcdn.com/NhacCuaTui975/YeuEmDaiKhoAcousticLive-LouHoang-5838190_hq.mp3?st=8qPRNV5thrT51JyNQ-W6Ow&amp;e=1557150880&amp;download=true',
+        'name' => 'Yêu Em Dại Khờ (Acoustic Live)'
+    ],
+    [
+        'url' => 'https://aredir.nixcdn.com/NhacCuaTui117/LiuXingYuMuaSaoBang-F4_t5p5.mp3?st=L3NqKr4IferSpdAw-6dEfQ&amp;e=1557150929&amp;download=true',
+        'name' => 'Liu Xing Yu (Mưa Sao Băng)'
+    ],
+    [
+        'url' => 'https://aredir.nixcdn.com/NhacCuaTui946/YeuNhuNgayYeuCuoi-MaiTienDung-5085422.mp3?st=HsCQq7ZsvMt2fSLIhZkDUA&amp;e=1557152583&amp;download=true',
+        'name' => 'Yêu Như Ngày Yêu Cuối'
+    ],
+    [
+        'url' => 'https://aredir.nixcdn.com/NhacCuaTui154/YeuLaiTuDau-KhacViet_354qr.mp3?st=Zz0Oh9tUqEE3ZghcYmgq6A&amp;e=1557152618&amp;download=true',
+        'name' => 'Yêu Lại Từ Đầu'
+    ],
+    [
+        'url' => 'https://aredir.nixcdn.com/NhacCuaTui966/SuytNuaThiChuyenDiCuaThanhXuanOST-Andiez-5524811.mp3?st=PaeSmyNMCK5xqjcP34HzIw&amp;e=1557152657&amp;download=true',
+        'name' => 'Suýt Nữa Thì (Chuyến Đi Của Thanh Xuân OST)'
+    ],
+    [
+        'url' => 'https://aredir.nixcdn.com/Sony_Audio52/ThanhXuan-DaLAB-5773854.mp3?st=F1xuNAkSLTYCvsHmsWMlag&amp;e=1557152682&amp;download=true',
+        'name' => 'Thanh Xuân'
+    ],
+    [
+        'url' => 'https://aredir.nixcdn.com/NhacCuaTui966/HoaRaEmLaNguoiThuBa-QuachTuHeUyTuWeiZai-5524343.mp3?st=ZQLU5w6VAuRnvaTmbfXCUw&amp;e=1557151523&amp;download=true',
+        'name' => 'Hóa Ra Em Là Người Thứ Ba'
+    ]
+];
+
+$factory->define(Media::class, function (Faker $faker) use ($musicData) {
+    $type = $faker->randomElement([1, 2]);
+    $music = [];
+    $albumId = null;
+
+    if ($type == 1) {
+        $music = $musicData[array_rand($musicData)];
+        $albumId = Album::all()->random()->id;
+    }
+
     return [
-        'album_id' => Album::all()->random()->id,
+        'album_id' => $albumId,
         'region_id' => Region::all()->random()->id,
         'user_id' => User::all()->random()->id,
-        'url' => '',
-        'name' => implode(' ', $faker->words(3)),
-        'type' => $faker->randomElement([1, 2]),
+        'url' => empty($music) ? '' : $music['url'],
+        'name' => empty($music) ? implode(' ', $faker->words(3)) : $faker->bothify($music['name'] . ' (#?)'),
+        'type' => $type,
         'lyrics' => '',
         'artist_name' => User::all()->random()->name,
         'cover_image' => $faker->imageUrl(640, 300),
@@ -87,7 +139,6 @@ $factory->define(Like::class, function (Faker $faker) {
 });
 
 $factory->define(Follow::class, function (Faker $faker) {
-
     $userId = User::all()->random()->id;
     $followId = User::where('id', '!=', $userId)->where('role_id', config('setting.user.role.artist'))->get()->random()->id;
 

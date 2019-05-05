@@ -643,24 +643,23 @@
       parent_box.find('.album-play-list').slideToggle(500, 'swing')
     });
 
-      // Initialize jPlayerJukebox
-	var jpjb = new jPlayerJukebox({
-	  'swfPath': 'jplayer',
-	  'jukeboxOptions': {
-	    'autoAdvance': true,
-	    'position': 'static'
-	  }
-	});
+    /*== POPUP MENU ==*/
+
+    $(document).on('click', '.popup-menu .btn-open-menu', function(e) {
+        e.stopPropagation();
+        $('.popup-menu .menu-content').fadeOut(400);
+        $(this).closest('.popup-menu').find('.menu-content').fadeIn(400);
+    });
+
+    $(document).on('click', '.popup-menu .menu-content li', function(e) {
+        e.stopPropagation();
+        $(this).closest('.menu-content').fadeOut(400);
+    });
+
+    $(document).on('click', function() {
+        $('.popup-menu .menu-content').fadeOut(400);
+    });
 });
-
-
-
-
-
-
-
-
-
 
 	 /*
     =======================================================================

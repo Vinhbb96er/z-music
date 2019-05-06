@@ -68,14 +68,15 @@ class MediaController extends BaseApiController
         }
     }
 
-    public function getSliders(Request $request) {
+    public function getSliders(Request $request)
+    {
         try {
             $media = $this->mediaRepository->search([
                 'size' => 5,
                 'is_artist' => true,
                 'sort_field' => 'views',
                 'sort_type' => 'desc',
-                'eagle_loading' => [
+                'with_count' => [
                     'likes'
                 ]
             ]);
@@ -88,7 +89,8 @@ class MediaController extends BaseApiController
         }
     }
 
-    public function getNewAlbums() {
+    public function getNewAlbums()
+    {
         try {
             $albums = $this->albumRepository->search([
                 'is_artist' => true,
@@ -104,6 +106,35 @@ class MediaController extends BaseApiController
             ]);
 
             return response()->json($albums, Response::HTTP_OK);
+        } catch (Exception $e) {
+            report($e);
+
+            return response()->json(null, Response::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function getMedia(Request $request, $id)
+    {
+        try {
+            $type = $request->type;
+            $params = [
+                'with_count' => [
+                    'likes'
+                ],
+                'eagle_loading' => [
+                    'user',
+                    'album',
+                    'kinds'
+                ]
+            ];
+
+            if ($type == config('setting.album.media_type')) {
+                $media = $this->mediaRepository->getMediaInAlbum($id, $params);
+            } else {
+                $media = [$this->mediaRepository->getMedia($id, $params)];
+            }
+
+            return response()->json($media, Response::HTTP_OK);
         } catch (Exception $e) {
             report($e);
 

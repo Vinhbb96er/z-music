@@ -136,7 +136,7 @@ class UsersTableSeeder extends Seeder
                 'cover_image' => '/frontend/images/region_kind/rock_bg.jpg'
             ],
             [
-                'name' => 'Hippot',
+                'name' => 'Rock',
                 'cover_image' => '/frontend/images/region_kind/rock_bg.jpg'
             ],
             [

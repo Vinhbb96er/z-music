@@ -34,7 +34,9 @@
                             <a href="#" class="artist-name">{{ music.user.name }}</a>
                         </div>
                         <div class="music-icon-group">
-                            <a class="mp3-icon" href="#"><i class="icon-play-button"></i></a>
+                            <a class="mp3-icon" href="#" @click.prevent="addMusicToPlaylist({id: music.id, type: type})">
+                                <i class="icon-play-button"></i>
+                            </a>
                             <a class="mp3-icon" href="#"><i class="fa fa-info"></i></a>
                             <a class="mp3-icon" href="#"><i class="icon-music-1"></i></a>
                         </div>
@@ -69,7 +71,7 @@
             }
         },
         methods: {
-            ...mapActions(['getMediaHot'])
+            ...mapActions(['getMediaHot', 'addMusicToPlaylist'])
         },
         created() {
             this.getMediaHot({

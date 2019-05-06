@@ -10,7 +10,7 @@
                 </div>
                 <div class="media-info">
                     <span><i class="fa fa-play-circle-o play-icon"></i> {{ media.views }}</span>
-                    <span><i class="fa fa-heart like-icon"></i> {{ media.likes.length }}</span>
+                    <span><i class="fa fa-heart like-icon"></i> {{ media.likes_count }}</span>
                 </div>
             </div>
         </div>

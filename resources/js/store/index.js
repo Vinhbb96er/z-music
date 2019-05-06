@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import Media from './modules/media.js'
 import Category from './modules/category.js'
 import Ranking from './modules/ranking.js'
+import Playlist from './modules/playlist.js'
 
 Vue.use(Vuex);
 
@@ -22,6 +23,7 @@ export const store = new Vuex.Store({
     modules: {
         Media,
         Category,
-        Ranking
+        Ranking,
+        Playlist
     }
 })

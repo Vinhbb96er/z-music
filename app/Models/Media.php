@@ -20,6 +20,10 @@ class Media extends Model
         'status',
     ];
 
+    protected $appends = [
+        'kinds_text'
+    ];
+
     public function favourites()
     {
         return $this->hasMany(Favourite::class);
@@ -73,5 +77,10 @@ class Media extends Model
     public function getNameAttribute()
     {
         return ucwords($this->attributes['name']);
+    }
+
+    public function getKindsTextAttribute()
+    {
+        return implode(', ', $this->kinds->pluck('name')->all());
     }
 }

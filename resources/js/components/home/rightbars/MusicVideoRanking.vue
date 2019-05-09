@@ -7,7 +7,6 @@
                     <span>
                         <a href="#">
                             {{ $t('music_video.video_ranking') }}
-                            <i class="icon-multimedia-1 icon"></i>
                         </a>
                     </span>
                 </h5>

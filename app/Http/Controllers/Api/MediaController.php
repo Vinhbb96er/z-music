@@ -113,10 +113,12 @@ class MediaController extends BaseApiController
         }
     }
 
-    public function getMedia(Request $request, $id)
+    public function getMediaForPlaylist(Request $request)
     {
         try {
             $type = $request->type;
+            $id = explode(',', $request->id);
+
             $params = [
                 'with_count' => [
                     'likes'
@@ -131,10 +133,97 @@ class MediaController extends BaseApiController
             if ($type == config('setting.album.media_type')) {
                 $media = $this->mediaRepository->getMediaInAlbum($id, $params);
             } else {
-                $media = [$this->mediaRepository->getMedia($id, $params)];
+                $params['type'] = $type;
+                $media = $this->mediaRepository->getMediaForPlaylist($id, $params);
             }
 
             return response()->json($media, Response::HTTP_OK);
+        } catch (Exception $e) {
+            report($e);
+
+            return response()->json(null, Response::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function show(Request $request, $id)
+    {
+        try {
+            $type = $request->type;
+
+            if ($type == config('setting.album.media_type')) {
+                $data = $this->albumRepository->getAlbum($id, [
+                    'with_count' => [
+                        'likes'
+                    ],
+                    'eagle_loading' => [
+                        'user',
+                        'kinds',
+                        'region'
+                    ],
+                    'load_user_followers' => true,
+                ]);
+            } else {
+                $data = $this->mediaRepository->getMedia($id, [
+                    'type' => $type,
+                    'with_count' => [
+                        'likes',
+                    ],
+                    'eagle_loading' => [
+                        'user',
+                        'album',
+                        'kinds',
+                        'region'
+                    ],
+                    'load_user_followers' => true,
+                ]);
+            }
+
+            return response()->json($data, Response::HTTP_OK);
+        } catch (Exception $e) {
+            report($e);
+
+            return response()->json(null, Response::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function getMediaComment(Request $request, $id)
+    {
+        try {
+            $type = $request->type;
+
+            if ($type == config('setting.album.media_type')) {
+                //
+            } else {
+                $data = $this->mediaRepository->getMediaComment($id);
+            }
+
+            return response()->json($data, Response::HTTP_OK);
+        } catch (Exception $e) {
+            report($e);
+
+            return response()->json(null, Response::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function getMediaSuggest(Request $request)
+    {
+        try {
+            $params = $request->only(
+                'artist',
+                'kind',
+                'region',
+                'type',
+                'size',
+                'media_id'
+            );
+
+            if ($params['type'] == config('setting.album.media_type')) {
+                //
+            } else {
+                $data = $this->mediaRepository->getMediaSuggest($params);
+            }
+
+            return response()->json($data, Response::HTTP_OK);
         } catch (Exception $e) {
             report($e);
 

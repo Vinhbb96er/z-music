@@ -20,6 +20,7 @@ class CreateCommentsTable extends Migration
             $table->string('commentable_type');
             $table->text('content');
             $table->tinyInteger('status');
+            $table->integer('reply_id')->default(0);
             $table->timestamps();
         });
     }

@@ -11,4 +11,6 @@ interface AlbumInterface
     public function getNewAlbum($params = []);
 
     public function getRankingAlbum($params = []);
+
+    public function getAlbum($id, $params = []);
 }

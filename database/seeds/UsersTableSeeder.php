@@ -10,6 +10,7 @@ use App\Models\Album;
 use App\Models\Media;
 use App\Models\Like;
 use App\Models\Follow;
+use App\Models\Comment;
 
 class UsersTableSeeder extends Seeder
 {
@@ -36,13 +37,25 @@ class UsersTableSeeder extends Seeder
         });
 
         Media::truncate();
-        factory(Media::class, 2000)->create()->each(function ($media) {
+        factory(Media::class, 2000)->create()->each(function ($media) use ($faker) {
             $kindId = Kind::all()->random()->id;
             $media->kinds()->attach($kindId);
+            $media->comments()->createMany([
+                [
+                    'user_id' => User::all()->random()->id,
+                    'content' => $faker->sentence,
+                    'status' => 1,
+                ],
+                [
+                    'user_id' => User::all()->random()->id,
+                    'content' => $faker->sentence,
+                    'status' => 1,
+                ]
+            ]);
         });
 
         Like::truncate();
-        for ($i = 1; $i <= 500; $i++) {
+        for ($i = 1; $i <= 1000; $i++) {
             $rand = $faker->randomElement([0, 1]);
 
             if ($rand) {
@@ -56,6 +69,27 @@ class UsersTableSeeder extends Seeder
             factory(Like::class, 1)->create([
                 'likeable_id' => $likeableId,
                 'likeable_type' => $likeableType,
+            ]);
+        }
+
+        for ($i = 1; $i <= 1000; $i++) {
+            $rand = 1;
+            if ($rand) {
+                $media = Media::all()->random();
+                $commentableType = 'App\Models\Media';
+                $commentableId = $media->id;
+                $parentId = $media->comments->where('reply_id', 0)->first()->id;
+            } else {
+                $album = Album::all()->random();
+                $commentableType = 'App\Models\Album';
+                $commentableId = $album->id;
+                $parentId = $album->comments->where('reply_id', 0)->first()->id;
+            }
+
+            factory(Comment::class, 1)->create([
+                'commentable_id' => $commentableId,
+                'commentable_type' => $commentableType,
+                'reply_id' => $parentId,
             ]);
         }
     }

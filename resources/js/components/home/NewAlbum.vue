@@ -18,7 +18,7 @@
                         <img src="#" :style="{backgroundImage: `url(${album.cover_image})`}">
                     </figure>
                     <div class="new-album-caption">
-                        <a href="#" class="new-album fa fa-play" @click.prevent="addMusicToPlaylist({id: album.id, type: type})"></a>
+                        <a href="#" class="new-album fa fa-play" @click.prevent="addMusicToPlaylist({id: album.id, type: type})" :title="$t('playlist.add_to_playlist')"></a>
                         <h5><a href="#">{{ album.name }}</a></h5>
                         <h6>{{ album.user.name }}</h6>
                         <p>{{ album.region.name }}</p>

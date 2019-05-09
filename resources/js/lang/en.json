@@ -1,6 +1,6 @@
 {
     "home": {
-        "view": "View",
+        "view_detail": "View Detail",
         "listen": "Listen",
         "new_releases_albums": "New Releases Albums",
         "hot_media": "Music / Video / Album Hot",
@@ -10,7 +10,13 @@
         "kind": "Kind",
         "kind_regions": "Regions & Kinds",
         "topic_hot": "Topic hot",
-        "highlight_artist": "Highlight Artists"
+        "highlight_artist": "Highlight Artists",
+        "maybe_you_interested": "Maybe you are interested"
+    },
+    "media": {
+        "description": "Description",
+        "comments": "Comments",
+        "add_comment": "Add Your Comments"
     },
     "album": {
         "name": "Album",
@@ -29,10 +35,19 @@
         "name": "Music",
         "music_hot": "Music hot",
         "music_new": "Music new",
-        "music_ranking": "Music ranking"
+        "music_ranking": "Music ranking",
+        "lyrics": "Lyrics",
+        "contribute_by": "Contribute by"
+    },
+    "artist": {
+        "name": "Artist",
+        "followers": "Followers"
     },
     "button": {
-        "follow": "Follow"
+        "follow": "Follow",
+        "contribute_lyrics": "Contribute lyrics",
+        "comment": "Comment",
+        "cancel": "Cancel"
     },
     "playlist": {
         "name": "Playlist",
@@ -44,7 +59,17 @@
         "repeat": "Repeat",
         "search": "Search",
         "next": "Next",
-        "prev": "Previous"
+        "prev": "Previous",
+        "play": "Play",
+        "play_all": "Play all",
+        "report": "Report",
+        "like": "Like",
+        "pause": "Pause",
+        "add_to_playlist": "Add to Playlist"
+    },
+    "message": {
+        "album_exists_in_playlist": "All songs in this album have exists in playlist",
+        "music_exists_in_playlist": "This song have exists in playlist"
     },
     "footer": {
     "copy_right": "© 2018 Z-Music. All Right Reserved."

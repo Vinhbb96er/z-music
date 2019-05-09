@@ -89,4 +89,35 @@ class AlbumRepository extends BaseRepository implements AlbumInterface
 
         return $this->search($params);
     }
+
+    public function getAlbum($id, $params = [])
+    {
+        $query = $this->model->newQuery();
+
+        if (isset($params['eagle_loading'])) {
+            if (isset($params['eagle_loading'])) {
+                if (!empty($params['load_user_followers'])) {
+                    $query->with(['user' => function ($query) {
+                        $query->withCount('followers');
+                    }]);
+                    $params['eagle_loading'] = array_diff($params['eagle_loading'], ['user']);
+                }
+
+                if (in_array('comments', $params['eagle_loading'])) {
+                    $query->with(['comments' => function ($query) {
+                        $query->where('reply_id', 0)->with(['user', 'replies.user']);
+                    }]);
+                    $params['eagle_loading'] = array_diff($params['eagle_loading'], ['comments']);
+                }
+
+                $query->with($params['eagle_loading']);
+            }
+        }
+
+        if (isset($params['with_count'])) {
+            $query->withCount($params['with_count']);
+        }
+
+        return $query->findOrFail($id);
+    }
 }

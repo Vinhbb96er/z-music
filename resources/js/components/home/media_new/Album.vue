@@ -28,8 +28,8 @@
                                 </div>
                                 <div class="title">
                                     <div>
-                                        <h5>{{ album.name }}</h5>
-                                        <p>{{ album.user.name }}</p>
+                                        <h5 class="album-name" @click.prevent="addMusicToPlaylist({id: album.id, type: type})" role="button">{{ album.name }}</h5>
+                                        <a href="#" class="album-artist">{{ album.user.name }}</a>
                                     </div>
                                 </div>
                                 <div class="album-no">
@@ -37,9 +37,11 @@
                                         <p>{{ album.kinds_text }}</p>
                                     </div>
                                 </div>
-                                <div class="album-date">
-                                    <div>
-                                        <p>{{ album.created_at_date }}</p>
+                                <div class="clic-btn-wrap">
+                                    <div class="music-icon-group">
+                                        <router-link @click.stop tag="a" class="mp3-icon" :to="{name: 'musicDetail', params: {id: album.id}}" :title="$t('home.view_detail')">
+                                            <i class="fa fa-info"></i>
+                                        </router-link>
                                     </div>
                                 </div>
                                 <div class="clic-btn-wrap">
@@ -52,14 +54,19 @@
                             </div>
                             <div class="album-play-list">
                                 <ul>
-                                    <li v-for="music in album.media" :key="music.id">
+                                    <li v-for="music in album.media" :key="music.id"  @click.prevent="playingMusic({id: music.id, type: music_type})">
                                         <div class="play-list-title">
-                                            <i class="icon-multimedia-1"></i>
+                                            <img :src="images.music_playing" class="playing-icon" v-if="checkPlayingMusic(music.id)">
+                                            <i class="icon-multimedia-1" v-else></i>
                                             <h6>{{ music.name }}</h6>
                                         </div>
-                                        <div class="play-list-icon">
-                                            <span class="icon-cross"></span>
-                                            <span class="icon-arrows-4"></span>
+                                        <div class="music-icon-group text-right">
+                                            <router-link @click.stop tag="a" class="mp3-icon" :to="{name: 'musicDetail', params: {id: music.id}}" :title="$t('home.view_detail')">
+                                                <i class="fa fa-info"></i>
+                                            </router-link>
+                                            <a href="#" class="mp3-icon" :title="$t('playlist.download')" @click.stop.prevent>
+                                                <i class="fa fa-download"></i>
+                                            </a>
                                         </div>
                                     </li>
                                 </ul>
@@ -81,8 +88,12 @@
         data() {
             return {
                 type: window.Laravel.setting.album.media_type,
+                music_type: window.Laravel.setting.media.type.music,
                 region: 0,
-                size: window.Laravel.setting.media_filter_size.album
+                size: window.Laravel.setting.media_filter_size.album,
+                images: {
+                    music_playing: window.Laravel.setting.images.music_playing
+                }
             }
         },
         watch: {
@@ -95,10 +106,10 @@
             }
         },
         computed: {
-            ...mapGetters(['popularRegions', 'mediaNew'])
+            ...mapGetters(['popularRegions', 'mediaNew', 'checkPlayingMusic'])
         },
         methods: {
-            ...mapActions(['getMediaNew'])
+            ...mapActions(['getMediaNew', 'addMusicToPlaylist', 'playingMusic'])
         },
         created() {
             this.getMediaNew({

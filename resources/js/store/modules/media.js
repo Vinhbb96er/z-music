@@ -4,7 +4,10 @@ const state = {
     sliderItems: [],
     newAlbums: [],
     mediaHot: [],
-    mediaNew: []
+    mediaNew: [],
+    mediaDetailData: null,
+    mediaComments: {},
+    mediaSuggest: [],
 }
 
 const getters = {
@@ -14,12 +17,21 @@ const getters = {
     newAlbums(state) {
         return state.newAlbums;
     },
-    mediaHot() {
+    mediaHot(state) {
         return state.mediaHot;
     }
     ,
-    mediaNew() {
+    mediaNew(state) {
         return state.mediaNew;
+    },
+    mediaDetailData(state) {
+        return state.mediaDetailData;
+    },
+    mediaSuggest(state) {
+        return state.mediaSuggest;
+    },
+    mediaComments(state) {
+        return state.mediaComments;
     }
 }
 
@@ -35,6 +47,15 @@ const mutations = {
     },
     setMediaNew(state, payload) {
         state.mediaNew = payload;
+    },
+    setMediaDetailData(state, payload) {
+        state.mediaDetailData = payload;
+    },
+    setMediaSuggest(state, payload) {
+        state.mediaSuggest = payload;
+    },
+    setMediaComments(state, payload) {
+        state.mediaComments = payload;
     }
 }
 
@@ -77,6 +98,47 @@ const actions = {
             get(makePathByParams('media/new', data))
                 .then(res => {
                     commit('setMediaNew', res.data.data);
+                })
+                .catch(err => {
+                    reject(err);
+                });
+        });
+    },
+    getMediaDetail({commit, dispatch}, data) {
+        return new Promise((resolve, reject) => {
+            get(`media/${data.id}/show?type=${data.type}`)
+                .then(res => {
+                    commit('setMediaDetailData', res.data);
+                    dispatch('getMediaSuggest', {
+                        type: res.data.type,
+                        artist: res.data.user_id,
+                        region: res.data.region_id,
+                        media_id: res.data.id
+                    });
+                })
+                .catch(err => {
+                    reject(err);
+                });
+        });
+    },
+    getMediaComments({commit, dispatch}, data) {
+        return new Promise((resolve, reject) => {
+            let mediaId = data.id;
+            delete data.id;
+            get(makePathByParams(`media/${mediaId}/comment`, data))
+                .then(res => {
+                    commit('setMediaComments', res.data);
+                })
+                .catch(err => {
+                    reject(err);
+                });
+        });
+    },
+    getMediaSuggest({commit}, data) {
+        return new Promise((resolve, reject) => {
+            get(makePathByParams('media/suggest', data))
+                .then(res => {
+                    commit('setMediaSuggest', res.data.data);
                 })
                 .catch(err => {
                     reject(err);

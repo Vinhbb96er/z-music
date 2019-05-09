@@ -1598,7 +1598,7 @@ section{
     padding: 0;
     margin: 0;
 }
-.kode-comments ul li{
+.kode-comments ul.comment li{
     float: left;
     width: 100%;
 }
@@ -2102,6 +2102,7 @@ div.title h5{
 }
 .album-play-list li{
     display: table-row;
+    cursor: pointer;
 }
 .album-play-list li:hover{
     background-color: #f4f7fa;
@@ -2547,6 +2548,7 @@ div.title h5{
 .mp3-list-table li{
     display: table-row;
     width: 100%;
+    cursor: pointer;
 }
 .mp3-list-table li > div:before{
     float: left;
@@ -8409,23 +8411,20 @@ body.msl-black .ticket-column:hover li a{
 .pagination > li:first-child > a,
 .pagination > li:first-child > span {
     border-radius: 0px;
-   padding: 6px 12px;
+   /*padding: 6px 12px;
    line-height: 1.42857;
    width: auto;
-   height: auto;
+   height: auto;*/
 }
 .pagination > li{
     float:none;
     display:inline-block;
 }
-.pagination > li:first-child > a{
+.pagination > li.prev > a {
+    margin-right: 0;
+}
+.pagination li.next > a{
     margin-left: 0;
-}
-.pagination li:first-child  span i{
-    margin-right:12px;
-}
-.pagination li:last-child  span i{
-    margin-left:12px;
 }
 .pagination > li > a,
 .pagination > li > span {
@@ -8440,7 +8439,7 @@ body.msl-black .ticket-column:hover li a{
     position: relative;
     text-decoration: none;
     font-size: 15px;
-    margin-left: 5px;
+    margin: 0 3px;
 }
 .pagination > li > a:hover,
 .pagination > li.active:hover a,
@@ -8755,12 +8754,38 @@ body.msl-black .albums-tables ul li span{
     font-size: 13px;
 }
 
-.media-filter-element .music-icon-group {
-    width: 105px;
+.media-filter-element .mp3-list-table .music-icon-group {
+    width: 115px;
+    padding-right: 20px;
+    text-align: right;
 }
 
 .media-filter-element .music-icon-group .mp3-icon {
-    margin: 0 6px;
+    margin-left: 10px;
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    border: 1px solid #fff;
+    text-align: center;
+    border-radius: 50%;
+    font-size: 14px;
+}
+
+.media-filter-element .music-icon-group .mp3-icon:hover {
+    border-color: #db152e;
+}
+
+.media-filter-element .album-play-list .play-list-title .playing-icon {
+    width: 25px;
+    height: 22px;
+    float: left;
+    margin-right: 20px;
+}
+
+.media-filter-element .album-list-thumb .album-name:hover,
+.media-filter-element .album-list-thumb .album-artist:hover,
+.media-filter-element .music-icon-group .mp3-icon:hover .fa {
+    color: #db152e !important;
 }
 
 .media-filter-element .mp3-list-table {
@@ -8775,6 +8800,14 @@ body.msl-black .albums-tables ul li span{
     padding: 7px 9px;
 }
 
+.media-filter-element .mp3-playlist-item-cover.playing {
+    background-color: #db152e;
+}
+
+.media-filter-element .mp3-playlist-item-cover.playing .img-holder {
+    animation-play-state: running;
+}
+
 .media-filter-element .mp3-playlist-item-cover .img-holder {
     border-radius: 50%;
     background-position: center;
@@ -8783,6 +8816,15 @@ body.msl-black .albums-tables ul li span{
     border: 1px solid #fff;
     width: 44px;
     height: 44px;
+    -webkit-transition: all 0.6s ease-in-out;
+    -moz-transition: all 0.6s ease-in-out;
+    -ms-transition: all 0.6s ease-in-out;
+    -o-transition: all 0.6s ease-in-out;
+    -webkit-animation: music-rotation 7s infinite linear;
+    -moz-animation: music-rotation 7s infinite linear;
+    -ms-animation: music-rotation 7s infinite linear;
+    -o-animation: music-rotation 7s infinite linear;
+    animation-play-state: paused;
 }
 
 .media-filter-element .mp3-playlist-item-cover .img-holder img {
@@ -9298,4 +9340,252 @@ body.msl-black .albums-tables ul li span{
 
 .highlight-artist-element .btn-follow:hover {
     font-weight: bold;
+}
+
+.msl-black .msl-heading h5 {
+    padding-left: 45px;
+    margin-left: 0;
+}
+
+.msl-black .msl-heading .line-before {
+    width: 30px;
+    border-bottom: 3px solid #fff;
+    position: absolute;
+    bottom: 8px;
+    margin-right: 20px;
+    left: 0;
+}
+
+.mp3-list-table li .music-icon-group .music-playing-icon {
+    display: none;
+    font-size: 15px;
+}
+
+.mp3-list-table li:hover .music-icon-group .music-playing-icon {
+    display: inline;
+}
+
+.artists-rank-list .artists-rank {
+    cursor: pointer;
+}
+
+.artists-rank-list .artists-rank figure .playing-icon {
+    padding: 5px;
+    background: #33333394;
+}
+
+.artists-rank-list .artists-rank:hover figure img {
+    opacity: unset;
+}
+
+/* MUSIC DETAIL */
+.artist-banner .artist-banner-thumb .text-overflow a {
+    padding: 0;
+}
+
+.artist-banner .artist-banner-thumb .text-overflow a:hover {
+    color: #db152e;
+}
+
+.artist-banner {
+    padding: 45px 0 30px;
+    min-height: unset;
+}
+
+.artist-banner .following-wrap {
+    display: block;
+    position: absolute;
+    bottom: 155px;
+    right: 360px;
+}
+
+.following-wrap .music-view-like {
+    color: #fff;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.following-wrap .music-view-like span {
+    margin-left: 15px;
+}
+
+.artist-banner .text-overflow {
+    padding-top: 0;
+}
+
+.artist-banner .text-overflow h5 {
+    margin-bottom: 10px;
+}
+
+.artist-banner .text-overflow h6 {
+    margin-bottom: 5px;
+}
+
+.artist-banner-thumb figure {
+    width: 150px;
+    height: 150px;
+}
+
+.container .action-group {
+    position: relative;
+    margin-bottom: 45px;
+}
+
+.container .action-group .btn-1 {
+    background-color: #db152e;
+    color: #fff;
+    padding: 9px 18px;
+    font-size: 14px;
+    margin-right: 5px;
+}
+
+.container .action-group .btn-1 .fa {
+    margin-right: 10px;
+}
+
+.container .action-group .btn-1:hover {
+    background-color: #000 !important;
+}
+
+.artist-bio {
+    border-bottom: unset;
+    padding-bottom: unset;
+}
+
+.artist-content {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    padding: 0 15px;
+    margin-bottom: 45px;
+}
+
+.artist-content .artist-title {
+    color: #fff;
+    margin-bottom: 5px;
+}
+
+.artist-content .artist-title:hover {
+    color: #db152e;
+}
+
+.artist-content figure {
+    height: 100px;
+    width: 100px;
+    float: left;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    margin-right: 20px;
+}
+
+.artist-content figure:hover {
+    border-color: #db152e;
+}
+
+.artist-content .follower-info {
+    color: #a0a0a0;
+}
+
+.artist-content .btn-follow {
+    padding: 4px 10px;
+    margin-top: 10px;
+}
+
+.lyrics-content {
+    color: #a0a0a0;
+}
+
+.lyrics-content p {
+    color: #a0a0a0;
+}
+
+.lyrics-content .lyrics-header {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.lyrics-content .lyrics-header a {
+    color: #fff;
+}
+
+.lyrics-content .lyrics-header a:hover {
+    color: #db152e;
+}
+
+.lyrics-content .lyrics-header .btn-contribute-lyrics {
+    position: absolute;
+    right: 10px;
+}
+
+.lyrics-content .lyrics-header .btn-contribute-lyrics .fa {
+    margin-right: 5px;
+}
+
+.kode-comment-form .comment-form {
+    display: flex;
+    padding: 10px;
+}
+
+.kode-comment-form .comment-form figure {
+    height: 80px;
+    width: 80px;
+    float: left;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    margin-right: 20px;
+}
+
+.kode-comment-form .comment-form .kode-textarea {
+    width: calc(100% - 100px);
+}
+
+.kode-comment-form .comment-form .kode-textarea textarea {
+    float: unset;
+    background-color: #a0a0a03d;
+    color: #f1f1f1;
+}
+
+.kode-comment-form .comment-form .kode-textarea textarea::placeholder {
+    color: #a0a0a0;
+}
+
+.kode-comment-form .comment-form .kode-textarea textarea::-ms-input-placeholder {
+    color: #a0a0a0;
+}
+
+.kode-comment-form .comment-form .kode-textarea textarea::-ms-input-placeholder {
+    color: #a0a0a0;
+}
+
+.kode-comment-form .comment-form .btn-comment-group {
+    text-align: right;
+    margin-top: 15px;
+}
+
+.kode-comment-form .comment-form .btn-comment-group .btn-1 {
+    width: auto;
+    padding: 9px 18px;
+    font-size: 14px;
+    margin-left: 5px;
+}
+
+.kode-comment-form .comment-form .btn-comment-group .btn-comment {
+    background-color: #db152e;
+    color: #fff;
+}
+
+.comment .comment_item .kode-author figure {
+    width: 65px;
+    height: 65px;
+}
+
+@media screen and (max-width: 1366px){
+    .artist-banner .following-wrap {
+        right: 85px
+    }
+}
+
+.media-detail .artist-banner-thumb .playing-icon {
+    background: #3333335c;
+    padding: 20px;
 }

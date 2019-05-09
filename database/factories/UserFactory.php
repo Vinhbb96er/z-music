@@ -8,6 +8,7 @@ use App\Models\Kind;
 use App\Models\Album;
 use App\Models\Like;
 use App\Models\Follow;
+use App\Models\Comment;
 
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
@@ -116,6 +117,7 @@ $factory->define(Media::class, function (Faker $faker) use ($musicData) {
         'cover_image' => $faker->imageUrl(640, 300),
         'status' => 1,
         'views' => $faker->numberBetween(100, 10000),
+        'lyrics_contributer_name' => User::all()->random()->name
     ];
 });
 
@@ -145,5 +147,15 @@ $factory->define(Follow::class, function (Faker $faker) {
     return [
         'user_id' => $userId,
         'follow_id' => $followId,
+    ];
+});
+
+$factory->define(Comment::class, function (Faker $faker) {
+    return [
+        'user_id' => User::all()->random()->id,
+        'commentable_id' => '',
+        'commentable_type' => '',
+        'content' => $faker->sentence,
+        'status' => 1,
     ];
 });

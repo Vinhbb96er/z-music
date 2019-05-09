@@ -14,5 +14,11 @@ interface MediaInterface
 
     public function getMedia($id, $params = []);
 
+    public function getMediaForPlaylist($ids, $params = []);
+
     public function getMediaInAlbum($albumId, $params = []);
+
+    public function getMediaComment($mediaId, $size = 5);
+
+    public function getMediaSuggest($params);
 }

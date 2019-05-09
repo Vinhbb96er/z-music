@@ -1,6 +1,6 @@
 {
     "home": {
-        "view": "Xem",
+        "view_detail": "Xem chi tiết",
         "listen": "Nghe",
         "new_releases_albums": "Albums mới phát hành",
         "hot_media": "Nhạc / Video / Album Hot",
@@ -10,7 +10,13 @@
         "kind": "Thể loại",
         "kind_regions": "Khu vực & Thể loại",
         "topic_hot": "Chủ đề hot",
-        "highlight_artist": "Nghệ sĩ nổi bật"
+        "highlight_artist": "Nghệ sĩ nổi bật",
+        "maybe_you_interested": "Có thể bạn quan tâm"
+    },
+    "media": {
+        "description": "Tổng quan",
+        "comments": "Bình luận",
+        "add_comment": "Thêm bình luận của bạn"
     },
     "album": {
         "name": "Album",
@@ -29,10 +35,19 @@
         "name": "Bài hát",
         "music_hot": "Bài hát hot",
         "music_new": "Bài hát mới",
-        "music_ranking": "BXH Bài hát"
+        "music_ranking": "BXH Bài hát",
+        "lyrics": "Lời bài hát",
+        "contribute_by": "Đóng góp bởi"
+    },
+    "artist": {
+        "name": "Nghệ sĩ",
+        "followers": "người theo dõi"
     },
     "button": {
-        "follow": "Theo dõi"
+        "follow": "Theo dõi",
+        "contribute_lyrics": "Đóng góp lời bài hát",
+        "comment": "Bình luận",
+        "cancel": "Hủy bỏ"
     },
     "playlist": {
         "name": "Danh sách phát",
@@ -44,7 +59,17 @@
         "repeat": "Lặp lại",
         "search": "Tìm kiếm",
         "next": "Tiếp theo",
-        "prev": "Trước"
+        "prev": "Trước",
+        "play": "Nghe",
+        "play_all": "Nghe tất cả",
+        "report": "Báo cáo",
+        "like": "Thích",
+        "pause": "Tạm dừng",
+        "add_to_playlist": "Thêm vào danh sách phát"
+    },
+    "message": {
+        "album_exists_in_playlist": "Tất cả những bài hát trong Album này đã có trong Playlist của bạn",
+        "music_exists_in_playlist": "Bài hát này đã có trong Playlist của bạn"
     },
     "footer": {
     "copy_right": "© 2018 Z-Music. All Right Reserved."

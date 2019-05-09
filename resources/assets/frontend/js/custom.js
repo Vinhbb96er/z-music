@@ -637,7 +637,7 @@
         $(this).parent().parent().parent('.album-list-thumb-outer').addClass("active");
     });
 
-    $(document).on('click', ".album-list-thumb", function () {
+    $(document).on('click', ".clic-btn", function () {
       var parent_box = $(this).closest('.album-list-thumb-outer');
       parent_box.siblings().find('.album-play-list').slideUp();
       parent_box.find('.album-play-list').slideToggle(500, 'swing')

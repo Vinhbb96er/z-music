@@ -68,7 +68,7 @@
                                                    <i class="fa fa-download"></i> {{ $t('playlist.download') }}
                                                 </a>
                                             </li>
-                                            <li v-if="playingIndex != index" @click="removeMusicFromPlaylist(index)">
+                                            <li v-if="!isPlaying || playingIndex != index" @click="removeMusicFromPlaylist(index)">
                                                 <a href="#">
                                                     <i class="fa fa-trash"></i>
                                                     {{ $t('playlist.remove') }}

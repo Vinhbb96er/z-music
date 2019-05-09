@@ -93,6 +93,9 @@
     {{ Html::script(asset('frontend/js/video.js')) }}
     <!-- waypoint-->
     {{ Html::script(asset('frontend/js/waypoint.js')) }}
+    <!-- Sweet Alert -->
+    {{ Html::script(asset('frontend/vendor/sweetalert/dist/sweetalert.min.js')) }}
+    {{ Html::script(asset('frontend/js/alert.js')) }}
     <!--Custom JavaScript-->
     {{ Html::script(asset('frontend/js/custom.js')) }}
     <!-- Vue -->

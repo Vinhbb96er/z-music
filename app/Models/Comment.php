@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Comment extends Model
 {
@@ -12,6 +13,7 @@ class Comment extends Model
         'commentable_type',
         'content',
         'status',
+        'reply_id'
     ];
 
     public function commentable()
@@ -22,5 +24,15 @@ class Comment extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function replies()
+    {
+        return $this->hasMany(Comment::class, 'reply_id', 'id');
+    }
+
+    public function getCreatedAtAttribute()
+    {
+        return Carbon::parse($this->attributes['created_at'])->format(trans('admin.date_time_format'));
     }
 }

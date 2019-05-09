@@ -1,4 +1,5 @@
-import {get} from '../../api/base_api.js'
+import {get, makePathByParams} from '../../api/base_api.js'
+import {i18n} from '../../lang/index.js'
 
 const state = {
     playlist: [],
@@ -8,6 +9,7 @@ const state = {
     audio: null,
     player: null,
     isPlaying: false,
+    checkPlayingThisMusic: false,
 }
 
 const getters = {
@@ -43,6 +45,13 @@ const getters = {
     },
     isPlaying(state) {
         return state.isPlaying;
+    },
+    checkPlayingMusic: state => (musicId) => {
+        if (!state.playlist.length || !state.isPlaying) {
+            return false;
+        }
+
+        return state.playlist[state.playingIndex].id == musicId;
     }
 }
 
@@ -136,10 +145,32 @@ const actions = {
     },
     addMusicToPlaylist({commit, dispatch, state}, data) {
         return new Promise((resolve, reject) => {
-            get(`media/${data.id}/get?type=${data.type}`)
+            get(makePathByParams('media/playlist', data))
                 .then(res => {
-                    state.playlist = state.playlist.concat(res.data);
-                    dispatch('playMusic', state.playlist.length - res.data.length);
+                    let newMusics = res.data.filter(function (item) {
+                        let index = state.playlist.findIndex(function (music) {
+                            return music.id == item.id;
+                        });
+
+                        return index == -1;
+                    });
+
+                    if (!newMusics.length) {
+                        if (data.type == window.Laravel.setting.album.media_type) {
+                            return alertWarning({message: i18n.t('message.album_exists_in_playlist')});
+                        }
+
+                        let index = state.playlist.findIndex(function (music) {
+                            return music.id == res.data[0].id;
+                        });
+
+                        dispatch('playMusic', index);
+
+                        return;
+                    }
+
+                    state.playlist = state.playlist.concat(newMusics);
+                    dispatch('playMusic', state.playlist.length - newMusics.length);
                 })
                 .catch(err => {
                     reject(err);
@@ -147,8 +178,32 @@ const actions = {
         });
 
     },
-    removeMusicFromPlaylist({commit, state}, index) {
+    removeMusicFromPlaylist({commit, dispatch, state}, index) {
         state.playlist.splice(index, 1);
+
+        if (index == state.playingIndex) {
+            dispatch('playMusic', state.playingIndex);
+        }
+    },
+    pauseMusic({commit, state}) {
+        state.audio.pause();
+    },
+    playingMusic({commit, dispatch, state}, data) {
+        var index = state.playlist.findIndex(function(music, index) {
+            return music.id == data.id;
+        });
+
+        if (index != -1) {
+            if (index == state.playingIndex) {
+                state.audio.play();
+            } else {
+                dispatch('playMusic', index);
+            }
+
+            return;
+        }
+
+        dispatch('addMusicToPlaylist', data);
     }
 }
 

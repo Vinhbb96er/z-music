@@ -18,6 +18,7 @@ class Media extends Model
         'cover_image',
         'views',
         'status',
+        'lyrics_contributer_name'
     ];
 
     protected $appends = [
@@ -82,5 +83,14 @@ class Media extends Model
     public function getKindsTextAttribute()
     {
         return implode(', ', $this->kinds->pluck('name')->all());
+    }
+
+    public function getLyricsAttribute()
+    {
+        if ($this->type == config('setting.media.type.music')) {
+            return empty($this->attributes['lyrics']) ? trans('admin.empty_lyrics') : $this->attributes['lyrics'];
+        }
+
+        return null;
     }
 }

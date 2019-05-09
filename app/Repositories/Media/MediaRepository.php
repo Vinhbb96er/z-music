@@ -89,7 +89,25 @@ class MediaRepository extends BaseRepository implements MediaInterface
     {
         $query = $this->model->newQuery();
 
+        if (isset($params['type'])) {
+            $query->where('type', $params['type']);
+        }
+
         if (isset($params['eagle_loading'])) {
+            if (!empty($params['load_user_followers'])) {
+                $query->with(['user' => function ($query) {
+                    $query->withCount('followers');
+                }]);
+                $params['eagle_loading'] = array_diff($params['eagle_loading'], ['user']);
+            }
+
+            if (in_array('comments', $params['eagle_loading'])) {
+                $query->with(['comments' => function ($query) {
+                    $query->where('reply_id', 0)->with(['user', 'replies.user']);
+                }]);
+                $params['eagle_loading'] = array_diff($params['eagle_loading'], ['comments']);
+            }
+
             $query->with($params['eagle_loading']);
         }
 
@@ -100,11 +118,72 @@ class MediaRepository extends BaseRepository implements MediaInterface
         return $query->findOrFail($id);
     }
 
+    public function getMediaForPlaylist($id, $params = [])
+    {
+        $query = $this->model->newQuery();
+        $id = array_wrap($id);
+
+        if (isset($params['type'])) {
+            $query->where('type', $params['type']);
+        }
+
+        if (isset($params['eagle_loading'])) {
+            if (!empty($params['load_user_followers'])) {
+                $query->with(['user' => function ($query) {
+                    $query->withCount('followers');
+                }]);
+                $params['eagle_loading'] = array_diff($params['eagle_loading'], ['user']);
+            }
+
+            if (in_array('comments', $params['eagle_loading'])) {
+                $query->with(['comments' => function ($query) {
+                    $query->where('reply_id', 0)->with(['user', 'replies.user']);
+                }]);
+                $params['eagle_loading'] = array_diff($params['eagle_loading'], ['comments']);
+            }
+
+            $query->with($params['eagle_loading']);
+        }
+
+        if (isset($params['with_count'])) {
+            $query->withCount($params['with_count']);
+        }
+
+        $media = $query->whereIn('id', $id)->get();
+
+        if (count($id) == 1) {
+            return $media;
+        }
+
+        $media = $media->groupBy('id');
+        $result = [];
+
+        foreach ($id as $id) {
+            $result[] = $media[$id][0];
+        }
+
+        return $result;
+    }
+
     public function getMediaInAlbum($albumId, $params = [])
     {
         $query = $this->model->newQuery();
 
         if (isset($params['eagle_loading'])) {
+            if (!empty($params['load_user_followers'])) {
+                $query->with(['user' => function ($query) {
+                    $query->withCount('followers');
+                }]);
+                $params['eagle_loading'] = array_diff($params['eagle_loading'], ['user']);
+            }
+
+            if (in_array('comments', $params['eagle_loading'])) {
+                $query->with(['comments' => function ($query) {
+                    $query->where('reply_id', 0)->with(['user', 'replies.user']);
+                }]);
+                $params['eagle_loading'] = array_diff($params['eagle_loading'], ['comments']);
+            }
+
             $query->with($params['eagle_loading']);
         }
 
@@ -113,5 +192,36 @@ class MediaRepository extends BaseRepository implements MediaInterface
         }
 
         return $query->where('album_id', $albumId)->get();
+    }
+
+    public function getMediaComment($mediaId, $size = 5)
+    {
+        return $this->model->findOrFail($mediaId)->comments()->where('reply_id', 0)->with(['user', 'replies.user'])->paginate($size);
+    }
+
+    public function getMediaSuggest($params)
+    {
+        $query = $this->model->newQuery();
+        $query->with('user')->where('id', '!=', $params['media_id']);
+
+        if (isset($params['type'])) {
+            $query->where('type', $params['type']);
+        }
+
+        $query->where(function ($query) use ($params) {
+            if (!empty($params['artist'])) {
+                $query->orWhere('user_id', $params['artist']);
+            }
+
+            if (!empty($params['kind'])) {
+                $query->orWhere('kind_id', $params['kind']);
+            }
+
+            if (!empty($params['region'])) {
+                $query->orWhere('region_id', $params['region']);
+            }
+        });
+
+        return isset($params['size']) ? $query->paginate($params['size']) : $query->paginate(10);
     }
 }

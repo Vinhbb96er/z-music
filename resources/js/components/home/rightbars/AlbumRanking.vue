@@ -7,7 +7,6 @@
                     <span>
                         <a href="#">
                             {{ $t('album.album_ranking') }}
-                            <i class="icon-multimedia-1 icon"></i>
                         </a>
                     </span>
                 </h5>
@@ -17,11 +16,11 @@
         <!--Artist Rank List Start-->
         <div class="artists-rank-list">
             <!--Artist Rank End-->
-            <div class="artists-rank" v-for="(album, index) in albumRanking"  :key="album.id">
+            <div class="artists-rank" v-for="(album, index) in albumRanking"  :key="album.id" @click="addMusicToPlaylist({id: album.id, type: type})">
                 <span class="rank-no">{{ index + 1 }}</span>
                 <figure class="backgroud-image-show" :style="{backgroundImage: `url(${album.cover_image})`}"></figure>
                 <div class="text-overflow">
-                    <h6><a href="#">{{ album.name }}</a></h6>
+                    <h6><a href="#" @click.prevent>{{ album.name }}</a></h6>
                     <p>{{ album.user.name }}</p>
                 </div>
             </div>
@@ -44,7 +43,7 @@
             ...mapGetters(['albumRanking'])
         },
         methods: {
-            ...mapActions(['getAlbumRanking'])
+            ...mapActions(['getAlbumRanking', 'addMusicToPlaylist'])
         },
         created() {
             this.getAlbumRanking({

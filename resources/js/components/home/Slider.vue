@@ -5,8 +5,14 @@
                 <img :src="media.cover_image" alt="banner img">
                 <div class="banner_content container">
                     <div class="b_title animated">{{ media.name }}</div>
-                    <a href="index.html" class="btn_normal border_btn animated">{{ $t('home.view') }}</a>
-                    <a href="index.html" class="btn_normal border_btn animated">{{ $t('home.listen') }}</a>
+                    <router-link tag="a" class="btn_normal border_btn animated" :to="getLink(media)">
+                        {{ $t('home.view_detail') }}
+                    </router-link>
+                    <a href="#" class="btn_normal border_btn animated"
+                        v-if="media.type == type.music"
+                        @click.prevent="playingMusic({id: media.id, type: media.type})">
+                        {{ $t('home.listen') }}
+                    </a>
                 </div>
                 <div class="media-info">
                     <span><i class="fa fa-play-circle-o play-icon"></i> {{ media.views }}</span>
@@ -24,6 +30,14 @@
     import {mapActions} from 'vuex'
 
     export default {
+        data() {
+            return {
+                type: {
+                    music: window.Laravel.setting.media.type.music,
+                    video: window.Laravel.setting.media.type.video
+                }
+            };
+        },
         computed: {
             ...mapGetters(['sliderItems']),
             sliderThumbnails() {
@@ -37,7 +51,19 @@
             }
         },
         methods: {
-            ...mapActions(['getSliders']),
+            ...mapActions(['getSliders', 'playingMusic']),
+            getLink(media) {
+                if (media.type == this.type.music) {
+                    return {
+                        name: 'musicDetail',
+                        params: {
+                            id: media.id
+                        }
+                    };
+                }
+
+                return {};
+            }
         },
         created() {
             this.getSliders();

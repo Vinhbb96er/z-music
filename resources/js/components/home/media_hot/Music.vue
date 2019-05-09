@@ -19,9 +19,9 @@
             </ul>
             <div class="mp3-list-wrap">
                 <ul class="mp3-list-table">
-                    <li v-for="music in mediaHot" :key="music.id">
+                    <li v-for="music in mediaHot" :key="music.id" @click.prevent="playingMusic({id: music.id, type: type})">
                         <div class="mp3-title">
-                            <div class="mp3-playlist-item-cover">
+                            <div class="mp3-playlist-item-cover" :class="{playing: checkPlayingMusic(music.id)}">
                                 <span class="img-holder" :style="{backgroundImage: `url(${music.cover_image})`}">
                                     <span class="circle"></span>
                                 </span>
@@ -34,11 +34,13 @@
                             <a href="#" class="artist-name">{{ music.user.name }}</a>
                         </div>
                         <div class="music-icon-group">
-                            <a class="mp3-icon" href="#" @click.prevent="addMusicToPlaylist({id: music.id, type: type})">
-                                <i class="icon-play-button"></i>
+                            <i class="music-playing-icon icon-play-button" v-if="!checkPlayingMusic(music.id)"></i>
+                            <router-link @click.stop tag="a" class="mp3-icon" :to="{name: 'musicDetail', params: {id: music.id}}" :title="$t('home.view_detail')">
+                                <i class="fa fa-info"></i>
+                            </router-link>
+                            <a href="#" class="mp3-icon" :title="$t('playlist.download')" @click.stop.prevent>
+                                <i class="fa fa-download"></i>
                             </a>
-                            <a class="mp3-icon" href="#"><i class="fa fa-info"></i></a>
-                            <a class="mp3-icon" href="#"><i class="icon-music-1"></i></a>
                         </div>
                     </li>
                 </ul>
@@ -59,7 +61,7 @@
             }
         },
         computed: {
-            ...mapGetters(['popularRegions', 'mediaHot'])
+            ...mapGetters(['popularRegions', 'mediaHot', 'checkPlayingMusic'])
         },
         watch: {
             region() {
@@ -71,7 +73,7 @@
             }
         },
         methods: {
-            ...mapActions(['getMediaHot', 'addMusicToPlaylist'])
+            ...mapActions(['getMediaHot', 'playingMusic'])
         },
         created() {
             this.getMediaHot({

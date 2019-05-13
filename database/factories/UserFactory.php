@@ -95,7 +95,13 @@ $musicData = [
     ]
 ];
 
-$factory->define(Media::class, function (Faker $faker) use ($musicData) {
+$videoData = [
+    'https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4',
+    'http://www.tra.org.bh/media/movie/sample2.mp4',
+    'http://clips.vorwaerts-gmbh.de/VfE_html5.mp4'
+];
+
+$factory->define(Media::class, function (Faker $faker) use ($musicData, $videoData) {
     $type = $faker->randomElement([1, 2]);
     $music = [];
     $albumId = null;
@@ -103,13 +109,15 @@ $factory->define(Media::class, function (Faker $faker) use ($musicData) {
     if ($type == 1) {
         $music = $musicData[array_rand($musicData)];
         $albumId = Album::all()->random()->id;
+    } else {
+        $video = $videoData[array_rand($videoData)];
     }
 
     return [
         'album_id' => $albumId,
         'region_id' => Region::all()->random()->id,
         'user_id' => User::all()->random()->id,
-        'url' => empty($music) ? '' : $music['url'],
+        'url' => empty($music) ? $video : $music['url'],
         'name' => empty($music) ? implode(' ', $faker->words(3)) : $faker->bothify($music['name'] . ' (#?)'),
         'type' => $type,
         'lyrics' => '',

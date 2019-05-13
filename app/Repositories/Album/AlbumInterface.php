@@ -13,4 +13,8 @@ interface AlbumInterface
     public function getRankingAlbum($params = []);
 
     public function getAlbum($id, $params = []);
+
+    public function upViewAlbum($id);
+
+    public function getAlbumComment($mediaId, $size = 5);
 }

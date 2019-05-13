@@ -81,7 +81,7 @@
     export default {
         data() {
             return {
-                type: window.Laravel.setting.media.type.music,
+                type: window.Laravel.setting.album.media_type,
                 id: this.$route.params.id,
             }
         },

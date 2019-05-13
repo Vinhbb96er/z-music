@@ -24,6 +24,7 @@ Route::group(['namespace' => 'Api'], function () {
     Route::get('/media/new-albums', 'MediaController@getNewAlbums');
     Route::get('/media/playlist', 'MediaController@getMediaForPlaylist');
     Route::get('/media/{id}/show', 'MediaController@show');
+    Route::post('/media/{id}/up-view', 'MediaController@upViewMedia');
     Route::get('/media/{id}/comment', 'MediaController@getMediaComment');
     Route::get('/media/suggest', 'MediaController@getMediaSuggest');
 

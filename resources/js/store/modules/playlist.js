@@ -10,6 +10,8 @@ const state = {
     player: null,
     isPlaying: false,
     checkPlayingThisMusic: false,
+    isView: false,
+    startPlay: 0
 }
 
 const getters = {
@@ -79,7 +81,7 @@ const actions = {
         dispatch('loadMusic', index);
         state.audio.play();
     },
-    initPlayer({commit, dispatch, state, getters}) {
+    initPlayer({commit, dispatch, state, getters, rootState}) {
         state.player = new Plyr('#music-player', {
             controls: [
                 'play',
@@ -95,6 +97,25 @@ const actions = {
 
         state.audio = $('#music-player').on('play', function () {
             commit('setIsPlaying', true);
+            state.startPlay = state.audio.currentTime;
+            state.isView = true;
+        }).on('timeupdate', function () {
+            let totalTimePlay = ((state.audio.currentTime - state.startPlay) / state.audio.duration) * 100;
+
+            if (state.isView && totalTimePlay > 70) {
+                state.isView = false;
+                var currentPlaying = state.playlist[state.playingIndex];
+
+                dispatch('upViewMedia', currentPlaying.id, {root: true})
+                    .then(function (value) {
+                        currentPlaying.views = value;
+                        let mediaDetail = rootState.Media.mediaDetailData;
+
+                        if (mediaDetail && mediaDetail.id == currentPlaying.id) {
+                            mediaDetail.views = value;
+                        }
+                    });
+            }
         }).on('pause', function () {
             commit('setIsPlaying', false);
         }).on('ended', () => {

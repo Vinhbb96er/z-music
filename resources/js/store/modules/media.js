@@ -1,4 +1,4 @@
-import {get, makePathByParams} from '../../api/base_api.js'
+import {get, post, makePathByParams} from '../../api/base_api.js'
 
 const state = {
     sliderItems: [],
@@ -7,7 +7,7 @@ const state = {
     mediaNew: [],
     mediaDetailData: null,
     mediaComments: {},
-    mediaSuggest: [],
+    mediaSuggest: []
 }
 
 const getters = {
@@ -109,12 +109,36 @@ const actions = {
             get(`media/${data.id}/show?type=${data.type}`)
                 .then(res => {
                     commit('setMediaDetailData', res.data);
+                    let kindIds = [];
+                    res.data.kinds.forEach((kind) => {
+                        kindIds.push(kind.id);
+                    });
+
+                    let mediaId = res.data.id;
+                    let type = res.data.type;
+                    let size = 10;
+
+                    if (data.type == window.Laravel.setting.album.media_type) {
+                        mediaId = [];
+
+                        res.data.media.forEach((music) => {
+                            mediaId.push(music.id);
+                        });
+
+                        type = window.Laravel.setting.media.type.music;
+                        size = 9;
+                    }
+
                     dispatch('getMediaSuggest', {
-                        type: res.data.type,
+                        type: type,
                         artist: res.data.user_id,
                         region: res.data.region_id,
-                        media_id: res.data.id
+                        media_id: mediaId,
+                        kind: kindIds,
+                        size: size
                     });
+
+                    resolve();
                 })
                 .catch(err => {
                     reject(err);
@@ -139,6 +163,17 @@ const actions = {
             get(makePathByParams('media/suggest', data))
                 .then(res => {
                     commit('setMediaSuggest', res.data.data);
+                })
+                .catch(err => {
+                    reject(err);
+                });
+        });
+    },
+    upViewMedia({commit}, id) {
+        return new Promise((resolve, reject) => {
+            post(`media/${id}/up-view`)
+                .then(res => {
+                    resolve(res.data);
                 })
                 .catch(err => {
                     reject(err);

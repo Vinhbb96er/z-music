@@ -202,7 +202,8 @@ class MediaRepository extends BaseRepository implements MediaInterface
     public function getMediaSuggest($params)
     {
         $query = $this->model->newQuery();
-        $query->with('user')->where('id', '!=', $params['media_id']);
+        $params['media_id'] = array_wrap($params['media_id']);
+        $query->with('user')->whereNotIn('id', $params['media_id']);
 
         if (isset($params['type'])) {
             $query->where('type', $params['type']);
@@ -214,7 +215,10 @@ class MediaRepository extends BaseRepository implements MediaInterface
             }
 
             if (!empty($params['kind'])) {
-                $query->orWhere('kind_id', $params['kind']);
+                $params['kind'] = array_wrap($params['kind']);
+                $query->orWhereHas('kinds', function ($query) use ($params) {
+                    $query->whereIn('kinds.id', $params['kind']);
+                });
             }
 
             if (!empty($params['region'])) {
@@ -223,5 +227,15 @@ class MediaRepository extends BaseRepository implements MediaInterface
         });
 
         return isset($params['size']) ? $query->paginate($params['size']) : $query->paginate(10);
+    }
+
+    public function upViewMedia($id)
+    {
+        $media = $this->model->findOrFail($id);
+        $media->update([
+            'views' => $media->views + 1
+        ]);
+
+        return $media->views;
     }
 }

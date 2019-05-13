@@ -19,14 +19,18 @@
                     </figure>
                     <div class="new-album-caption">
                         <a href="#" class="new-album fa fa-play" @click.prevent="addMusicToPlaylist({id: album.id, type: type})" :title="$t('playlist.add_to_playlist')"></a>
-                        <h5><a href="#">{{ album.name }}</a></h5>
+                        <h5>
+                            <router-link :to="{name: 'albumDetail', params: {id: album.id}}" tag="a">
+                                {{ album.name }}
+                            </router-link>
+                        </h5>
                         <h6>{{ album.user.name }}</h6>
                         <p>{{ album.region.name }}</p>
                         <p>{{ album.kinds_text }}</p>
                         <ul class="blog-meta-list">
                             <li>
                                 <a href="javascript::void(0);">
-                                    <i class="fa fa-music"></i> <span>{{ album.media.length }} {{ $t('album.track') }}</span>
+                                    <i class="fa fa-music"></i> <span>{{ album.media_count }} {{ $t('album.track') }}</span>
                                 </a>
                             </li>
                             <li>
@@ -36,7 +40,7 @@
                             </li>
                             <li>
                                 <a href="javascript::void(0);">
-                                    <i class="fa fa-heart"></i> <span>{{ album.likes.length }}</span>
+                                    <i class="fa fa-heart"></i> <span>{{ album.likes_count }}</span>
                                 </a>
                             </li>
                         </ul>

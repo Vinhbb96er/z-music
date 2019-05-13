@@ -108,7 +108,7 @@ audio {
     border-bottom: 0.5px solid #273138;
 }
 
-.plyr__control[data-plyr="play"]{
+.playlist-container .plyr__control[data-plyr="play"]{
     border-radius: 50%;
     background: #f5253f;
     padding: 10px;
@@ -116,12 +116,12 @@ audio {
     height: 38px;
 }
 
-.plyr__control[data-plyr="play"] .icon--not-pressed {
+.playlist-container .plyr__control[data-plyr="play"] .icon--not-pressed {
     padding: 0 1px;
 }
 
-.plyr__control:hover[data-plyr="play"],
-.plyr__control:focus[data-plyr="play"] {
+.playlist-container .plyr__control:hover[data-plyr="play"],
+.playlist-container .plyr__control:focus[data-plyr="play"] {
     background: #f5253f !important;
 }
 
@@ -611,7 +611,7 @@ audio {
     border: none
 }
 
-.plyr__controls > .plyr__controls__item:not(.plyr__progress__container),
-.plyr__controls > .plyr__control {
+.playlist-container .plyr__controls > .plyr__controls__item:not(.plyr__progress__container),
+.playlist-container .plyr__controls > .plyr__control {
     margin-top: 26px;
 }

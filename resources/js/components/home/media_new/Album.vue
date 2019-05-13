@@ -39,7 +39,7 @@
                                 </div>
                                 <div class="clic-btn-wrap">
                                     <div class="music-icon-group">
-                                        <router-link @click.stop tag="a" class="mp3-icon" :to="{name: 'musicDetail', params: {id: album.id}}" :title="$t('home.view_detail')">
+                                        <router-link @click.stop tag="a" class="mp3-icon" :to="{name: 'albumDetail', params: {id: album.id}}" :title="$t('home.view_detail')">
                                             <i class="fa fa-info"></i>
                                         </router-link>
                                     </div>
@@ -54,10 +54,13 @@
                             </div>
                             <div class="album-play-list">
                                 <ul>
-                                    <li v-for="music in album.media" :key="music.id"  @click.prevent="playingMusic({id: music.id, type: music_type})">
+                                    <li v-for="(music, index) in album.media" :key="music.id"  @click.prevent="playingMusic({id: music.id, type: music_type})">
                                         <div class="play-list-title">
                                             <img :src="images.music_playing" class="playing-icon" v-if="checkPlayingMusic(music.id)">
-                                            <i class="icon-multimedia-1" v-else></i>
+                                            <template v-else>
+                                                <i class="icon-multimedia-1"></i>
+                                                <span class="index">#{{ index + 1 }}</span>
+                                            </template>
                                             <h6>{{ music.name }}</h6>
                                         </div>
                                         <div class="music-icon-group text-right">

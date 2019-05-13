@@ -26,7 +26,7 @@
                 </figure>
                 <div class="text-overflow">
                     <h6>
-                        <router-link tag="a" :to="{name: 'musicDetail', params: {id: music.id, type: type}}">
+                        <router-link tag="a" :to="{name: 'musicDetail', params: {id: music.id}}">
                             {{ music.name }}
                         </router-link>
                     </h6>

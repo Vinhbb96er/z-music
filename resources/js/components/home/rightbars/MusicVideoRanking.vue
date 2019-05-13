@@ -14,7 +14,7 @@
         </div>
         <!--Heading End-->
         <!--Featured Thumb List Start-->
-        <div class="msl-featured-thumb video-list-thumb" v-if="videoRanking.length">
+        <router-link class="msl-featured-thumb video-list-thumb" v-if="videoRanking.length" tag="div" :to="{name: 'videoDetail', params: {id: videoRanking[0].id}}">
             <figure>
                 <img src="#" class="backgroud-image-show" :style="{backgroundImage: `url(${videoRanking[0].cover_image})`}">
                 <a class="video-play" href="#"><i class="icon-multimedia-1"></i></a>
@@ -22,7 +22,9 @@
                 <div class="text">
                     <!--Featured Title Start-->
                     <h4 class="featured-title">
-                        <a href="#">{{ videoRanking[0].name }}</a>
+                        <router-link tag="a" :to="{name: 'videoDetail', params: {id: videoRanking[0].id}}">
+                            {{ videoRanking[0].name }}
+                        </router-link>
                     </h4>
                     <!--Featured Title End-->
                     <!--Featured Meta Start-->
@@ -33,10 +35,10 @@
                     </div>
                 </div>
             </figure>
-        </div>
+        </router-link>
         <div class="featured-thumb-list-wrap">
             <!--Featured Thumb Start-->
-            <div class="msl-featured-thumb featured-thumb-list" v-for="(video, index) in videoRankingSlice">
+            <router-link class="msl-featured-thumb featured-thumb-list" v-for="(video, index) in videoRankingSlice" tag="div" :to="{name: 'videoDetail', params: {id: video.id}}" :key="video.id">
                 <figure>
                     <img src="#" class="backgroud-image-show" :style="{backgroundImage: `url(${video.cover_image})`}">
                     <a class="video-play" href="#"><i class="icon-multimedia-1"></i></a>
@@ -45,7 +47,9 @@
                 <div class="text">
                     <!--Featured Title Start-->
                     <h4 class="featured-title">
-                        <a href="#">{{ video.name }}</a>
+                        <router-link tag="a" :to="{name: 'videoDetail', params: {id: video.id}}">
+                            {{ video.name }}
+                        </router-link>
                     </h4>
                     <!--Featured Title End-->
                     <!--Featured Meta Start-->
@@ -56,7 +60,7 @@
                     </div>
                     <!--Featured Meta End-->
                 </div>
-            </div>
+            </router-link>
             <!--Featured Thumb End-->
         </div>
         <!--Featured Thumb List End-->

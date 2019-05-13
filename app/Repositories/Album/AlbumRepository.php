@@ -120,4 +120,19 @@ class AlbumRepository extends BaseRepository implements AlbumInterface
 
         return $query->findOrFail($id);
     }
+
+    public function upViewAlbum($id)
+    {
+        $media = $this->model->findOrFail($id);
+        $media->update([
+            'views' => $media->views + 1
+        ]);
+
+        return $media->views;
+    }
+
+    public function getAlbumComment($mediaId, $size = 5)
+    {
+        return $this->model->findOrFail($mediaId)->comments()->where('reply_id', 0)->with(['user', 'replies.user'])->paginate($size);
+    }
 }

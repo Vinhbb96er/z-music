@@ -96,10 +96,12 @@ class MediaController extends BaseApiController
                 'is_artist' => true,
                 'sort_field' => 'created_at',
                 'sort_type' => 'desc',
+                'with_count' => [
+                    'likes',
+                    'media'
+                ],
                 'eagle_loading' => [
                     'user',
-                    'likes',
-                    'media',
                     'region',
                     'kinds'
                 ]
@@ -158,7 +160,8 @@ class MediaController extends BaseApiController
                     'eagle_loading' => [
                         'user',
                         'kinds',
-                        'region'
+                        'region',
+                        'media'
                     ],
                     'load_user_followers' => true,
                 ]);
@@ -192,7 +195,7 @@ class MediaController extends BaseApiController
             $type = $request->type;
 
             if ($type == config('setting.album.media_type')) {
-                //
+                $data = $this->albumRepository->getAlbumComment($id);
             } else {
                 $data = $this->mediaRepository->getMediaComment($id);
             }
@@ -217,10 +220,25 @@ class MediaController extends BaseApiController
                 'media_id'
             );
 
-            if ($params['type'] == config('setting.album.media_type')) {
-                //
+            $data = $this->mediaRepository->getMediaSuggest($params);
+
+            return response()->json($data, Response::HTTP_OK);
+        } catch (Exception $e) {
+            report($e);
+
+            return response()->json(null, Response::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function upViewMedia(Request $request, $id)
+    {
+        try {
+            $type = $request->type;
+
+            if ($type == config('setting.album.media_type')) {
+                $data = $this->albumRepository->upViewAlbum($id);
             } else {
-                $data = $this->mediaRepository->getMediaSuggest($params);
+                $data = $this->mediaRepository->upViewMedia($id);
             }
 
             return response()->json($data, Response::HTTP_OK);

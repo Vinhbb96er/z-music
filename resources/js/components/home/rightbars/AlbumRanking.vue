@@ -20,7 +20,9 @@
                 <span class="rank-no">{{ index + 1 }}</span>
                 <figure class="backgroud-image-show" :style="{backgroundImage: `url(${album.cover_image})`}"></figure>
                 <div class="text-overflow">
-                    <h6><a href="#" @click.prevent>{{ album.name }}</a></h6>
+                    <h6>
+                        <router-link tag="a" :to="{name: 'albumDetail', params: {id: album.id}}">{{ album.name }}</router-link>
+                    </h6>
                     <p>{{ album.user.name }}</p>
                 </div>
             </div>

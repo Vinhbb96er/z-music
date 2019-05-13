@@ -1,6 +1,6 @@
 {
     "home": {
-        "view_detail": "Xem chi tiết",
+        "view_detail": "Xem",
         "listen": "Nghe",
         "new_releases_albums": "Albums mới phát hành",
         "hot_media": "Nhạc / Video / Album Hot",
@@ -16,14 +16,19 @@
     "media": {
         "description": "Tổng quan",
         "comments": "Bình luận",
-        "add_comment": "Thêm bình luận của bạn"
+        "add_comment": "Thêm bình luận của bạn",
+        "video_not_support": "Trình duyệt của bạn không hỗ trợ HTML5 Video! 😢",
+        "auto_next": "Tự động phát",
+        "song_name": "Tên",
+        "action": "Thao tác"
     },
     "album": {
         "name": "Album",
         "track": "Bài hát",
         "album_hot": "Album hot",
         "album_new": "Album mới",
-        "album_ranking": "BXH Album"
+        "album_ranking": "BXH Album",
+        "list_song": "Danh sách bài hát"
     },
     "music_video": {
         "name": "Video ca nhạc",

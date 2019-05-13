@@ -53,16 +53,14 @@
         methods: {
             ...mapActions(['getSliders', 'playingMusic']),
             getLink(media) {
-                if (media.type == this.type.music) {
-                    return {
-                        name: 'musicDetail',
-                        params: {
-                            id: media.id
-                        }
-                    };
-                }
+                let name = media.type == this.type.music ? 'musicDetail' : 'videoDetail';
 
-                return {};
+                return {
+                    name: name,
+                    params: {
+                        id: media.id
+                    }
+                };
             }
         },
         created() {

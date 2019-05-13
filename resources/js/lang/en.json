@@ -1,6 +1,6 @@
 {
     "home": {
-        "view_detail": "View Detail",
+        "view_detail": "View",
         "listen": "Listen",
         "new_releases_albums": "New Releases Albums",
         "hot_media": "Music / Video / Album Hot",
@@ -16,14 +16,19 @@
     "media": {
         "description": "Description",
         "comments": "Comments",
-        "add_comment": "Add Your Comments"
+        "add_comment": "Add Your Comments",
+        "video_not_support": "Your browser does not support HTML5 Video! 😢",
+        "auto_next": "Auto next",
+        "song_name": "Name",
+        "action": "Action"
     },
     "album": {
         "name": "Album",
         "track": "Track",
         "album_hot": "Album hot",
         "album_new": "Album new",
-        "album_ranking": "Album ranking"
+        "album_ranking": "Album ranking",
+        "list_song": "List songs"
     },
     "music_video": {
         "name": "Music Video",

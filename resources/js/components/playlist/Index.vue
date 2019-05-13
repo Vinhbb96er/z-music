@@ -233,7 +233,8 @@
 
                 $(document).on('click', '.btn-playlist, .btn-close-playlist-content', function (e) {
                     e.stopPropagation();
-                    $('#music-playlist-element').slideToggle('slow');
+                    $('#music-playlist-element #music-playlist tr.selected').get(0).scrollIntoView();
+                    $('#music-playlist-element').slideToggle('fast');
                 });
 
                 $(document).on('click', '.playlist-container', function (e) {

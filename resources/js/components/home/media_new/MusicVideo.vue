@@ -19,7 +19,7 @@
             </ul>
             <!--Music Album Inner Nav End-->
             <div class="grid-container">
-                <div class="grid-item" v-for="video in mediaNewSlice.largeItem">
+                <router-link class="grid-item" v-for="video in mediaNewSlice.largeItem" tag="div" :to="{name: 'videoDetail', params: {id: video.id}}" :key="video.id">
                     <div class="msl-featured-thumb video-list-thumb">
                         <figure>
                             <img src="#" :style="{backgroundImage: `url(${video.cover_image})`}">
@@ -27,7 +27,9 @@
                             <div class="text">
                                 <!--Featured Title Start-->
                                 <h4 class="featured-title">
-                                    <a href="#">{{ video.name }}</a>
+                                    <router-link tag="a" :to="{name: 'videoDetail', params: {id: video.id}}">
+                                        {{ video.name }}
+                                    </router-link>
                                 </h4>
                                 <!--Featured Title End-->
                                 <!--Featured Meta Start-->
@@ -39,10 +41,10 @@
                             </div>
                         </figure>
                     </div>
-                </div>
+                </router-link>
             </div>
             <div class="grid-container-small">
-                <div class="grid-item" v-for="video in mediaNewSlice.smallItem">
+                <router-link class="grid-item" v-for="video in mediaNewSlice.smallItem" tag="div" :to="{name: 'videoDetail', params: {id: video.id}}" :key="video.id">
                     <div class="msl-featured-thumb video-list-thumb">
                         <figure>
                             <img src="#" :style="{backgroundImage: `url(${video.cover_image})`}">
@@ -50,14 +52,16 @@
                         </figure>
                         <div class="text">
                             <h4 class="featured-title" :title="video.name">
-                                <a href="#">{{ video.name }}</a>
+                                <router-link tag="a" :to="{name: 'videoDetail', params: {id: video.id}}">
+                                    {{ video.name }}
+                                </router-link>
                             </h4>
                             <div class="blog-info blog-admin" :title="video.user.name">
                                 <a href="#">{{ video.user.name }}</a>
                             </div>
                         </div>
                     </div>
-                </div>
+                </router-link>
             </div>
         </div>
     </div>

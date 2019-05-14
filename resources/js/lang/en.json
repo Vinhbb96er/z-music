@@ -74,7 +74,31 @@
     },
     "message": {
         "album_exists_in_playlist": "All songs in this album have exists in playlist",
-        "music_exists_in_playlist": "This song have exists in playlist"
+        "music_exists_in_playlist": "This song have exists in playlist",
+        "login_success": "Login success",
+        "login_failed": "Failed! Password wrong or Account not exists!",
+        "register_success": "Register new account success",
+        "register_failed": "Failed! Email has been taken!",
+        "register_error": "Register failed! Try again!"
+    },
+    "auth": {
+        "sign_in": "Sign in",
+        "sign_in_title": "Welcome to zMusic! Sign in to your account",
+        "email": "Email Address",
+        "email_placeholder": "Your Email Address",
+        "password": "Password",
+        "remember_me": "Remember me",
+        "forgot_password": "Forgotten password?",
+        "login": "Login",
+        "create_account": "Create new account",
+        "create_account_title": "Create your account now!",
+        "confirm_password": "Confirm Password",
+        "confirm_password_placeholder": "Password Confirmation",
+        "register": "Register",
+        "my_profile": "My profile",
+        "my_favourite_list": "My favourite list",
+        "music_management": "Music management",
+        "logout": "Logout"
     },
     "footer": {
     "copy_right": "© 2018 Z-Music. All Right Reserved."

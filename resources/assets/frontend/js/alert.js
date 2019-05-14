@@ -64,3 +64,39 @@ function alertDanger(data, callback = null) {
     data.confirmButtonClass = 'btn-danger';
     baseAlert(data, callback);
 }
+
+function flashMessage(message, type = 'success') {
+    let icon = null;
+
+    switch (type) {
+        case 'success':
+            icon = '<i class="fa fa-check"></i>';
+            break;
+        case 'warning':
+            icon = '<i class="fa fa-exclamation-triangle"></i>';
+            break;
+        case 'danger':
+            icon = '<i class="fa fa-close"></i>';
+            break;
+        case 'primary':
+            break;
+        case 'info':
+            icon = '<i class="fa fa-info"></i>';
+            break;
+        case 'secondary':
+            break;
+    }
+
+    let element = $('<div></div>').html(
+        `<div class="alert alert-${type}" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            ${icon}
+            ${message}
+        </div>`
+    ).children();
+
+    $('#block-message').append(element);
+    $(element).delay(5000).hide(300);
+}

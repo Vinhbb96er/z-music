@@ -9778,3 +9778,142 @@ body.msl-black .albums-tables ul li span{
 .lyrics-content .lyrics-header .contributer {
     color: #fff;
 }
+
+#block-message {
+    position: fixed;
+    top: 40px;
+    right: 0;
+    z-index: 30000;
+    opacity: 0.95;
+}
+
+#block-message .alert {
+    margin-bottom: 10px;
+    min-width: 400px;
+}
+
+#block-message .close {
+    margin-left: 10px;
+    line-height: 1.2;
+}
+
+#block-message .alert-success {
+    color: #279229;
+    background-color: #9fdeae;
+    border-color: #82cc93;
+}
+
+#block-message .alert-danger {
+    color: #903039;
+    background-color: #fbd0d4;
+    border-color: #f5c6cb;
+}
+
+#block-message .alert-primary {
+    color: #004085;
+    background-color: #cce5ff;
+    border-color: #b8daff;
+}
+
+#block-message .alert-warning {
+    color: #856404;
+    background-color: #fff1c4;
+    border-color: #ffeeba;
+}
+
+#block-message .alert-info {
+    color: #0c5460;
+    background-color: #d1ecf1;
+    border-color: #bee5eb;
+}
+
+#block-message .alert-secondary {
+    color: #383d41;
+    background-color: #e2e3e5;
+    border-color: #d6d8db;
+}
+
+.user-menu {
+    padding: 13px 0;
+}
+
+.user-menu .meta {
+    display: flex;
+    align-items: center;
+}
+
+.user-menu .meta .avatar {
+    width: 40px;
+    height: 40px;
+    margin-right: 7px;
+    border-radius: 50%;
+    border: 1px solid #fff;
+}
+
+.user-menu .login-register {
+    color: #fff;
+}
+
+.user-menu .login-register a:hover {
+    color: #dc1937;
+}
+
+.user-menu .user-info {
+    color: #fff;
+    font-size: 16px;
+}
+
+.user-menu .dropdown-menu {
+    right: 0;
+    top: 42px;
+    left: unset;
+    background: #171e22;
+}
+
+.user-menu .dropdown-menu li {
+    border-bottom: 1px solid #2f3539;
+}
+
+.user-menu .dropdown-menu li:last-child {
+    border-bottom: unset;
+}
+
+.user-menu .dropdown-menu li a {
+    color: #fff;
+    padding: 9px 15px;
+}
+
+.user-menu .dropdown-menu li a:hover {
+    background: #dc1937;
+}
+
+.user-menu .dropdown-menu li a i {
+    width: 20px;
+    display: inline-block;
+}
+
+.ms-login-form .form-content .ms_width_off50 {
+    padding-bottom: 30px;
+}
+
+.ms-login-form .form-content {
+    display: flex;
+}
+
+.ms-login-form .form-content form {
+    background: unset;
+}
+
+.ms-login-form .input-felid {
+    margin-bottom: 10px;
+}
+
+.error {
+    color: #ff0d0d;
+    height: 19px;
+    display: block;
+}
+
+.box-error {
+    border: 2px solid #ff0d0d !important;
+}

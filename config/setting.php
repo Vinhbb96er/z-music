@@ -11,6 +11,10 @@ return [
             'admin' => 1,
             'artist' => 2,
             'member' => 3,
+        ],
+        'status' => [
+            'active' => 1,
+            'block' => 2
         ]
     ],
 
@@ -44,5 +48,6 @@ return [
     'images' => [
         'track' => '/frontend/images/track.png',
         'music_playing' => '/frontend/images/music-playing.gif',
+        'user_avatar_default' => '/frontend/images/user_avatar_default.png'
     ]
 ];

@@ -34,14 +34,47 @@
                 </div>
                 <div class="center-logo">
                     <div class="logo">
-                        <h1><a href="#"><img class="logo-light" src="frontend/images/logo-light.png" alt="logo here"><img class="logo-drak" src="frontend/images/logo-dark.png" alt="logo here"></a></h1>
+                        <h1>
+                            <a href="#">
+                                <img class="logo-light" src="frontend/images/logo-light.png" alt="logo here">
+                                <img class="logo-drak" src="frontend/images/logo-dark.png" alt="logo here">
+                            </a>
+                        </h1>
                     </div>
                 </div>
                 <div class="pull-right">
-                    <ul class="playlist_menu_bar">
-                        <li><a href="mp3-list.html" class=""><i class="icon-music"></i></a></li>
-                        <li><a href="#" data-toggle="modal" data-target="#login-register1"><i class="fa fa-user-circle"></i></a></li>
-                        <li><a data-action="open" data-side="right" class="side_t kf_menu_button" href="#"><i class="fa fa-bars" aria-hidden="true"></i></a></li>
+                    <ul class="user-menu">
+                        <li class="dropdown navbar-profile" v-if="authenticated">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                <div class="meta" v-if="user">
+                                    <img :src="user.avatar" class="avatar">
+                                    </span>
+                                    <div class="user-info">
+                                        <span>{{ user.name }}</span>
+                                        <span class="caret"></span>
+                                    </div>
+                                </div>
+                            </a>
+                            <!-- Start dropdown menu -->
+                            <ul class="dropdown-menu animated">
+                                <li>
+                                    <a href="#"><i class="fa fa-user"></i> {{ $t('auth.my_profile') }}</a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-heart"></i> {{ $t('auth.my_favourite_list')}}</a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="icon-music"></i> {{ $t('auth.music_management') }}</a>
+                                </li>
+                                <li>
+                                    <a href="#" @click.prevent="logout"><i class="fa fa-sign-out"> {{ $t('auth.logout')}}</i> </a>
+                                </li>
+                            </ul>
+                            <!--/ End dropdown menu -->
+                        </li>
+                        <li v-else class="login-register">
+                            <a href="#" data-toggle="modal" data-target="#login-register1">login / register</a>
+                        </li>
                     </ul>
                     <div id="kode-responsive-navigation" class="dl-menuwrapper">
                         <button class="dl-trigger"></button>
@@ -157,10 +190,10 @@
             <div class="container">
                 <div class="fst-navigation">
                     <nav class="navigation-1">
-                        <ul>    
+                        <ul>
                             <li class="active"><a href="index.html">home</a>
                                 <ul class="sub-menu children">
-                                   <li><a href="light-index.html">Home Light</a></li>       
+                                   <li><a href="light-index.html">Home Light</a></li>
                                 </ul>
                             </li>
                             <li><a href="artist.html">artist</a>
@@ -169,7 +202,7 @@
                                     <li><a href="artist-blog.html">artist 02</a></li>
                                     <li><a href="event-organiser.html">artist 03</a></li>
                                     <li><a href="dj.html">dj</a></li>
-                                </ul>   
+                                </ul>
                             </li>
                             <li class="menu-item ">
                                 <a href="#">event</a>
@@ -260,15 +293,28 @@
                             </li>
                             <li><a href="contact-us.html">contact us</a></li>
                         </ul>
-                    </nav>                           
+                    </nav>
                 </div>
             </div>
         </div>
     </header>
 </template>
 <script>
-    
+    import {mapGetters} from 'vuex'
+    import {mapActions} from 'vuex'
+
+    export default {
+        computed: {
+            ...mapGetters(['authenticated', 'user'])
+        },
+        methods: {
+            ...mapActions(['getAuth', 'logout'])
+        },
+        created() {
+            this.getAuth();
+        }
+    }
 </script>
-<style scoped>
-    
+<style>
+
 </style>

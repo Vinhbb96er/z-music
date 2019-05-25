@@ -74,7 +74,31 @@
     },
     "message": {
         "album_exists_in_playlist": "Tất cả những bài hát trong Album này đã có trong Playlist của bạn",
-        "music_exists_in_playlist": "Bài hát này đã có trong Playlist của bạn"
+        "music_exists_in_playlist": "Bài hát này đã có trong Playlist của bạn",
+        "login_success": "Đăng nhập thành công",
+        "login_failed": "Thất bại! Mật khẩu sai hoặc tài khoản không tồn tại!",
+        "register_success": "Đăng ký tài khoản mới thành công!",
+        "register_failed": "Thất bại! Email này đã được sử dụng!",
+        "register_error": "Có lỗi xảy ra khi đăng ký tài khoản! Hãy thử lại!"
+    },
+    "auth": {
+        "sign_in": "Đăng nhập",
+        "sign_in_title": "Chào mừng bạn! Đăng nhập với tài khoản của bạn",
+        "email": "Email",
+        "email_placeholder": "Email của bạn",
+        "password": "Mật khẩu",
+        "remember_me": "Ghi nhớ đăng nhập",
+        "forgot_password": "Bạn quên mật khẩu?",
+        "login": "Đăng nhập",
+        "create_account": "Tạo mới tài khoản",
+        "create_account_title": "Tạo tài khoản của bạn ngay!",
+        "confirm_password": "Xác nhận mật khẩu",
+        "confirm_password_placeholder": "Mật khẩu xác nhận",
+        "register": "Đăng ký",
+        "my_profile": "Trang cá nhân",
+        "my_favourite_list": "Danh sách yêu thích",
+        "music_management": "Quản lý nhạc",
+        "logout": "Đăng xuất"
     },
     "footer": {
     "copy_right": "© 2018 Z-Music. All Right Reserved."

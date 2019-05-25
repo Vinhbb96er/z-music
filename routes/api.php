@@ -33,4 +33,14 @@ Route::group(['namespace' => 'Api'], function () {
 
     Route::get('/ranking/media', 'RankingController@getRankingMedia');
     Route::get('/ranking/artist', 'RankingController@getRankingArtist');
+
+    Route::post('register', 'AuthController@register');
+    Route::post('login', 'AuthController@login');
+
+    Route::group(['middleware' => 'jwt.auth'], function () {
+        Route::get('auth', 'AuthController@user');
+        Route::post('logout', 'AuthController@logout');
+    });
+
+    Route::middleware('jwt.refresh')->get('/token/refresh', 'AuthController@refresh');
 });

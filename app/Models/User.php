@@ -5,8 +5,10 @@ namespace App\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
+use Storage;
 
-class User extends Authenticatable
+class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
 
@@ -47,6 +49,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
 
     // user following
     public function followings()
@@ -105,5 +117,23 @@ class User extends Authenticatable
     public function role()
     {
         return $this->belongsTo(Role::class);
+    }
+
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
+
+    public function getAvatarAttribute($value)
+    {
+        // if (checkExistsRemoteImage($this->attributes['avatar'])) {
+        //     return $this->attributes['avatar'];
+        // }
+
+        if (!Storage::disk('local')->exists($this->attributes['avatar']) || empty($this->attributes['avatar'])) {
+            return config('setting.images.user_avatar_default');
+        }
+
+        return Storage::url($this->attributes['avatar']);
     }
 }

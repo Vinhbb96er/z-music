@@ -161,6 +161,7 @@
                             'mute',
                             'volume',
                             'settings',
+                            'pip',
                             'fullscreen'
                         ]
                     });

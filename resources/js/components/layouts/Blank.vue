@@ -11,19 +11,24 @@
             <router-view></router-view>
             <app-footer></app-footer>
         </div>
+        <app-login-register></app-login-register>
         <app-playlist></app-playlist>
+        <div class="clear"></div>
+        <div id="block-message"></div>
     </div>
 </template>
 <script>
     import AppHeader from './partials/Header.vue'
     import AppFooter from './partials/Footer.vue'
     import AppPlaylist from '../playlist/Index.vue'
+    import AppLoginRegister from './partials/LoginRegister.vue'
 
     export default {
         components: {
             AppHeader,
             AppFooter,
-            AppPlaylist
+            AppPlaylist,
+            AppLoginRegister
         }
     }
 </script>

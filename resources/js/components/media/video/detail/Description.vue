@@ -8,11 +8,13 @@
                 </div>
             </div>
             <div class="artist-content">
-                <a href="#">
+                <router-link tag="a" :to="{name: 'profileShow', params: {id: video.user.id}}">
                     <figure class="backgroud-image-show" :style="{backgroundImage: `url('${video.user.avatar}')`}"></figure>
-                </a>
+                </router-link>
                 <div>
-                    <a href="#" class="artist-title">{{ video.user.name }}</a>
+                    <router-link tag="a" :to="{name: 'profileShow', params: {id: video.user.id}}" class="artist-title">
+                        {{ video.user.name }}
+                    </router-link>
                     <div class="follower-info">{{ video.user.followers_count }} {{ $t('artist.followers') }}</div>
                     <button class="btn btn-success btn-follow">{{ $t('button.follow') }}</button>
                 </div>

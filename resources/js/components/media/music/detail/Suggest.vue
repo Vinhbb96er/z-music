@@ -23,7 +23,11 @@
                         <h6>
                             <router-link tag="a" :to="{name: 'musicDetail', params: {id: music.id, type: type}}">{{ music.name }}</router-link>
                         </h6>
-                        <p>{{ music.user.name }}</p>
+                        <p>
+                            <router-link tag="a" :to="{name: 'profileShow', params: {id: music.user.id}}" class="artist-name">
+                                {{ music.user.name }}
+                            </router-link>
+                        </p>
                     </div>
                 </div>
             </div>

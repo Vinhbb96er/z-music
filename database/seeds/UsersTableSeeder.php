@@ -25,6 +25,7 @@ class UsersTableSeeder extends Seeder
         $this->createRoles($faker);
         $this->createRegions($faker);
         $this->createKinds($faker);
+        $this->createTags($faker);
 
         User::truncate();
         factory(User::class, 100)->create();
@@ -186,6 +187,25 @@ class UsersTableSeeder extends Seeder
 
     public function createTags($faker)
     {
-        //
+        Tag::truncate();
+        $tags = [
+            'Mưa',
+            'Buồn',
+            'Nhẹ nhàng',
+            'Thất tình',
+            'Vui vẻ',
+            'Nhớ',
+            'Cafe',
+            'Biển',
+            'Nhớ',
+            'Live',
+            'Cover'
+        ];
+
+        foreach ($tags as $tag) {
+            factory(Kind::class)->create([
+                'name' => $tag
+            ]);
+        }
     }
 }

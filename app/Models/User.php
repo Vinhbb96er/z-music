@@ -28,7 +28,9 @@ class User extends Authenticatable implements JWTSubject
         'gender',
         'description',
         'role_id',
-        'status'
+        'status',
+        'path_avatar',
+        'path_background'
     ];
 
     /**
@@ -48,6 +50,10 @@ class User extends Authenticatable implements JWTSubject
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+    ];
+
+    protected $appends = [
+        'type_text'
     ];
 
     public function getJWTIdentifier()
@@ -135,5 +141,21 @@ class User extends Authenticatable implements JWTSubject
         }
 
         return Storage::url($this->attributes['avatar']);
+    }
+
+    public function getBackgroundAttribute($value)
+    {
+        if (!Storage::disk('local')->exists($this->attributes['background']) || empty($this->attributes['background'])) {
+            return config('setting.images.user_background_default');
+        }
+
+        return Storage::url($this->attributes['background']);
+    }
+
+    public function getTypeTextAttribute($value)
+    {
+        return $this->attributes['role_id'] == config('setting.user.role.artist')
+            ? trans('admin.user.role.artist')
+            : null;
     }
 }

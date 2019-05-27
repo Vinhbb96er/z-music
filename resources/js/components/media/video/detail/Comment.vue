@@ -17,7 +17,11 @@
                             </figure>
                             <div class="kode-author-content">
                                 <div class="kode-author-head">
-                                    <h5><a href="#">{{ comment.user.name }}</a></h5>
+                                    <h5>
+                                        <router-link tag="a" :to="{name: 'profileShow', params: {id: comment.user.id}}">
+                                            {{ comment.user.name }}
+                                        </router-link>
+                                    </h5>
                                     <span>{{ comment.created_at }}</span>
                                 </div>
                                 <p>{{ comment.content }}</p>
@@ -36,7 +40,11 @@
                                     </figure>
                                     <div class="kode-author-content">
                                         <div class="kode-author-head">
-                                            <h5><a href="#">{{ reply.user.name }}</a></h5>
+                                            <h5>
+                                                <router-link tag="a" :to="{name: 'profileShow', params: {id: reply.user.id}}">
+                                                    {{ reply.user.name }}
+                                                </router-link>
+                                            </h5>
                                             <span>{{ reply.created_at }}</span>
                                         </div>
                                         <p>reply.content</p>

@@ -23,7 +23,11 @@
                     <h6>
                         <router-link tag="a" :to="{name: 'albumDetail', params: {id: album.id}}">{{ album.name }}</router-link>
                     </h6>
-                    <p>{{ album.user.name }}</p>
+                    <p>
+                        <router-link tag="a" :to="{name: 'profileShow', params: {id: album.user.id}}" class="artist-name">
+                            {{ album.user.name }}
+                        </router-link>
+                    </p>
                 </div>
             </div>
             <!--Artist Rank End-->

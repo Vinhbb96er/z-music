@@ -22,4 +22,5 @@ mix.js('resources/js/app.js', 'public/frontend/js')
    .copyDirectory('node_modules/bootstrap/', 'public/frontend/vendor/bootstrap')
    .copyDirectory('node_modules/plyr/', 'public/frontend/vendor/plyr')
    .copyDirectory('node_modules/sweetalert/', 'public/frontend/vendor/sweetalert')
+   .copyDirectory('node_modules/bootstrap-tagsinput/', 'public/frontend/vendor/bootstrap-tagsinput')
    .version();

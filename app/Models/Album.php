@@ -15,6 +15,7 @@ class Album extends Model
         'status',
         'views',
         'type',
+        'path_image'
     ];
 
     protected $appends = [

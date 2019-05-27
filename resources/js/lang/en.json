@@ -20,7 +20,21 @@
         "video_not_support": "Your browser does not support HTML5 Video! 😢",
         "auto_next": "Auto next",
         "song_name": "Name",
-        "action": "Action"
+        "action": "Action",
+        "type": "Type",
+        "file": "Media file",
+        "cover_image": "Cover Image",
+        "region": "Region",
+        "kinds": "Kinds",
+        "tags": "Tags",
+        "lyrics": "Lyrics",
+        "song_name_placeholder": "Type song name/video...",
+        "choose_region": "--- Choose region ---",
+        "kind_placeholder": "Search and add kind...",
+        "tag_placeholder": "Search and add tag...",
+        "lyrics_placeholder": "Type lyrics...",
+        "upload_title": "Upload Music/Video/Album",
+        "music_video": "Music/Video"
     },
     "album": {
         "name": "Album",
@@ -28,13 +42,15 @@
         "album_hot": "Album hot",
         "album_new": "Album new",
         "album_ranking": "Album ranking",
-        "list_song": "List songs"
+        "list_song": "List songs",
+        "list_album": "List Album"
     },
     "music_video": {
         "name": "Music Video",
         "video_hot": "Video hot",
         "video_new": "Video new",
-        "video_ranking": "Video ranking"
+        "video_ranking": "Video ranking",
+        "list_video": "List video"
     },
     "music": {
         "name": "Music",
@@ -52,7 +68,9 @@
         "follow": "Follow",
         "contribute_lyrics": "Contribute lyrics",
         "comment": "Comment",
-        "cancel": "Cancel"
+        "cancel": "Cancel",
+        "edit": "Edit",
+        "upload": "Upload"
     },
     "playlist": {
         "name": "Playlist",
@@ -79,7 +97,10 @@
         "login_failed": "Failed! Password wrong or Account not exists!",
         "register_success": "Register new account success",
         "register_failed": "Failed! Email has been taken!",
-        "register_error": "Register failed! Try again!"
+        "register_error": "Register failed! Try again!",
+        "confirm_upload_media": "Are you sure want to upload Music/Video/Album?",
+        "upload_media_success": "Upload success! Waiting for Administrator approve!",
+        "upload_media_failed": "Upload failed! Try again!"
     },
     "auth": {
         "sign_in": "Sign in",
@@ -98,7 +119,11 @@
         "my_profile": "My profile",
         "my_favourite_list": "My favourite list",
         "music_management": "Music management",
-        "logout": "Logout"
+        "logout": "Logout",
+        "empty_description": "Description have not updated",
+        "introduce": "Introduce",
+        "real_name": "Real name",
+        "birthday": "Birthday"
     },
     "footer": {
     "copy_right": "© 2018 Z-Music. All Right Reserved."

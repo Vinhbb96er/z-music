@@ -25,4 +25,9 @@ class RegionRepository extends BaseRepository implements RegionInterface
             ->groupBy('media.region_id')
             ->orderBy('total_view', 'desc')->paginate($size);
     }
+
+    public function getAll()
+    {
+        return $this->model->all();
+    }
 }

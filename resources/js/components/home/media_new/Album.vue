@@ -29,7 +29,9 @@
                                 <div class="title">
                                     <div>
                                         <h5 class="album-name" @click.prevent="addMusicToPlaylist({id: album.id, type: type})" role="button">{{ album.name }}</h5>
-                                        <a href="#" class="album-artist">{{ album.user.name }}</a>
+                                        <router-link tag="a" :to="{name: 'profileShow', params: {id: album.user.id}}" class="album-artist">
+                                            {{ album.user.name }}
+                                        </router-link>
                                     </div>
                                 </div>
                                 <div class="album-no">

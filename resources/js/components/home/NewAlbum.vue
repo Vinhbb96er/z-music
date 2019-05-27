@@ -24,7 +24,11 @@
                                 {{ album.name }}
                             </router-link>
                         </h5>
-                        <h6>{{ album.user.name }}</h6>
+                        <h6>
+                            <router-link tag="a" :to="{name: 'profileShow', params: {id: album.user.id}}">
+                                {{ album.user.name }}
+                            </router-link>
+                        </h6>
                         <p>{{ album.region.name }}</p>
                         <p>{{ album.kinds_text }}</p>
                         <ul class="blog-meta-list">

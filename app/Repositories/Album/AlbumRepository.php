@@ -30,6 +30,10 @@ class AlbumRepository extends BaseRepository implements AlbumInterface
             $query->where('region_id', $params['region']);
         }
 
+        if (!empty($params['user'])) {
+            $query->where('user_id', $params['user']);
+        }
+
         if (isset($params['with_count'])) {
             $query->withCount($params['with_count']);
         }

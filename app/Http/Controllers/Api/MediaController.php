@@ -8,9 +8,13 @@ use App\Http\Controllers\Controller;
 use App\Repositories\Media\MediaInterface;
 use App\Repositories\Album\AlbumInterface;
 use Exception;
+use App\Traits\DropboxFileUploadTrait;
+use DB, Auth;
 
 class MediaController extends BaseApiController
 {
+    use DropboxFileUploadTrait;
+
     protected $mediaRepository;
     protected $albumRepository;
 
@@ -246,6 +250,82 @@ class MediaController extends BaseApiController
             report($e);
 
             return response()->json(null, Response::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function search(Request $request)
+    {
+        try {
+            $params = $request->only(
+                'type',
+                'user',
+                'size'
+            );
+
+            if ($params['type'] == config('setting.album.media_type')) {
+                unset($params['type']);
+                $params['eagle_loading'] = ['media', 'user'];
+                $data = $this->albumRepository->search($params);
+            } else {
+                $data = $this->mediaRepository->search($params);
+            }
+
+            return response()->json($data, Response::HTTP_OK);
+        } catch (Exception $e) {
+            report($e);
+
+            return response()->json(null, Response::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function store(Request $request)
+    {
+        DB::beginTransaction();
+        $data = [];
+
+        try {
+            $data = $request->only(
+                'name',
+                'region_id',
+                'type',
+                'lyrics'
+            );
+
+            $data['user_id'] = Auth::user()->id;
+            $kinds = $request->get('kinds');
+            $tags = $request->get('tags');
+            $dataKinds = isset($kinds) ? explode(',', $kinds) : [];
+            $dataTags = isset($tags) ? explode(',', $tags) : [];
+
+            if ($request->hasFile('file')) {
+                $result = $this->uploadFile($request->file('file'));
+                $data['url'] = $result['url'];
+                $data['path_media'] = $result['path'];
+            }
+
+            if ($request->hasFile('cover_image')) {
+                $result = $this->uploadFile($request->file('cover_image'));
+                $data['cover_image'] = $result['url'];
+                $data['path_image'] = $result['path'];
+            }
+
+            $this->mediaRepository->createMedia($data, $dataKinds, $dataTags);
+
+            DB::commit();
+            return response()->json(true, Response::HTTP_OK);
+        } catch (Exception $e) {
+            DB::rollback();
+            report($e);
+
+            if (isset($data['path_media'])) {
+                $this->deleteFile($data['path_media']);
+            }
+
+            if (isset($data['path_image'])) {
+                $this->deleteFile($data['path_image']);
+            }
+
+            return response()->json(false, Response::HTTP_NOT_FOUND);
         }
     }
 }

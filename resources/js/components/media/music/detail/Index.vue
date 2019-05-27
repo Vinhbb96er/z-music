@@ -10,9 +10,14 @@
                         <div class="text-overflow">
                             <h5>{{ music.name }}</h5>
                             <h6>
-                                <a href="#">{{ music.user.name }}</a>
+                                <router-link tag="a" :to="{name: 'profileShow', params: {id: music.user.id}}">
+                                    {{ music.user.name }}
+                                </router-link>
                             </h6>
-                            <p v-if="music.album">{{ $t('album.name') }}: <a href="#">{{ music.album.name }}</a></p>
+                            <p v-if="music.album">
+                                {{ $t('album.name') }}:
+                                <router-link tag="a" :to="{name: 'albumDetail', params: {id: music.album.id}}">{{ music.album.name }}</router-link>
+                            </p>
                             <p v-if="music.kinds_text">{{ $t('home.kind') }}: {{ music.kinds_text }}</p>
                             <p v-if="music.region">{{ $t('home.region') }}: <a href="#">{{ music.region.name }}</a></p>
                         </div>

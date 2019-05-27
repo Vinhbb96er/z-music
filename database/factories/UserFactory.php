@@ -9,6 +9,7 @@ use App\Models\Album;
 use App\Models\Like;
 use App\Models\Follow;
 use App\Models\Comment;
+use App\Models\Tag;
 
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
@@ -125,7 +126,9 @@ $factory->define(Media::class, function (Faker $faker) use ($musicData, $videoDa
         'cover_image' => $faker->imageUrl(640, 300),
         'status' => 1,
         'views' => $faker->numberBetween(100, 10000),
-        'lyrics_contributer_name' => User::all()->random()->name
+        'lyrics_contributer_name' => User::all()->random()->name,
+        'path_media' => '',
+        'path_image' => ''
     ];
 });
 
@@ -138,6 +141,10 @@ $factory->define(Region::class, function (Faker $faker) {
 });
 
 $factory->define(Kind::class, function (Faker $faker) {
+    return [];
+});
+
+$factory->define(Tag::class, function (Faker $faker) {
     return [];
 });
 

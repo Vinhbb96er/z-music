@@ -124,15 +124,15 @@
                     if (valid) {
                         this.login(this.userLogin).then((isSuccess) => {
                             if (isSuccess) {
+                                $('#login-register1').modal('hide');
                                 this.userLogin = {
                                     email: null,
                                     password: null,
                                     remmeber: false
                                 };
+                                this.$validator.reset();
 
                                 flashMessage(this.$t('message.login_success'));
-                                $('#login-register1').modal('hide');
-                                this.errors.clear();
                             } else {
                                 flashMessage(this.$t('message.login_failed'), 'danger');
                             }
@@ -147,15 +147,14 @@
                     if (valid) {
                         this.register(this.userRegister).then((isSuccess) => {
                             if (isSuccess) {
+                                $('#login-register1').modal('hide');
                                 this.userRegister = {
                                     email: null,
                                     password: null,
                                     password_confirmation: null
                                 };
-
+                                this.$validator.reset();
                                 flashMessage(this.$t('message.register_success'));
-                                $('#login-register1').modal('hide');
-                                this.errors.clear();
                             } else {
                                 flashMessage(this.$t('message.register_failed'), 'danger');
                             }

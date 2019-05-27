@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Storage;
 
 class Media extends Model
 {
@@ -18,7 +19,9 @@ class Media extends Model
         'cover_image',
         'views',
         'status',
-        'lyrics_contributer_name'
+        'lyrics_contributer_name',
+        'path_media',
+        'path_image'
     ];
 
     protected $appends = [

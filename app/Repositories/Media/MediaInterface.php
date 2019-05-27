@@ -21,4 +21,6 @@ interface MediaInterface
     public function getMediaComment($mediaId, $size = 5);
 
     public function getMediaSuggest($params);
+
+    public function createMedia($data, $dataKinds = [], $dataTags = []);
 }

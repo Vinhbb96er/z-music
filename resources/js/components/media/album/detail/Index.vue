@@ -10,7 +10,9 @@
                         <div class="text-overflow">
                             <h5>{{ album.name }}</h5>
                             <h6>
-                                <a href="#">{{ album.user.name }}</a>
+                                <router-link tag="a" :to="{name: 'profileShow', params: {id: album.user.id}}">
+                                    {{ album.user.name }}
+                                </router-link>
                             </h6>
                             <p v-if="album.kinds_text">{{ $t('home.kind') }}: {{ album.kinds_text }}</p>
                             <p v-if="album.region">{{ $t('home.region') }}: <a href="#">{{ album.region.name }}</a></p>

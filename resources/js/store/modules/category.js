@@ -2,7 +2,10 @@ import {get, makePathByParams} from '../../api/base_api.js'
 
 const state = {
     popularRegions: [],
-    topViewCategories: []
+    topViewCategories: [],
+    allRegions: [],
+    allKinds: [],
+    allTags: []
 }
 
 const getters = {
@@ -20,6 +23,15 @@ const getters = {
         });
 
         return categories;
+    },
+    allRegions(state) {
+        return state.allRegions;
+    },
+    allKinds(state) {
+        return state.allKinds;
+    },
+    allTags(state) {
+        return state.allTags;
     }
 }
 
@@ -29,6 +41,15 @@ const mutations = {
     },
     setTopViewCategories(state, payload) {
         state.topViewCategories = payload;
+    },
+    setAllRegions(state, payload) {
+        state.allRegions = payload;
+    },
+    setAllKinds(state, payload) {
+        state.allKinds = payload;
+    },
+    setAllTags(state, payload) {
+        state.allTags = payload;
     }
 }
 
@@ -49,6 +70,29 @@ const actions = {
             get(makePathByParams('category/top-view', data))
                 .then(res => {
                     commit('setTopViewCategories', res.data.data);
+                })
+                .catch(err => {
+                    reject(err);
+                });
+        });
+    },
+    getAllCategories({commit}, type) {
+        return new Promise((resolve, reject) => {
+            get(`category/${type}/all`)
+                .then(res => {
+                    switch(type) {
+                        case window.Laravel.setting.category_type.region:
+                            commit('setAllRegions', res.data);
+                            break;
+                        case window.Laravel.setting.category_type.kind:
+                            commit('setAllKinds', res.data);
+                            break;
+                        case window.Laravel.setting.category_type.tag:
+                            commit('setAllTags', res.data);
+                            break;
+                    }
+
+                    resolve(true);
                 })
                 .catch(err => {
                     reject(err);

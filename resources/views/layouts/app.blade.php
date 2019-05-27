@@ -10,6 +10,8 @@
     {{ Html::favicon(asset('frontend/fonts/fav.png')) }}
     <!-- Bootstrap core CSS -->
     {{ Html::style(asset('frontend/vendor/bootstrap/dist/css/bootstrap.min.css')) }}
+    <!-- Bootstrap Taginput -->
+    {{ Html::style(asset('frontend/vendor/bootstrap-tagsinput/dist/bootstrap-tagsinput.css')) }}
     <!-- Preloader CSS -->
     {{ Html::style(asset('frontend/css/preloader.css')) }}
     <!-- DL Menu CSS -->
@@ -96,9 +98,14 @@
     <!-- Sweet Alert -->
     {{ Html::script(asset('frontend/vendor/sweetalert/dist/sweetalert.min.js')) }}
     {{ Html::script(asset('frontend/js/alert.js')) }}
+    <!-- Typehead -->
+    {{ Html::script(asset('frontend/js/typeahead.bundle.min.js')) }}
+    <!-- Bootstrap Taginput -->
+    {{ Html::script(asset('frontend/vendor/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js')) }}
     <!--Custom JavaScript-->
     {{ Html::script(asset('frontend/js/custom.js')) }}
     <!-- Vue -->
     {{ Html::script(asset('frontend/js/app.js')) }}
+
 </body>
 </html>

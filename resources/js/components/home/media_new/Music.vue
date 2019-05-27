@@ -31,7 +31,7 @@
                             <h6 class="music-name">
                                 <a href="#">{{ music.name }}</a>
                             </h6>
-                            <a href="#" class="artist-name">{{ music.user.name }}</a>
+                            <a href="#" @click.prevent class="artist-name">{{ music.user.name }}</a>
                         </div>
                         <div class="music-icon-group">
                             <i class="music-playing-icon icon-play-button" v-if="!checkPlayingMusic(music.id)"></i>

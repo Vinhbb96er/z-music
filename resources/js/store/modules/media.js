@@ -1,4 +1,5 @@
 import {get, post, makePathByParams} from '../../api/base_api.js'
+import axios from 'axios'
 
 const state = {
     sliderItems: [],
@@ -7,7 +8,8 @@ const state = {
     mediaNew: [],
     mediaDetailData: null,
     mediaComments: {},
-    mediaSuggest: []
+    mediaSuggest: [],
+    mediaSearch: null,
 }
 
 const getters = {
@@ -32,6 +34,9 @@ const getters = {
     },
     mediaComments(state) {
         return state.mediaComments;
+    },
+    mediaSearch(state) {
+        return state.mediaSearch;
     }
 }
 
@@ -56,6 +61,9 @@ const mutations = {
     },
     setMediaComments(state, payload) {
         state.mediaComments = payload;
+    },
+    setMediaSearch(state, payload) {
+        state.mediaSearch = payload;
     }
 }
 
@@ -172,6 +180,35 @@ const actions = {
     upViewMedia({commit}, id) {
         return new Promise((resolve, reject) => {
             post(`media/${id}/up-view`)
+                .then(res => {
+                    resolve(res.data);
+                })
+                .catch(err => {
+                    reject(err);
+                });
+        });
+    },
+    searchMedia({commit, state}, data) {
+        return new Promise((resolve, reject) => {
+            get(makePathByParams('media/search', data))
+                .then(res => {
+                    commit('setMediaSearch', res.data);
+                })
+                .catch(err => {
+                    reject(err);
+                });
+        });
+    },
+    uploadMedia({commit, state}, data) {
+        return new Promise((resolve, reject) => {
+            axios.defaults.headers.common['Content-Type'] = 'multipart/form-data';
+            let formData = new FormData(data);
+
+            for(var key in data) {
+                formData.append(key, data[key]);
+            }
+
+            post('media', formData)
                 .then(res => {
                     resolve(res.data);
                 })

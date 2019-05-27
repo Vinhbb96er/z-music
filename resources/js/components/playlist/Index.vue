@@ -50,11 +50,15 @@
                                     <a href="#" :title="music.name">{{ music.name }}</a>
                                 </td>
                                 <td width="30%" class="artist">
-                                    <a href="#" :title="music.user.name">{{ music.user.name }}</a>
+                                    <router-link tag="a" :to="{name: 'profileShow', params: {id: music.user.id}}" :title="music.user.name">
+                                        {{ music.user.name }}
+                                    </router-link>
                                 </td>
                                 <td width="10%" class="btn-action-group text-right">
                                     <div class="popup-menu">
-                                        <span class="btn-action"><i role="button" class="fa fa-info-circle"></i></span>
+                                        <router-link tag="span" :to="{name: 'musicDetail', params: {id: music.id}}" class="btn-action">
+                                            <i role="button" class="fa fa-info-circle"></i>
+                                        </router-link>
                                         <span class="btn-open-menu btn-action"><i role="button" class="fa fa-bars"></i></span>
                                         <ul class="menu-content text-left">
                                             <li>
@@ -108,13 +112,13 @@
                 </div>
                 <div class="clear"></div>
                 <ul class="action-group-icon">
-                    <li>
-                        <a class=" liked">
+                    <router-link tag="li" :to="{name: 'musicDetail', params: {id: playlist[playingIndex].id}}">
+                        <a class="liked" @click.prevent>
                             <i role="button" class="fa fa-info"></i>
                         </a>
-                    </li>
+                    </router-link>
                     <li>
-                        <a class=" liked">
+                        <a class="liked">
                             <i role="button" class="fa fa-heart-o"></i>
                         </a>
                     </li>
@@ -134,14 +138,16 @@
                         <a role="button" class="" href="#">{{ playlist[playingIndex].name }}</a>
                     </div>
                     <div class="music-artist">
-                        <a role="button" class="" href="#">{{ playlist[playingIndex].user.name }}</a>
+                        <router-link tag="a" :to="{name: 'profileShow', params: {id: playlist[playingIndex].user.id}}" role="button">
+                            {{ playlist[playingIndex].user.name }}
+                        </router-link>
                     </div>
                     <div class="music-info">
                         <div class="music-album" v-if="playlist[playingIndex].album">
                             {{ $t('album.name') }}:
-                            <a role="button" class="" href="#">
+                            <router-link tag="a" :to="{name: 'albumDetail', params: {id: playlist[playingIndex].album.id}}" role="button">
                                 {{ playlist[playingIndex].album.name }}
-                            </a>
+                            </router-link>
                         </div>
                         <div class="music-kind">
                             {{ $t('home.kind') }}:

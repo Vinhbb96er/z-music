@@ -13,11 +13,8 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::group(['namespace' => 'Api'], function () {
+    Route::get('/media/search', 'MediaController@search');
     Route::get('/media/hot', 'MediaController@getHotMedia');
     Route::get('/media/new', 'MediaController@getNewMedia');
     Route::get('/media/slider', 'MediaController@getSliders');
@@ -30,9 +27,12 @@ Route::group(['namespace' => 'Api'], function () {
 
     Route::get('/category/region/popular', 'CategoryController@getPopularRegions');
     Route::get('/category/top-view', 'CategoryController@getTopViewCategories');
+    Route::get('/category/{type}/all', 'CategoryController@getAllCatagories');
 
     Route::get('/ranking/media', 'RankingController@getRankingMedia');
     Route::get('/ranking/artist', 'RankingController@getRankingArtist');
+
+    Route::get('profile/{id}', 'ProfileController@show');
 
     Route::post('register', 'AuthController@register');
     Route::post('login', 'AuthController@login');
@@ -40,6 +40,9 @@ Route::group(['namespace' => 'Api'], function () {
     Route::group(['middleware' => 'jwt.auth'], function () {
         Route::get('auth', 'AuthController@user');
         Route::post('logout', 'AuthController@logout');
+        Route::get('profile', 'ProfileController@index');
+
+        Route::post('/media', 'MediaController@store');
     });
 
     Route::middleware('jwt.refresh')->get('/token/refresh', 'AuthController@refresh');

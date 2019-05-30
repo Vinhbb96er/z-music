@@ -66,4 +66,19 @@ class UserRepository extends BaseRepository implements UserInterface
 
         return $this->model->create($data);
     }
+
+    public function getUser($id, $params = [])
+    {
+        $query = $this->model->newQuery();
+
+        if (isset($params['eagle_loading'])) {
+            $query->with($params['eagle_loading']);
+        }
+
+        if (isset($params['with_count'])) {
+            $query->withCount($params['with_count']);
+        }
+
+        return $query->findOrFail($id);
+    }
 }

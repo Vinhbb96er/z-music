@@ -9,4 +9,6 @@ interface UserInterface
     public function getTopFollowArtist($params = []);
 
     public function createUser($data);
+
+    public function getUser($id, $params = []);
 }

@@ -43,11 +43,13 @@ return [
         'selective' => 0,
         'region' => 1,
         'kind' => 2,
+        'tag' => 3,
     ],
 
     'images' => [
         'track' => '/frontend/images/track.png',
         'music_playing' => '/frontend/images/music-playing.gif',
-        'user_avatar_default' => '/frontend/images/user_avatar_default.png'
+        'user_avatar_default' => '/frontend/images/user_avatar_default.png',
+        'user_background_default' => '/frontend/images/user_bg_default.png',
     ]
 ];

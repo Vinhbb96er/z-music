@@ -27,6 +27,8 @@ class CreateMediaTable extends Migration
             $table->string('cover_image')->nullable();
             $table->bigInteger('views')->default(0);
             $table->tinyInteger('status');
+            $table->string('path_media');
+            $table->string('path_image')->nullable();
             $table->timestamps();
         });
     }

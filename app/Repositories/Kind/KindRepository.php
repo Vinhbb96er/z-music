@@ -22,4 +22,9 @@ class KindRepository extends BaseRepository implements KindInterface
             ->groupBy('kindables.kind_id')
             ->orderBy('total_view', 'desc')->paginate($size);
     }
+
+    public function getAll()
+    {
+        return $this->model->all();
+    }
 }

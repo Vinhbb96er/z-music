@@ -20,7 +20,21 @@
         "video_not_support": "Trình duyệt của bạn không hỗ trợ HTML5 Video! 😢",
         "auto_next": "Tự động phát",
         "song_name": "Tên",
-        "action": "Thao tác"
+        "action": "Thao tác",
+        "type": "Loại",
+        "file": "Media file",
+        "cover_image": "Ảnh đại diện",
+        "region": "Khu vực",
+        "kinds": "Thể loại",
+        "tags": "Thẻ",
+        "lyrics": "Lời bài hát",
+        "song_name_placeholder": "Nhập tên bài hát/video...",
+        "choose_region": "--- Chọn khu vực ---",
+        "kind_placeholder": "Tìm và thêm thể loại...",
+        "tag_placeholder": "Tìm và thêm thẻ...",
+        "lyrics_placeholder": "Nhập lời bài hát...",
+        "upload_title": "Đăng tải Bài hát/Video/Album",
+        "music_video": "Bài hát/Video"
     },
     "album": {
         "name": "Album",
@@ -28,13 +42,15 @@
         "album_hot": "Album hot",
         "album_new": "Album mới",
         "album_ranking": "BXH Album",
-        "list_song": "Danh sách bài hát"
+        "list_song": "Danh sách bài hát",
+        "list_album": "Danh sách Album"
     },
     "music_video": {
         "name": "Video ca nhạc",
         "video_hot": "Video hot",
         "video_new": "Video mới",
-        "video_ranking": "BXH MV"
+        "video_ranking": "BXH MV",
+        "list_video": "Danh sách Video"
     },
     "music": {
         "name": "Bài hát",
@@ -52,7 +68,9 @@
         "follow": "Theo dõi",
         "contribute_lyrics": "Đóng góp lời bài hát",
         "comment": "Bình luận",
-        "cancel": "Hủy bỏ"
+        "cancel": "Hủy bỏ",
+        "edit": "Chỉnh sửa",
+        "upload": "Đăng tải"
     },
     "playlist": {
         "name": "Danh sách phát",
@@ -79,7 +97,10 @@
         "login_failed": "Thất bại! Mật khẩu sai hoặc tài khoản không tồn tại!",
         "register_success": "Đăng ký tài khoản mới thành công!",
         "register_failed": "Thất bại! Email này đã được sử dụng!",
-        "register_error": "Có lỗi xảy ra khi đăng ký tài khoản! Hãy thử lại!"
+        "register_error": "Có lỗi xảy ra khi đăng ký tài khoản! Hãy thử lại!",
+        "confirm_upload_media": "Bạn có chắc chắn muốn đăng tải Music/Video/Album?",
+        "upload_media_success": "Đăng tải thành công! Đang chờ Quản trị viên phê duyệt!",
+        "upload_media_failed": "Đăng tải thất bại! Hãy thử lại!"
     },
     "auth": {
         "sign_in": "Đăng nhập",
@@ -98,7 +119,11 @@
         "my_profile": "Trang cá nhân",
         "my_favourite_list": "Danh sách yêu thích",
         "music_management": "Quản lý nhạc",
-        "logout": "Đăng xuất"
+        "logout": "Đăng xuất",
+        "empty_description": "Thông tin giới thiệu chưa được cập nhật.",
+        "introduce": "Giới thiệu",
+        "real_name": "Tên thật",
+        "birthday": "Ngày sinh"
     },
     "footer": {
     "copy_right": "© 2018 Z-Music. All Right Reserved."

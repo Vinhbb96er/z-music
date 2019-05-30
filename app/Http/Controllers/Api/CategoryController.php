@@ -7,19 +7,23 @@ use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 use App\Repositories\Region\RegionInterface;
 use App\Repositories\Kind\KindInterface;
+use App\Repositories\Tag\TagInterface;
 use Exception;
 
 class CategoryController extends Controller
 {
     protected $regionRepository;
     protected $kindRepository;
+    protected $tagRepository;
 
     public function __construct(
         RegionInterface $regionRepository,
-        KindInterface $kindRepository
+        KindInterface $kindRepository,
+        TagInterface $tagRepository
     ) {
         $this->regionRepository = $regionRepository;
         $this->kindRepository = $kindRepository;
+        $this->tagRepository = $tagRepository;
     }
 
     public function getPopularRegions()
@@ -62,6 +66,37 @@ class CategoryController extends Controller
             }
 
             return response()->json($categories, Response::HTTP_OK);
+        } catch (Exception $e) {
+            report($e);
+
+            return response()->json(null, Response::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function getAllCatagories(Request $request, $type)
+    {
+        try {
+            $data = [];
+
+            switch ($type) {
+                case config('setting.category_type.region'):
+                    $data = $this->regionRepository->getAll();
+                    break;
+
+                case config('setting.category_type.kind'):
+                    $data = $this->kindRepository->getAll();
+                    break;
+
+                case config('setting.category_type.tag'):
+                    $data = $this->tagRepository->getAll();
+                    break;
+
+                default:
+                    throw new Exception("Not found", 1);
+                    break;
+            }
+
+            return response()->json($data, Response::HTTP_OK);
         } catch (Exception $e) {
             report($e);
 

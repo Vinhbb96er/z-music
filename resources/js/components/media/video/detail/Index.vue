@@ -14,7 +14,11 @@
                                         <h6 class="video-title">{{ video.name }}</h6>
                                         <div class="video-admin-wrap">
                                             <div class="text-overflow">
-                                                <h5><a href="#">{{ video.user.name }}</a></h5>
+                                                <h5>
+                                                   <router-link tag="a" :to="{name: 'profileShow', params: {id: video.user.id}}">
+                                                        {{ video.user.name }}
+                                                    </router-link>
+                                                </h5>
                                                 <p v-if="video.kinds_text">{{ $t('home.kind') }}: {{ video.kinds_text }}</p>
                                                 <p v-if="video.region">
                                                     {{ $t('home.region') }}:

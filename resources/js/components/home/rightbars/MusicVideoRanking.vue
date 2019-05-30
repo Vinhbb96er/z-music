@@ -30,7 +30,9 @@
                     <!--Featured Meta Start-->
                     <div class="blog-post-meta">
                         <div class="blog-info blog-admin">
-                            <a href="#">{{ videoRanking[0].user.name }}on</a>
+                            <router-link tag="a" :to="{name: 'profileShow', params: {id: videoRanking[0].user.id}}">
+                                {{ videoRanking[0].user.name }}
+                            </router-link>
                         </div>
                     </div>
                 </div>
@@ -55,7 +57,9 @@
                     <!--Featured Meta Start-->
                     <div class="blog-post-meta">
                         <div class="blog-info blog-admin">
-                            <a href="#">{{ video.user.name }}</a>
+                            <router-link tag="a" :to="{name: 'profileShow', params: {id: video.user.id}}">
+                                {{ video.user.name }}
+                            </router-link>
                         </div>
                     </div>
                     <!--Featured Meta End-->

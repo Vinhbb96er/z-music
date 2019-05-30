@@ -11,7 +11,10 @@ const getters = {
         return state.authenticated;
     },
     user(state) {
-        return state. user;
+        return state.user;
+    },
+    checkIsAuthUser: state => (userId) => {
+        return state.user && state.user.id == userId;
     }
 }
 
@@ -67,6 +70,7 @@ const actions = {
         return new Promise((resolve, reject) => {
             get('token/refresh')
                 .then((res) => {
+                    localStorage.setItem('access_token', res.data);
                     resolve(true);
                 })
                 .catch((err) => {
@@ -78,20 +82,24 @@ const actions = {
         return new Promise((resolve, reject) => {
             commit('checkAuthenticated');
 
-            get('auth')
-                .then((res) => {
-                    commit('setUser', res.data);
-                })
-                .catch((err) => {
-                    dispatch('refreshToken')
-                        .then((isSuccess) => {
-                            dispatch('getAuth');
-                        })
-                        .catch((err) => {
-                            commit('removeAuthenticated');
-                        });
-                    reject(err);
-                });
+            if (state.authenticated) {
+                get('auth')
+                    .then((res) => {
+                        commit('setUser', res.data);
+                    })
+                    .catch((err) => {
+                        dispatch('refreshToken')
+                            .then((isSuccess) => {
+                                dispatch('getAuth');
+                            })
+                            .catch((err) => {
+                                commit('removeAuthenticated');
+                            });
+                        reject(err);
+                    });
+            } else {
+                commit('removeAuthenticated');
+            }
         });
     },
     register({commit}, data) {

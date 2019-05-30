@@ -704,3 +704,16 @@
     map.mapTypes.set(MY_MAPTYPE_ID, customMapType);
   }
 
+function showAnimationLoader() {
+    $('#process-loader').show();
+    $('.modal-backdrop').css('z-index', 10000);
+    $('body').append('<div class="modal-backdrop disable-background fade in"></div>');
+    $('body').css('overflow', 'hidden');
+}
+
+function hideAnimationLoader() {
+    $('#process-loader').hide();
+    $('.disable-background').remove();
+    $('body').css('overflow', '');
+    $('.modal-backdrop').css('z-index', '');
+}

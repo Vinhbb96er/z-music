@@ -13,12 +13,16 @@
         <div class="artist-slider">
             <div v-for="artist in artistRanking" :key="artist.id">
                 <div class="artist-item">
-                    <a href="#" class="artist-avatar">
+                    <router-link tag="a" :to="{name: 'profileShow', params: {id: artist.id}}" class="artist-avatar">
                         <figure class="backgroud-image-show" :style="{backgroundImage: `url(${artist.avatar})`}"></figure>
-                    </a>
+                    </router-link>
                     <h6 class="artist-info">
-                        <a href="#">{{ artist.name }}</a>
-                        <button class="btn btn-success btn-follow">{{ $t('button.follow') }}</button>
+                        <router-link tag="a" :to="{name: 'profileShow', params: {id: artist.id}}">
+                            {{ artist.name }}
+                        </router-link>
+                        <button class="btn btn-success btn-follow" v-if="!checkIsAuthUser(artist.id)">
+                            {{ $t('button.follow') }}
+                        </button>
                     </h6>
                 </div>
             </div>
@@ -36,7 +40,7 @@
             };
         },
         computed: {
-            ...mapGetters(['artistRanking'])
+            ...mapGetters(['artistRanking', 'checkIsAuthUser'])
         },
         methods: {
             ...mapActions(['getArtistRanking'])

@@ -15,6 +15,11 @@
         <app-playlist></app-playlist>
         <div class="clear"></div>
         <div id="block-message"></div>
+        <div class="modal fade in" id="process-loader">
+            <section>
+                <div class="loading-spiner"></div>
+            </section>
+        </div>
     </div>
 </template>
 <script>

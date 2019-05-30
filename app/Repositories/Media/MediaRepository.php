@@ -53,6 +53,10 @@ class MediaRepository extends BaseRepository implements MediaInterface
             });
         }
 
+        if (!empty($params['user'])) {
+            $query->where('user_id', $params['user']);
+        }
+
         if (!empty($params['region'])) {
             $query->where('region_id', $params['region']);
         }
@@ -237,5 +241,19 @@ class MediaRepository extends BaseRepository implements MediaInterface
         ]);
 
         return $media->views;
+    }
+
+    public function createMedia($data, $dataKinds = [], $dataTags = [])
+    {
+        $data['status'] = 0;
+        $media = $this->model->create($data);
+
+        if (count($dataKinds)) {
+            $media->kinds()->attach($dataKinds);
+        }
+
+        if (count($dataTags)) {
+            $media->tags()->attach($dataKinds);
+        }
     }
 }

@@ -7,4 +7,6 @@ interface RegionInterface
     public function getPopularRegions($size);
 
     public function getTopViewRegions($size);
+
+    public function getAll();
 }

@@ -5,6 +5,7 @@ import Category from './modules/category.js'
 import Ranking from './modules/ranking.js'
 import Playlist from './modules/playlist.js'
 import Auth from './modules/auth.js'
+import Profile from './modules/profile.js'
 
 Vue.use(Vuex);
 
@@ -26,6 +27,7 @@ export const store = new Vuex.Store({
         Media,
         Category,
         Ranking,
-        Playlist
+        Playlist,
+        Profile
     }
 })

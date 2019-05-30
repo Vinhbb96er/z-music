@@ -12,6 +12,9 @@ import VideoDetail from '../components/media/video/detail/Index.vue'
 import AlbumIndex from '../components/media/album/Index.vue'
 import AlbumDetail from '../components/media/album/detail/Index.vue'
 
+import Profile from '../components/profile/Profile.vue'
+import ProfileIndex from '../components/profile/Index.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -22,7 +25,6 @@ const routes = [
     },
     {
         path: '/music',
-        name: 'music',
         component: MusicIndex,
         children: [
             // {
@@ -44,7 +46,6 @@ const routes = [
     },
     {
         path: '/video',
-        name: 'video',
         component: VideoIndex,
         children: [
     //         {
@@ -66,7 +67,6 @@ const routes = [
     },
     {
         path: '/album',
-        name: 'album',
         component: AlbumIndex,
         children: [
     //         {
@@ -85,7 +85,24 @@ const routes = [
     //             component: AlbumEdit
     //         }
         ]
-    }
+    },
+    {
+        path: '/profile',
+        component: Profile,
+        children: [
+            {
+                path: '',
+                name: 'profile',
+                component: ProfileIndex
+            },
+            {
+                path: ':id',
+                name: 'profileShow',
+                component: ProfileIndex
+            }
+        ]
+    },
+
 ];
 
 export const router = new VueRouter({

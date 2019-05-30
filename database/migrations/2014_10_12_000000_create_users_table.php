@@ -20,6 +20,8 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('avatar')->nullable();
             $table->string('background')->nullable();
+            $table->string('path_avatar')->nullable();
+            $table->string('path_background')->nullable();
             $table->date('birthday')->nullable();
             $table->tinyInteger('gender')->default(config('setting.user.other'));
             $table->text('description')->nullable();

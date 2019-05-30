@@ -28,7 +28,9 @@
                     <!--Featured Meta Start-->
                     <div class="blog-post-meta">
                         <div class="blog-info blog-admin">
-                            <a href="#">{{ video.user.name }}</a>
+                            <router-link tag="a" :to="{name: 'profileShow', params: {id: video.user.id}}">
+                                {{ video.user.name }}
+                            </router-link>
                         </div>
                     </div>
                     <!--Featured Meta End-->

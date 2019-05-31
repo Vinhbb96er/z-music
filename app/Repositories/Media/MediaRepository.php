@@ -4,6 +4,7 @@ namespace App\Repositories\Media;
 
 use App\Repositories\BaseRepository;
 use App\Models\Media;
+use Auth;
 
 class MediaRepository extends BaseRepository implements MediaInterface
 {
@@ -255,5 +256,24 @@ class MediaRepository extends BaseRepository implements MediaInterface
         if (count($dataTags)) {
             $media->tags()->attach($dataKinds);
         }
+    }
+
+    public function like($data)
+    {
+        $media = $this->model->findOrFail($data['id']);
+        $like = $media->likes()
+            ->where('user_id', Auth::user()->id)
+            ->first();
+
+        if ($like) {
+            $like->delete();
+        } else {
+            $media->likes()->create([
+                'status' => 1,
+                'user_id' => Auth::user()->id,
+            ]);
+        }
+
+        return $this->model->withCount('likes')->findOrFail($data['id'])->likes_count;
     }
 }

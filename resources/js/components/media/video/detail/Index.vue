@@ -48,12 +48,15 @@
                                                 </a>
                                             </div>
                                             <div class="action-btn">
-                                                <a href="#"><i class="fa fa-heart-o"></i>
+                                                <a href="#" @click.prevent="likeMedia({id: id, type: type})" v-if="!user || !checkLiked(id, user.like_data.media)"><i class="fa fa-heart-o"></i>
                                                     <span>{{ $t('playlist.like') }}</span>
+                                                </a>
+                                                <a href="#" @click.prevent="likeMedia({id: id, type: type})" v-else class="liked"><i class="fa fa-heart"></i>
+                                                    <span>{{ $t('playlist.liked') }}</span>
                                                 </a>
                                             </div>
                                             <div class="action-btn">
-                                                <a href="#">
+                                                <a href="#" @click.prevent="downloadMedia(id)">
                                                     <i class="fa fa-download"></i><span>{{ $t('playlist.download') }}</span>
                                                 </a>
                                             </div>
@@ -136,11 +139,13 @@
         computed: {
             ...mapGetters({
                 video: 'mediaDetailData',
-                videoSuggest: 'mediaSuggest'
+                videoSuggest: 'mediaSuggest',
+                checkLiked: 'checkLiked',
+                user: 'user'
             })
         },
         methods: {
-            ...mapActions(['getMediaDetail', 'upViewMedia']),
+            ...mapActions(['getMediaDetail', 'upViewMedia', 'likeMedia', 'downloadMedia']),
             loadVideo() {
                 this.videoPlayer.src = this.video.url;
                 this.videoPlayer.poster = this.video.cover_image;
@@ -211,6 +216,8 @@
         }
     }
 </script>
-<style>
-
+<style scoped>
+    .liked {
+        color: #db152e !important;
+    }
 </style>

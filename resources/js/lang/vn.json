@@ -88,7 +88,8 @@
         "report": "Báo cáo",
         "like": "Thích",
         "pause": "Tạm dừng",
-        "add_to_playlist": "Thêm vào danh sách phát"
+        "add_to_playlist": "Thêm vào danh sách phát",
+        "liked": "Đã thích"
     },
     "message": {
         "album_exists_in_playlist": "Tất cả những bài hát trong Album này đã có trong Playlist của bạn",
@@ -100,7 +101,9 @@
         "register_error": "Có lỗi xảy ra khi đăng ký tài khoản! Hãy thử lại!",
         "confirm_upload_media": "Bạn có chắc chắn muốn đăng tải Music/Video/Album?",
         "upload_media_success": "Đăng tải thành công! Đang chờ Quản trị viên phê duyệt!",
-        "upload_media_failed": "Đăng tải thất bại! Hãy thử lại!"
+        "upload_media_failed": "Đăng tải thất bại! Hãy thử lại!",
+        "success": "Thành công!",
+        "failed": "Thất bại! Hãy thử lại!"
     },
     "auth": {
         "sign_in": "Đăng nhập",

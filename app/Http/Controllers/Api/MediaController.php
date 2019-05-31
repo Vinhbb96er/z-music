@@ -328,4 +328,44 @@ class MediaController extends BaseApiController
             return response()->json(false, Response::HTTP_NOT_FOUND);
         }
     }
+
+    public function like(Request $request)
+    {
+        try {
+            $params = $request->only(
+                'type',
+                'id'
+            );
+
+            if ($params['type'] == config('setting.album.media_type')) {
+                $data['like'] = $this->albumRepository->like($params);
+            } else {
+                $data['like'] = $this->mediaRepository->like($params);
+            }
+
+            $data['like_data'] = [
+                'media' => Auth::user()->likes()->where('likeable_type', 'App\Models\Media')->pluck('likeable_id')->all(),
+                'album' => Auth::user()->likes()->where('likeable_type', 'App\Models\Album')->pluck('likeable_id')->all(),
+            ];
+
+            return response()->json($data, Response::HTTP_OK);
+        } catch (Exception $e) {
+            report($e);
+
+            return response()->json(false, Response::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function download(Request $request, $id)
+    {
+        try {
+            $data = $this->mediaRepository->getMedia($id);
+
+            return response()->json($data->url, Response::HTTP_OK);
+        } catch (Exception $e) {
+            report($e);
+
+            return response()->json(false, Response::HTTP_NOT_FOUND);
+        }
+    }
 }

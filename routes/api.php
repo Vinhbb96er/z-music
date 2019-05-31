@@ -24,6 +24,7 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('/media/{id}/up-view', 'MediaController@upViewMedia');
     Route::get('/media/{id}/comment', 'MediaController@getMediaComment');
     Route::get('/media/suggest', 'MediaController@getMediaSuggest');
+    Route::get('/media/{id}/download', 'MediaController@download');
 
     Route::get('/category/region/popular', 'CategoryController@getPopularRegions');
     Route::get('/category/top-view', 'CategoryController@getTopViewCategories');
@@ -43,6 +44,7 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('profile', 'ProfileController@index');
 
         Route::post('/media', 'MediaController@store');
+        Route::post('/media/like', 'MediaController@like');
     });
 
     Route::middleware('jwt.refresh')->get('/token/refresh', 'AuthController@refresh');

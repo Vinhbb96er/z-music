@@ -57,7 +57,7 @@
                                     <router-link @click.stop tag="a" class="mp3-icon" :to="{name: 'musicDetail', params: {id: music.id}}" :title="$t('home.view_detail')">
                                         <i class="fa fa-info"></i>
                                     </router-link>
-                                    <a href="#" class="mp3-icon" :title="$t('playlist.download')" @click.stop.prevent>
+                                    <a href="#" class="mp3-icon" :title="$t('playlist.download')" @click.stop.prevent="downloadMedia(music.id)">
                                         <i class="fa fa-download"></i>
                                     </a>
                                 </div>
@@ -89,7 +89,7 @@
             })
         },
         methods: {
-            ...mapActions(['playingMusic'])
+            ...mapActions(['playingMusic', 'downloadMedia'])
         }
     }
 </script>

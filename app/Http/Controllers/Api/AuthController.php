@@ -71,6 +71,10 @@ class AuthController extends Controller
     {
         try {
             $user = Auth::user();
+            $user->like_data = [
+                'media' => $user->likes()->where('likeable_type', 'App\Models\Media')->pluck('likeable_id')->all(),
+                'album' => $user->likes()->where('likeable_type', 'App\Models\Album')->pluck('likeable_id')->all(),
+            ];
 
             if (!$user) {
                 throw new Exception("Error Processing Request", 1);

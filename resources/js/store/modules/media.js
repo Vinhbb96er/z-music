@@ -1,5 +1,6 @@
 import {get, post, makePathByParams} from '../../api/base_api.js'
 import axios from 'axios'
+import {i18n} from '../../lang/index.js'
 
 const state = {
     sliderItems: [],
@@ -37,6 +38,17 @@ const getters = {
     },
     mediaSearch(state) {
         return state.mediaSearch;
+    },
+    checkLiked: state => (mediaId, mediaIdLikes) => {
+        var check = false;
+
+        mediaIdLikes.forEach(function (item) {
+            if (item == mediaId) {
+                check = true;
+            }
+        });
+
+        return check;
     }
 }
 
@@ -214,6 +226,58 @@ const actions = {
                 })
                 .catch(err => {
                     reject(err);
+                });
+        });
+    },
+    likeMedia({commit, state, rootState, dispatch}, data) {
+        if (!rootState.Auth.authenticated) {
+            $('#login-register1').modal('show');
+
+            return;
+        }
+
+        return new Promise((resolve, reject) => {
+            post('media/like', data)
+                .then(res => {
+                    if (state.mediaDetailData) {
+                        state.mediaDetailData.likes_count = res.data.like;
+                    }
+
+                    var mediaIndex = null;
+                    rootState.Playlist.playlist.forEach(function (item, index) {
+                        if (item.id == data.id) {
+                            mediaIndex = index;
+
+                            return ;
+                        }
+                    });
+
+                    if (mediaIndex != null) {
+                        rootState.Playlist.playlist[mediaIndex].likes_count = res.data.like;
+                    }
+
+                    if (rootState.Auth.user) {
+                        rootState.Auth.user.like_data = res.data.like_data;
+                    }
+
+                    flashMessage(i18n.t('message.success'));
+                })
+                .catch(err => {
+                    reject(err);
+                    flashMessage(i18n.t('message.failed'), 'danger');
+                });
+        });
+    },
+    downloadMedia({commit}, id) {
+        return new Promise((resolve, reject) => {
+            get(`media/${id}/download`)
+                .then(res => {
+                    window.location.href = res.data;
+                    flashMessage(i18n.t('message.success'));
+                })
+                .catch(err => {
+                    reject(err);
+                    flashMessage(i18n.t('message.failed'), 'danger');
                 });
         });
     }

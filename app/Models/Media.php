@@ -96,4 +96,13 @@ class Media extends Model
 
         return null;
     }
+
+    public function getTypeTextAttribute()
+    {
+        if ($this->attributes['type'] == 1) {
+            return trans('admin.media.type_text.music');
+        } else {
+            return trans('admin.media.type_text.video');
+        }
+    }
 }

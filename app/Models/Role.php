@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Role extends Model
 {
     protected $fillable = [
-        'name', 
+        'name',
     ];
 
     public function users()
@@ -18,5 +18,10 @@ class Role extends Model
     public function permissions()
     {
         return $this->hasMany(Permission::class);
+    }
+
+    public function isAdmin()
+    {
+        return $this->name == 'Admin';
     }
 }

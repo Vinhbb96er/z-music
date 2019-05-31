@@ -158,4 +158,13 @@ class User extends Authenticatable implements JWTSubject
             ? trans('admin.user.role.artist')
             : null;
     }
+
+    public function getStatusTextAttribute()
+    {
+        if ($this->attributes['status'] == 1) {
+            return trans('admin.status_text.active');
+        } else {
+            return trans('admin.status_text.block');
+        }
+    }
 }

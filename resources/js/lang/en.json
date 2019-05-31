@@ -88,7 +88,8 @@
         "report": "Report",
         "like": "Like",
         "pause": "Pause",
-        "add_to_playlist": "Add to Playlist"
+        "add_to_playlist": "Add to Playlist",
+        "liked": "Liked"
     },
     "message": {
         "album_exists_in_playlist": "All songs in this album have exists in playlist",
@@ -100,7 +101,9 @@
         "register_error": "Register failed! Try again!",
         "confirm_upload_media": "Are you sure want to upload Music/Video/Album?",
         "upload_media_success": "Upload success! Waiting for Administrator approve!",
-        "upload_media_failed": "Upload failed! Try again!"
+        "upload_media_failed": "Upload failed! Try again!",
+        "success": "Success!",
+        "failed": "Failed! Try again!"
     },
     "auth": {
         "sign_in": "Sign in",

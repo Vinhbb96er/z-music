@@ -23,4 +23,6 @@ interface MediaInterface
     public function getMediaSuggest($params);
 
     public function createMedia($data, $dataKinds = [], $dataTags = []);
+
+    public function like($data);
 }

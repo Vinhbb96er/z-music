@@ -10210,3 +10210,12 @@ body.msl-black .albums-tables ul li span{
     stroke-dashoffset: 0;
     transition: all 0.15s ease;
 }
+
+.btn-liked {
+    background: #fff !important;
+    color: #333 !important;
+}
+
+.btn-liked:hover {
+    color: #fff !important;
+}

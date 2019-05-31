@@ -139,4 +139,23 @@ class AlbumRepository extends BaseRepository implements AlbumInterface
     {
         return $this->model->findOrFail($mediaId)->comments()->where('reply_id', 0)->with(['user', 'replies.user'])->paginate($size);
     }
+
+    public function like($data)
+    {
+        $album = $this->model->findOrFail($data['id']);
+        $like = $album->likes()
+            ->where('user_id', Auth::user()->id)
+            ->first();
+
+        if ($like) {
+            $like->delete();
+        } else {
+            $album->likes()->create([
+                'status' => 1,
+                'user_id' => Auth::user()->id,
+            ]);
+        }
+
+        return $this->model->withCount('likes')->findOrFail($data['id'])->likes_count;
+    }
 }

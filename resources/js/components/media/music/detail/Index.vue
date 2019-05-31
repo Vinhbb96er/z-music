@@ -42,8 +42,15 @@
                     <a class="btn-1 theme-bg" href="#" @click.prevent="playingMusic({id: id, type: type})" v-else>
                         <i class="fa fa-play"></i>{{ $t('playlist.play') }}
                     </a>
-                    <a class="btn-1 theme-bg" href="#"><i class="fa fa-heart-o"></i>{{ $t('playlist.like') }}</a>
-                    <a class="btn-1 theme-bg" href="#"><i class="fa fa-download"></i>{{ $t('playlist.download') }}</a>
+                    <a class="btn-1 theme-bg" href="#" @click.prevent="likeMedia({id: id, type: type})" v-if="!user || !checkLiked(id, user.like_data.media)">
+                        <i class="fa fa-heart-o"></i>{{ $t('playlist.like') }}
+                    </a>
+                    <a class="btn-1 btn-liked" v-else href="#" @click.prevent="likeMedia({id: id, type: type})">
+                        <i class="fa fa-heart"></i>{{ $t('playlist.liked') }}
+                    </a>
+                    <a class="btn-1 theme-bg" href="#" @click.prevent="downloadMedia(id)">
+                        <i class="fa fa-download"></i>{{ $t('playlist.download') }}
+                    </a>
                     <a class="btn-1 theme-bg" href="#"><i class="fa fa-plus"></i>{{ $t('playlist.add_my_favourite') }}</a>
                     <a class="btn-1 theme-bg" href="#"><i class="fa fa-flag-o"></i>{{ $t('playlist.report') }}</a>
                 </div>
@@ -121,10 +128,18 @@
             ...mapGetters({
                 music: 'mediaDetailData',
                 checkPlayingMusic: 'checkPlayingMusic',
+                checkLiked: 'checkLiked',
+                user: 'user'
             })
         },
         methods: {
-            ...mapActions(['getMediaDetail', 'playingMusic', 'pauseMusic'])
+            ...mapActions([
+                'getMediaDetail',
+                'playingMusic',
+                'pauseMusic',
+                'likeMedia',
+                'downloadMedia'
+            ])
         },
         created() {
             this.getMediaDetail({

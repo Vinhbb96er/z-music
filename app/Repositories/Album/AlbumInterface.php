@@ -17,4 +17,6 @@ interface AlbumInterface
     public function upViewAlbum($id);
 
     public function getAlbumComment($mediaId, $size = 5);
+
+    public function like($data);
 }

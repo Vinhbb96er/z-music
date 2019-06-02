@@ -28,6 +28,7 @@ Route::group(['namespace' => 'Api'], function () {
 
     Route::get('/category/region/popular', 'CategoryController@getPopularRegions');
     Route::get('/category/top-view', 'CategoryController@getTopViewCategories');
+    Route::get('/category/topic/hot', 'CategoryController@getTopicHot');
     Route::get('/category/{type}/all', 'CategoryController@getAllCatagories');
 
     Route::get('/ranking/media', 'RankingController@getRankingMedia');

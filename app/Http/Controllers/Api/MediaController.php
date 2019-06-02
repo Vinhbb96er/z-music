@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 use App\Repositories\Media\MediaInterface;
 use App\Repositories\Album\AlbumInterface;
+use App\Repositories\User\UserInterface;
 use Exception;
 use App\Traits\DropboxFileUploadTrait;
 use DB, Auth;
@@ -17,13 +18,16 @@ class MediaController extends BaseApiController
 
     protected $mediaRepository;
     protected $albumRepository;
+    protected $userRepository;
 
     public function __construct(
         MediaInterface $mediaRepository,
-        AlbumInterface $albumRepository
+        AlbumInterface $albumRepository,
+        UserInterface $userRepository
     ) {
         $this->mediaRepository = $mediaRepository;
         $this->albumRepository = $albumRepository;
+        $this->userRepository = $userRepository;
     }
 
     public function getHotMedia(Request $request)
@@ -259,15 +263,78 @@ class MediaController extends BaseApiController
             $params = $request->only(
                 'type',
                 'user',
-                'size'
+                'size',
+                'keyword',
+                'region',
+                'kind',
+                'tag'
             );
 
-            if ($params['type'] == config('setting.album.media_type')) {
-                unset($params['type']);
-                $params['eagle_loading'] = ['media', 'user'];
-                $data = $this->albumRepository->search($params);
-            } else {
-                $data = $this->mediaRepository->search($params);
+            switch ($params['type']) {
+                case config('setting.album.media_type'):
+                    unset($params['type']);
+                    $params['eagle_loading'] = ['media', 'user'];
+
+                    if (!isset($params['user'])) {
+                        $params['eagle_loading'] = ['media', 'user', 'region', 'kinds'];
+                        $params['first_artist'] = true;
+                    }
+
+                    $data = $this->albumRepository->search($params);
+                    break;
+
+                case config('setting.media.type.music'):
+                case config('setting.media.type.video'):
+                    if (!isset($params['user'])) {
+                        $params['eagle_loading'] = ['user', 'region', 'kinds'];
+                        $params['first_artist'] = true;
+                    }
+
+                    $data = $this->mediaRepository->search($params);
+                    break;
+
+                case 4:
+                    $params['is_artist'] = true;
+                    $params['with_count'] = ['followers'];
+                    $data = $this->userRepository->search($params);
+                    break;
+
+                case 0:
+                    $params['first_artist'] = true;
+                    $params['eagle_loading'] = ['user', 'region', 'kinds'];
+
+                    $params['type'] = config('setting.media.type.music');
+                    $params['size'] = 5;
+                    $musics = $this->mediaRepository->search($params);
+
+                    $params['type'] = config('setting.media.type.video');
+                    $params['size'] = 4;
+                    $videos = $this->mediaRepository->search($params);
+
+                    unset($params['type']);
+                    $params['size'] = 4;
+                    $params['eagle_loading'][] = 'media';
+                    $albums = $this->albumRepository->search($params);
+
+                    $params['size'] = 4;
+                    unset($params['eagle_loading']);
+                    unset($params['first_artist']);
+                    $params['is_artist'] = true;
+                    $params['with_count'] = ['followers'];
+                    $artists = $this->userRepository->search($params);
+
+                    $data = [
+                        'musics' => $musics,
+                        'videos' => $videos,
+                        'albums' => $albums,
+                        'artists' => $artists,
+                    ];
+
+                    break;
+
+                default:
+
+                    break;
             }
 
             return response()->json($data, Response::HTTP_OK);

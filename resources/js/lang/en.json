@@ -11,7 +11,16 @@
         "kind_regions": "Regions & Kinds",
         "topic_hot": "Topic hot",
         "highlight_artist": "Highlight Artists",
-        "maybe_you_interested": "Maybe you are interested"
+        "maybe_you_interested": "Maybe you are interested",
+        "login_register": "Login / Register",
+        "view_all": "View all",
+        "no_results": "No results",
+        "search_placeholder": "Type something....",
+        "home": "Home",
+        "contact": "Contact",
+        "ranking": "Ranking",
+        "topic": "Topic",
+        "all": "All"
     },
     "media": {
         "description": "Description",
@@ -127,6 +136,18 @@
         "introduce": "Introduce",
         "real_name": "Real name",
         "birthday": "Birthday"
+    },
+    "search": {
+        "name": "Search",
+        "search_music": "Search Music",
+        "search_video": "Search Video",
+        "search_album": "Search Album",
+        "search_artist": "Search Artist",
+        "find_music_result": "Find out {number} song with keyword ",
+        "find_video_result": "Find out {number} video with keyword ",
+        "find_album_result": "Find out {number} video with keyword ",
+        "find_artist_result": "Find out {number} artist with keyword ",
+        "number_result": "{number} results"
     },
     "footer": {
     "copy_right": "© 2018 Z-Music. All Right Reserved."

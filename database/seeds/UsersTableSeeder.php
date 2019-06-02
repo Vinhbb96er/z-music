@@ -35,12 +35,19 @@ class UsersTableSeeder extends Seeder
         factory(Album::class, 50)->create()->each(function ($album) {
             $kindId = Kind::all()->random()->id;
             $album->kinds()->attach($kindId);
+
+            $tagId = Tag::all()->random()->id;
+            $album->kinds()->attach($tagId);
         });
 
         Media::truncate();
         factory(Media::class, 2000)->create()->each(function ($media) use ($faker) {
             $kindId = Kind::all()->random()->id;
             $media->kinds()->attach($kindId);
+
+            $tagId = Tag::all()->random()->id;
+            $media->tags()->attach($tagId);
+
             $media->comments()->createMany([
                 [
                     'user_id' => User::all()->random()->id,
@@ -98,7 +105,7 @@ class UsersTableSeeder extends Seeder
     public function createRoles($faker)
     {
         Role::truncate();
-        $roles = ['Admin', 'Artist', 'Member'];
+        $roles = ['Admin', 'Member', 'Artist'];
 
         foreach ($roles as $role) {
             factory(Role::class)->create([
@@ -203,7 +210,7 @@ class UsersTableSeeder extends Seeder
         ];
 
         foreach ($tags as $tag) {
-            factory(Kind::class)->create([
+            factory(Tag::class)->create([
                 'name' => $tag
             ]);
         }

@@ -192,6 +192,7 @@ const actions = {
 
                     state.playlist = state.playlist.concat(newMusics);
                     dispatch('playMusic', state.playlist.length - newMusics.length);
+                    flashMessage('Thêm nhạc vào danh sách phát thành công');
                 })
                 .catch(err => {
                     reject(err);

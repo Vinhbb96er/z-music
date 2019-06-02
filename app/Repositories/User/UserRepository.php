@@ -17,6 +17,12 @@ class UserRepository extends BaseRepository implements UserInterface
     {
         $query = $this->model->newQuery();
 
+        if (!empty($params['keyword'])) {
+            $query->where(function($subQuery) use ($params) {
+                $subQuery->orWhere('name', 'like', '%' . $params['keyword'] . '%');
+            });
+        }
+
         if (!empty($params['is_artist'])) {
             $query->where('role_id', config('setting.user.role.artist'));
         }

@@ -17,37 +17,13 @@
         <!--Artist Rank List Start-->
         <div class="topic-hot-element">
             <div class="card-group">
-                <div class="card-item">
-                    <a href="#">
-                        <figure class="backgroud-image-show" style="background-image: url(/frontend/images/region_kind/rock_bg.jpg);">
-                            <span class="card-gradient-background gradient-background-1"></span>
+                <div class="card-item" v-for="(topic, index) in topicHot">
+                    <router-link tag="a" :to="{name: 'categoryTopic', params: {id: topic.id}}">
+                        <figure class="backgroud-image-show" :style="{backgroundImage: `url(${topic.cover_image})`}">
+                            <span class="card-gradient-background" :class="'gradient-background-' + (index + 1)"></span>
                         </figure>
-                        <h4 class="card-title">Hôm nay nghe gì</h4>
-                    </a>
-                </div>
-                <div class="card-item no-padding">
-                    <a href="#">
-                        <figure class="backgroud-image-show" style="background-image: url(/frontend/images/region_kind/rock_bg.jpg);">
-                            <span class="card-gradient-background gradient-background-2"></span>
-                        </figure>
-                        <h4 class="card-title">Acoustic</h4>
-                    </a>
-                </div>
-                <div class="card-item no-padding">
-                    <a href="#">
-                        <figure class="backgroud-image-show" style="background-image: url(/frontend/images/region_kind/rock_bg.jpg);">
-                            <span class="card-gradient-background gradient-background-3"></span>
-                        </figure>
-                        <h4 class="card-title">Nhạc vàng bất hủ</h4>
-                    </a>
-                </div>
-                <div class="card-item no-padding">
-                    <a href="#">
-                        <figure class="backgroud-image-show" style="background-image: url(/frontend/images/region_kind/rock_bg.jpg);">
-                            <span class="card-gradient-background gradient-background-4"></span>
-                        </figure>
-                        <h4 class="card-title">EDM</h4>
-                    </a>
+                        <h4 class="card-title">{{ topic.name }}</h4>
+                    </router-link>
                 </div>
             </div>
         </div>
@@ -58,7 +34,18 @@
     import {mapActions} from 'vuex'
 
     export default {
-
+        data() {
+            return {};
+        },
+        computed: {
+            ...mapGetters(['topicHot'])
+        },
+        methods: {
+            ...mapActions(['getTopicHot'])
+        },
+        created() {
+            this.getTopicHot();
+        }
     }
 </script>
 <style>

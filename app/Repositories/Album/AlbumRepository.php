@@ -16,6 +16,12 @@ class AlbumRepository extends BaseRepository implements AlbumInterface
     {
         $query = $this->model->newQuery();
 
+        if (!empty($params['keyword'])) {
+            $query->where(function($subQuery) use ($params) {
+                $subQuery->orWhere('albums.name', 'like', '%' . $params['keyword'] . '%');
+            });
+        }
+
         if (isset($params['type'])) {
             $query->where('type', $params['type']);
         }
@@ -28,6 +34,18 @@ class AlbumRepository extends BaseRepository implements AlbumInterface
 
         if (!empty($params['region'])) {
             $query->where('region_id', $params['region']);
+        }
+
+        if (!empty($params['kind'])) {
+            $query->whereHas('kinds', function($query) use ($params) {
+                $query->where('kinds.id', $params['kind']);
+            });
+        }
+
+        if (!empty($params['tag'])) {
+            $query->whereHas('tags', function($query) use ($params) {
+                $query->where('tags.id', $params['tag']);
+            });
         }
 
         if (!empty($params['user'])) {
@@ -44,6 +62,10 @@ class AlbumRepository extends BaseRepository implements AlbumInterface
 
         if (isset($params['sort_type']) && isset($params['sort_field'])) {
             $query->orderBy($params['sort_field'], $params['sort_type']);
+        }
+
+        if (!empty($params['first_artist'])) {
+            $query->join('users', 'albums.user_id', '=', 'users.id')->orderBy('role_id', 'desc')->select('albums.*');
         }
 
         return isset($params['size']) ? $query->paginate($params['size']) : $query->paginate(10);

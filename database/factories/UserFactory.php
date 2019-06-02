@@ -35,7 +35,7 @@ $factory->define(User::class, function (Faker $faker) {
         'avatar' => $faker->imageUrl(100, 100),
         'gender' => 3,
         'description' => '',
-        'role_id' => $faker->randomElement([1, 2]),
+        'role_id' => $faker->randomElement([2, 3]),
         'background' => '',
         'status' => 1,
     ];
@@ -145,7 +145,9 @@ $factory->define(Kind::class, function (Faker $faker) {
 });
 
 $factory->define(Tag::class, function (Faker $faker) {
-    return [];
+    return [
+        'cover_image' => '/frontend/images/region_kind/rock_bg.jpg'
+    ];
 });
 
 $factory->define(Like::class, function (Faker $faker) {

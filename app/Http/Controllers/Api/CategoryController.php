@@ -103,4 +103,17 @@ class CategoryController extends Controller
             return response()->json(null, Response::HTTP_NOT_FOUND);
         }
     }
+
+    public function getTopicHot(Request $request)
+    {
+        try {
+            $topics = $this->tagRepository->getTagsHot(4);
+
+            return response()->json($topics, Response::HTTP_OK);
+        } catch (Exception $e) {
+            report($e);
+
+            return response()->json(null, Response::HTTP_NOT_FOUND);
+        }
+    }
 }

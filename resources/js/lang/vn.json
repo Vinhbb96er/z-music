@@ -11,7 +11,16 @@
         "kind_regions": "Khu vực & Thể loại",
         "topic_hot": "Chủ đề hot",
         "highlight_artist": "Nghệ sĩ nổi bật",
-        "maybe_you_interested": "Có thể bạn quan tâm"
+        "maybe_you_interested": "Có thể bạn quan tâm",
+        "login_register": "Đăng nhập / Đăng ký",
+        "view_all": "Xem tất cả",
+        "no_results": "Không có kết quả nào",
+        "search_placeholder": "Nhập từ khóa tìm kiếm....",
+        "home": "Trang chủ",
+        "contact": "Liên hệ",
+        "ranking": "Bảng xếp hạng",
+        "topic": "Chủ đề",
+        "all": "Tất cả"
     },
     "media": {
         "description": "Tổng quan",
@@ -127,6 +136,18 @@
         "introduce": "Giới thiệu",
         "real_name": "Tên thật",
         "birthday": "Ngày sinh"
+    },
+    "search": {
+        "name": "Tìm kiếm",
+        "search_music": "Tìm kiếm bài hát",
+        "search_video": "Tìm kiếm Video",
+        "search_album": "Tìm kiếm Album",
+        "search_artist": "Tìm kiếm nghệ sĩ",
+        "find_music_result": "Tìm thấy {number} bài hát với từ khóa ",
+        "find_video_result": "Tìm thấy {number} video với từ khóa ",
+        "find_album_result": "Tìm thấy {number} album với từ khóa ",
+        "find_artist_result": "Tìm thấy {number} nghệ sĩ với từ khóa ",
+        "number_result": "Có {number} kết quả"
     },
     "footer": {
     "copy_right": "© 2018 Z-Music. All Right Reserved."

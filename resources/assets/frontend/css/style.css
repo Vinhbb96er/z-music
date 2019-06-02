@@ -10219,3 +10219,179 @@ body.msl-black .albums-tables ul li span{
 .btn-liked:hover {
     color: #fff !important;
 }
+
+.search-content .results {
+    color: #ccc;
+    font-size: 13px;
+    margin: 0;
+}
+
+.search-content .empty-data {
+    padding: 35px;
+    text-align: center;
+    color: #fff;
+    font-size: 15px;
+}
+
+.search-content .keyword {
+    color: #0ff5bf;
+    font-weight: bold;
+}
+
+.search-content .sub-banner {
+    padding: 110px 0 50px;
+}
+
+.search-content .album-inner {
+    margin-bottom: 10px;
+}
+
+.search-content .view-more {
+    margin: 5px 0;
+}
+
+.search-content .data-content {
+    border: 1px solid #ccc;
+    padding: 10px;
+    overflow: hidden;
+}
+
+.link {
+    color: #fff;
+}
+
+.link:hover {
+    color: #db152e;
+}
+
+@import url("https://fonts.googleapis.com/css?family=Inconsolata:700");
+
+.container-search {
+    position: absolute;
+    top: -14px;
+    left: 130px;
+}
+.container-search .search {
+    position: absolute;
+    top: 26px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 45px;
+    height: 45px;
+    background: crimson;
+    border-radius: 50%;
+    transition: all 1s;
+    z-index: 4;
+    box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.4);
+}
+.container .search::before {
+    content: "";
+    position: absolute;
+    margin: auto;
+    top: 14px;
+    right: 0;
+    bottom: 0;
+    left: 15px;
+    width: 9px;
+    height: 2px;
+    background: white;
+    transform: rotate(45deg);
+    transition: all .5s;
+}
+.container .search::after {
+    content: "";
+    position: absolute;
+    margin: auto;
+    top: -5px;
+    right: 0;
+    bottom: 0;
+    left: -5px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid white;
+    transition: all .5s;
+}
+
+.container-search .search:hover {
+    cursor: pointer;
+}
+.container-search input {
+    font-family: 'Inconsolata', monospace;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    top: 26px;
+    width: 35px;
+    height: 35px;
+    outline: none;
+    border: none;
+    background: crimson;
+    color: white;
+    text-shadow: 0 0 10px crimson;
+    border-radius: 30px;
+    box-shadow: 0 0 25px 0 crimson, 0 20px 25px 0 rgba(0, 0, 0, 0.2);
+    transition: all 1s;
+    opacity: 0;
+    z-index: 5;
+    font-weight: bolder;
+    letter-spacing: 0.1em;
+    padding: 18px 22px;
+    margin: 4px 0;
+}
+.container-search input:hover {
+    cursor: pointer;
+}
+.container-search input:focus {
+    width: 300px;
+    opacity: 1;
+    cursor: text;
+    padding: 0 20px 0 60px;
+    height: 35px;
+}
+.container-search input:focus ~ .search {
+    background: #151515;
+    z-index: 6;
+}
+.container-search input:focus ~ .search::before {
+    top: 0;
+    left: 0;
+    width: 25px;
+}
+.container-search input:focus ~ .search::after {
+    top: 0;
+    left: 0;
+    width: 25px;
+    height: 2px;
+    border: none;
+    background: white;
+    border-radius: 0%;
+    transform: rotate(-45deg);
+}
+.container-search input::placeholder {
+    color: white;
+    opacity: 0.5;
+    font-weight: bolder;
+}
+
+.select-category .category-title {
+    color: #fff;
+    display: inline-block;
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.select-category select {
+    width: auto;
+    color: #e2e2e2;
+    font-weight: bold;
+    background: rgba(255, 255, 255, 0.1);
+    display: inline-block;
+}
+
+.select-category select option {
+    color: #333;
+}

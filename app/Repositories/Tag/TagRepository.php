@@ -16,4 +16,14 @@ class TagRepository extends BaseRepository implements TagInterface
     {
         return $this->model->all();
     }
+
+    public function getTagsHot($size)
+    {
+        return $this->model
+            ->join('taggables', 'tags.id', '=', 'taggables.tag_id')
+            ->join('media', 'taggables.taggable_id', '=', 'media.id')
+            ->selectRaw('tags.*, sum(media.views) as total_view')
+            ->groupBy('taggables.tag_id')
+            ->orderBy('total_view', 'desc')->paginate($size);
+    }
 }

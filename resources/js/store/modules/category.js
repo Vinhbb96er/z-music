@@ -5,7 +5,8 @@ const state = {
     topViewCategories: [],
     allRegions: [],
     allKinds: [],
-    allTags: []
+    allTags: [],
+    topicHot: [],
 }
 
 const getters = {
@@ -32,6 +33,9 @@ const getters = {
     },
     allTags(state) {
         return state.allTags;
+    },
+    topicHot(state) {
+        return state.topicHot;
     }
 }
 
@@ -50,6 +54,9 @@ const mutations = {
     },
     setAllTags(state, payload) {
         state.allTags = payload;
+    },
+    setTopicHot(state, payload) {
+        state.topicHot = payload;
     }
 }
 
@@ -93,6 +100,17 @@ const actions = {
                     }
 
                     resolve(true);
+                })
+                .catch(err => {
+                    reject(err);
+                });
+        });
+    },
+    getTopicHot({commit}) {
+        return new Promise((resolve, reject) => {
+            get('category/topic/hot')
+                .then(res => {
+                    commit('setTopicHot', res.data.data);
                 })
                 .catch(err => {
                     reject(err);

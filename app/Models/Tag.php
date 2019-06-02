@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Tag extends Model
 {
     protected $fillable = [
-        'name', 
+        'name',
+        'cover_image'
     ];
 
     public function media()

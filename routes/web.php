@@ -22,7 +22,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function () {
     Route::resource('/admin/media', 'MediaController');
 });
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/admin-home', 'HomeController@index')->name('home');
 
 Route::group(['namespace' => 'Auth'], function () {
     Route::get('login', 'LoginController@showLoginForm')->name('login');

@@ -16,9 +16,12 @@
                 <div class="album-inner">
                     <!--Music Album Inner Nav Start-->
                     <h4 class="heading-2 media-header-title">
-                        <a href="#">
+                        <template v-if="categoryType == 0">
+                            {{ categories[categoryType].title }}
+                        </template>
+                        <router-link v-else tag="a" :to="{name: categories[categoryType].routeName, params: {id: 'all'}}">
                             {{ categories[categoryType].title }} <i class="fa fa-angle-right"></i>
-                        </a>
+                        </router-link>
                     </h4>
                     <ul class="nav-tabs msl-tab-nav">
                         <li class="region-title" v-for="category in categories" @click.prevent="categoryType = category.type" :class="{active: categoryType == category.type}">
@@ -27,12 +30,12 @@
                     </ul>
                     <div class="card-group">
                         <div class="card-item" v-for="category in topViewCategories">
-                            <a href="#">
+                            <router-link tag="a" :to="getCategoryLink(category)">
                                 <figure class="backgroud-image-show" :style="{backgroundImage: `url(${category.cover_image})`}">
                                     <span class="card-gradient-background" :class="category.background"></span>
                                 </figure>
                                 <h4 class="card-title">{{ category.name }}</h4>
-                            </a>
+                            </router-link>
                         </div>
                     </div>
                 </div>
@@ -56,11 +59,13 @@
                     },
                     {
                         type: window.Laravel.setting.category_type.region,
-                        title: this.$t('home.region')
+                        title: this.$t('home.region'),
+                        routeName: 'categoryRegion'
                     },
                     {
                         type: window.Laravel.setting.category_type.kind,
-                        title: this.$t('home.kind')
+                        title: this.$t('home.kind'),
+                        routeName: 'categoryKind'
                     }
                 ]
             };
@@ -76,7 +81,23 @@
             ...mapGetters(['topViewCategories'])
         },
         methods: {
-            ...mapActions(['getTopViewCategories'])
+            ...mapActions(['getTopViewCategories']),
+            getCategoryLink(category) {
+                let routeName = null;
+
+                if (category.category_type == window.Laravel.setting.category_type.region) {
+                    routeName = 'categoryRegion';
+                } else if (category.category_type == window.Laravel.setting.category_type.kind) {
+                    routeName = 'categoryKind';
+                }
+
+                return {
+                    name: routeName,
+                    params: {
+                        id: category.id
+                    }
+                }
+            }
         },
         created() {
             this.getTopViewCategories({

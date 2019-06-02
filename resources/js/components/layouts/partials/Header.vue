@@ -22,15 +22,18 @@
             <div class="container">
                 <div class="pull-left">
                     <div class="social-icons">
-                        <strong>FOLLOW US:</strong>
                         <ul>
                             <li><a href=""><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                             <li><a href=""><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                            <li><a href=""><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
                             <li><a href=""><i class="fa fa-youtube" aria-hidden="true"></i></a></li>
-                            <li><a href=""><i class="fa fa-soundcloud" aria-hidden="true"></i></a></li>
                         </ul>
                     </div>
+                    <form @submit.prevent="search">
+                        <div class="container-search">
+                            <input type="text" :placeholder="$t('home.search_placeholder')" v-model="keyword">
+                            <div class="search"></div>
+                        </div>
+                    </form>
                 </div>
                 <div class="center-logo">
                     <div class="logo">
@@ -73,114 +76,51 @@
                             <!--/ End dropdown menu -->
                         </li>
                         <li v-else class="login-register">
-                            <a href="#" data-toggle="modal" data-target="#login-register1">login / register</a>
+                            <a href="#" data-toggle="modal" data-target="#login-register1">{{ $t('home.login_register') }}</a>
                         </li>
                     </ul>
                     <div id="kode-responsive-navigation" class="dl-menuwrapper">
                         <button class="dl-trigger"></button>
                         <ul class="dl-menu">
                             <li class="menu-item">
-                                <a href="index.html">Home</a>
+                                <router-link tag="a" :to="{name: 'home'}">{{ $t('home.home') }}</router-link>
+                            </li>
+                            <li class="menu-item">
+                                <router-link tag="a" :to="{name: 'categoryKind', params: {id: 'all'}}">{{ $t('home.kind') }}</router-link>
                                 <ul class="dl-submenu">
-                                    <li><a href="light-index.html">Home Light</a></li>
+                                    <li v-for="kind in allKinds">
+                                        <router-link tag="a" :to="{name: 'categoryKind', params: {id: kind.id}}">{{ kind.name }}</router-link>
+                                    </li>
                                 </ul>
                             </li>
                             <li class="menu-item">
-                                <a href="artist.html">artist</a>
+                                <router-link tag="a" :to="{name: 'categoryRegion', params: {id: 'all'}}">{{ $t('home.region') }}</router-link>
                                 <ul class="dl-submenu">
-                                    <li><a href="artist.html">artist</a></li>
-                                    <li><a href="artist-blog.html">artist 02</a></li>
-                                    <li><a href="event-organiser.html">artist 03</a></li>
-                                    <li><a href="dj.html">dj</a></li>
+                                    <li v-for="region in allRegions">
+                                        <router-link tag="a" :to="{name: 'categoryRegion', params: {id: region.id}}">{{ region.name }}</router-link>
+                                    </li>
                                 </ul>
                             </li>
                             <li class="menu-item">
-                                <a href="#">event</a>
+                                <a @click.prevent>{{ $t('home.ranking') }}</a>
                                 <ul class="dl-submenu">
                                     <li>
                                         <a href="event-list.html">event list</a>
                                     </li>
-                                    <li>
-                                        <a href="event-list-2.html">event list 02</a>
-                                    </li>
-                                    <li>
-                                        <a href="event-list-3.html">event list 03</a>
-                                    </li>
-                                    <li>
-                                        <a href="event-detail.html">event detail</a>
-                                    </li>
                                 </ul>
                             </li>
-                            <li class="menu-item "><a href="#">music</a>
+                            <li class="menu-item ">
+                                <router-link tag="a" :to="{name: 'searchArtist'}">{{ $t('artist.name') }}</router-link>
+                            </li>
+                            <li class="menu-item ">
+                                <router-link tag="a" :to="{name: 'categoryTopic', params: {id: 'all'}}">{{ $t('home.topic') }}</router-link>
                                 <ul class="dl-submenu">
-                                    <li>
-                                        <a href="video.html">video</a>
-                                    </li>
-                                    <li>
-                                        <a href="video-list.html">video list</a>
-                                    </li>
-                                    <li>
-                                        <a href="video-detail.html">video detail</a>
-                                    </li>
-                                    <li>
-                                        <a href="mp3-list.html">mp3 list</a>
-                                    </li>
-                                    <li>
-                                        <a href="music-artist-albums.html">music artist albums</a>
-                                    </li>
-                                    <li>
-                                        <a href="music-albums.html">music albums</a>
-                                    </li>
-                                    <li>
-                                        <a href="masonry-gallary.html">masonry gallary</a>
+                                    <li v-for="topic in allTags">
+                                        <router-link tag="a" :to="{name: 'categoryTopic', params: {id: topic.id}}">{{ topic.name }}</router-link>
                                     </li>
                                 </ul>
                             </li>
-                            <li class="menu-item "><a href="#">blog</a>
-                                <ul class="dl-submenu">
-                                    <li>
-                                        <a href="blog-detail.html">blog-detail</a>
-                                    </li>
-                                    <li>
-                                        <a href="blog-detail-02.html">blog-detail 02</a>
-                                    </li>
-                                    <li>
-                                        <a href="blog-detail-leftsidebar.html">blog-left-sidebar</a>
-                                    </li>
-                                    <li>
-                                        <a href="blog-right-sidebar.html">blog-right-sidebar</a>
-                                    </li>
-                                    <li>
-                                        <a href="blog-full.html">blog full</a>
-                                    </li>
-                                    <li>
-                                        <a href="blog-medium.html">blog medium</a>
-                                    </li>
-                                    <li>
-                                        <a href="blog-small.html">blog small</a>
-                                    </li>
-                                    <li>
-                                        <a href="masonry-blog.html">masonry small</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="menu-item"><a href="#">pages</a>
-                                <ul class="dl-submenu">
-                                    <li>
-                                        <a href="shop.html">shop</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop-items.html">shop items</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop-listing.html">shop listing</a>
-                                    </li>
-                                    <li>
-                                        <a href="headers.html">headers</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li><a href="contact-us.html">contact us</a></li>
+                            <li><a href="#">Liên hệ</a></li>
                         </ul>
                     </div>
                 </div>
@@ -191,107 +131,45 @@
                 <div class="fst-navigation">
                     <nav class="navigation-1">
                         <ul>
-                            <li class="active"><a href="index.html">home</a>
-                                <ul class="sub-menu children">
-                                   <li><a href="light-index.html">Home Light</a></li>
+                            <li class="menu-item">
+                                <router-link tag="a" :to="{name: 'home'}">{{ $t('home.home') }}</router-link>
+                            </li>
+                            <li class="menu-item">
+                                <router-link tag="a" :to="{name: 'categoryKind', params: {id: 'all'}}">{{ $t('home.kind') }}</router-link>
+                                <ul class="dl-submenu">
+                                    <li v-for="kind in allKinds">
+                                        <router-link tag="a" :to="{name: 'categoryKind', params: {id: kind.id}}">{{ kind.name }}</router-link>
+                                    </li>
                                 </ul>
                             </li>
-                            <li><a href="artist.html">artist</a>
-                                <ul class="sub-menu children">
-                                    <li><a href="artist.html">artist</a></li>
-                                    <li><a href="artist-blog.html">artist 02</a></li>
-                                    <li><a href="event-organiser.html">artist 03</a></li>
-                                    <li><a href="dj.html">dj</a></li>
+                            <li class="menu-item">
+                                <router-link tag="a" :to="{name: 'categoryRegion', params: {id: 'all'}}">{{ $t('home.region') }}</router-link>
+                                <ul class="dl-submenu">
+                                    <li v-for="region in allRegions">
+                                        <router-link tag="a" :to="{name: 'categoryRegion', params: {id: region.id}}">{{ region.name }}</router-link>
+                                    </li>
                                 </ul>
                             </li>
-                            <li class="menu-item ">
-                                <a href="#">event</a>
-                                <ul class="sub-menu children">
+                            <li class="menu-item">
+                                <a @click.prevent>{{ $t('home.ranking') }}</a>
+                                <ul class="dl-submenu">
                                     <li>
                                         <a href="event-list.html">event list</a>
                                     </li>
-                                    <li>
-                                        <a href="event-list-2.html">event list 02</a>
-                                    </li>
-                                    <li>
-                                        <a href="event-list-3.html">event list 03</a>
-                                    </li>
-                                    <li>
-                                        <a href="event-detail.html">event detail</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="menu-item "><a href="#">music</a>
-                                <ul class="sub-menu children">
-                                    <li>
-                                        <a href="dj.html">dj</a>
-                                    </li>
-                                    <li>
-                                        <a href="video.html">video</a>
-                                    </li>
-                                    <li>
-                                        <a href="video-list.html">video list</a>
-                                    </li>
-                                    <li>
-                                        <a href="video-detail.html">video detail</a>
-                                    </li>
-                                    <li>
-                                        <a href="mp3-list.html">mp3 list</a>
-                                    </li>
-                                    <li>
-                                        <a href="music-artist-albums.html">music artist albums</a>
-                                    </li>
-                                    <li>
-                                        <a href="music-albums.html">music albums</a>
-                                    </li>
-                                    <li>
-                                        <a href="masonry-gallary.html">masonry gallary</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="menu-item "><a href="#">blog</a>
-                                <ul class="sub-menu children">
-                                    <li>
-                                        <a href="blog-detail.html">blog detail</a>
-                                    </li>
-                                    <li>
-                                        <a href="blog-detail-leftsidebar.html">blog left sidebar</a>
-                                    </li>
-                                    <li>
-                                        <a href="blog-right-sidebar.html">blog right sidebar</a>
-                                    </li>
-                                    <li>
-                                        <a href="blog-full.html">blog full</a>
-                                    </li>
-                                    <li>
-                                        <a href="blog-medium.html">blog medium</a>
-                                    </li>
-                                    <li>
-                                        <a href="blog-small.html">blog small</a>
-                                    </li>
-                                    <li>
-                                        <a href="masonry-blog.html">masonry small</a>
-                                    </li>
                                 </ul>
                             </li>
                             <li class="menu-item ">
-                                <a href="">page</a>
-                                <ul class="sub-menu children">
-                                    <li>
-                                        <a href="shop.html">shop</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop-items.html">shop items</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop-listing.html">shop listing</a>
-                                    </li>
-                                    <li>
-                                        <a href="headers.html">headers</a>
+                                <router-link tag="a" :to="{name: 'searchArtist'}">{{ $t('artist.name') }}</router-link>
+                            </li>
+                            <li class="menu-item ">
+                                <router-link tag="a" :to="{name: 'categoryTopic', params: {id: 'all'}}">{{ $t('home.topic') }}</router-link>
+                                <ul class="dl-submenu">
+                                    <li v-for="topic in allTags">
+                                        <router-link tag="a" :to="{name: 'categoryTopic', params: {id: topic.id}}">{{ topic.name }}</router-link>
                                     </li>
                                 </ul>
                             </li>
-                            <li><a href="contact-us.html">contact us</a></li>
+                            <li><a href="#">Liên hệ</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -304,14 +182,39 @@
     import {mapActions} from 'vuex'
 
     export default {
+        data() {
+            return {
+                keyword: '',
+            }
+        },
         computed: {
-            ...mapGetters(['authenticated', 'user'])
+            ...mapGetters([
+                'authenticated',
+                'user',
+                'allRegions',
+                'allKinds',
+                'allTags'
+            ])
         },
         methods: {
-            ...mapActions(['getAuth', 'logout'])
+            ...mapActions(['getAuth', 'logout', 'getAllCategories']),
+            search() {
+                if (this.keyword) {
+                    this.$router.push({
+                        name: 'search',
+                        query: {
+                            keyword: this.keyword
+                        }
+                    })
+                }
+            }
         },
         created() {
             this.getAuth();
+
+            this.getAllCategories(window.Laravel.setting.category_type.region);
+            this.getAllCategories(window.Laravel.setting.category_type.kind);
+            this.getAllCategories(window.Laravel.setting.category_type.tag);
         }
     }
 </script>

@@ -9,8 +9,8 @@ return [
         ],
         'role' => [
             'admin' => 1,
-            'artist' => 2,
-            'member' => 3,
+            'member' => 2,
+            'artist' => 3,
         ],
         'status' => [
             'active' => 1,

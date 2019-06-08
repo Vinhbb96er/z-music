@@ -241,15 +241,19 @@ class MediaController extends BaseApiController
     public function upViewMedia(Request $request, $id)
     {
         try {
-            $type = $request->type;
+            $media = $this->mediaRepository->upViewMedia($id);
+            $albumsView = $request->albumsView;
+            $album = $this->albumRepository->upViewAlbum($media, $albumsView);
 
-            if ($type == config('setting.album.media_type')) {
-                $data = $this->albumRepository->upViewAlbum($id);
-            } else {
-                $data = $this->mediaRepository->upViewMedia($id);
+            if ($album) {
+                $albumsView[] = $album->id;
             }
 
-            return response()->json($data, Response::HTTP_OK);
+            return response()->json([
+                'media' => $media->views,
+                'album' => $album ? $album->views : null,
+                'albumsView' => $albumsView
+            ], Response::HTTP_OK);
         } catch (Exception $e) {
             report($e);
 
@@ -423,12 +427,99 @@ class MediaController extends BaseApiController
         }
     }
 
+    public function comment(Request $request)
+    {
+        try {
+            $params = $request->only(
+                'type',
+                'id',
+                'content',
+                'reply_id'
+            );
+
+            if ($params['type'] == config('setting.album.media_type')) {
+                $this->albumRepository->comment($params);
+            } else {
+                $this->mediaRepository->comment($params);
+            }
+
+            return response()->json(true, Response::HTTP_OK);
+        } catch (Exception $e) {
+            report($e);
+
+            return response()->json(false, Response::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function report(Request $request)
+    {
+        try {
+            $params = $request->only(
+                'type',
+                'id',
+                'content'
+            );
+
+            if ($params['type'] == config('setting.album.media_type')) {
+                // $this->albumRepository->report($params);
+            } else {
+                $this->mediaRepository->report($params);
+            }
+
+            return response()->json(true, Response::HTTP_OK);
+        } catch (Exception $e) {
+            report($e);
+
+            return response()->json(false, Response::HTTP_NOT_FOUND);
+        }
+    }
+
     public function download(Request $request, $id)
     {
         try {
             $data = $this->mediaRepository->getMedia($id);
 
             return response()->json($data->url, Response::HTTP_OK);
+        } catch (Exception $e) {
+            report($e);
+
+            return response()->json(false, Response::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function addFavouriteList(Request $request, $id)
+    {
+        try {
+            $this->mediaRepository->addFavouriteList(Auth::user(), $id);
+
+            return response()->json(true, Response::HTTP_OK);
+        } catch (Exception $e) {
+            report($e);
+
+            return response()->json(false, Response::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function removeFavouriteList(Request $request, $id)
+    {
+        try {
+            $this->mediaRepository->removeFavouriteList(Auth::user(), $id);
+
+            return response()->json(true, Response::HTTP_OK);
+        } catch (Exception $e) {
+            report($e);
+
+            return response()->json(false, Response::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function getFavouriteList(Request $request)
+    {
+        try {
+            ;
+            $data = $this->mediaRepository->getFavouriteList(Auth::user(), $request->size);
+
+            return response()->json($data, Response::HTTP_OK);
         } catch (Exception $e) {
             report($e);
 

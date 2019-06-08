@@ -5,26 +5,41 @@
     <div class="panel">
       <div class="panel-body">
       <div class="col-md-12 padding-0" style="padding-bottom:20px;">
-        <div class="col-md-6" style="padding-left:10px;">
-            <Button class="btn btn-danger block-all"
-                data-url=""
+        <div class="col-md-4" style="padding-left:10px;">
+            <Button class="btn btn-success change-user-status"
                 data-msg="">
-                @lang('admin.block_all')
+                Thay đổi trạng thái
             </Button>
-            <Button class="btn btn-success active-all"
-                data-url=""
+            <Button class="btn btn-info change-user-role"
                 data-msg="">
-                @lang('admin.active_all')
+                Thay đổi quyền
             </Button>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-8">
              <div class="col-lg-12">
-                <div class="input-group">
-                    <input type="text" class="form-control" aria-label="...">
-                    <div class="input-group-btn">
-                        <button type="button" class="btn btn-default">@lang('admin.search')</button>
-                    </div><!-- /btn-group -->
-                </div><!-- /input-group -->
+                {{ @Form::open(['route' => 'user.index', 'method' => 'GET']) }}
+                    <div class="input-group" style="float: left; margin-right: 5px;">
+                        {{ Form::select('role', [
+                            0 => 'All',
+                            1 => 'Admin',
+                            2 => 'Member',
+                            3 => 'Artist'
+                        ], Request::get('role')) }}
+                    </div>
+                    <div class="input-group" style="float: left; margin-right: 5px;">
+                        {{ Form::select('status', [
+                            0 => 'All',
+                            1 => 'Active',
+                            2 => 'Block',
+                        ], Request::get('status')) }}
+                    </div>
+                    <div class="input-group">
+                        <input name="keyword" type="text" class="form-control" aria-label="..." value="{{ Request::get('keyword') }}">
+                        <div class="input-group-btn">
+                            <button type="submit" class="btn btn-default">@lang('admin.search')</button>
+                        </div><!-- /btn-group -->
+                    </div><!-- /input-group -->
+                {{ @Form::close() }}
               </div><!-- /.col-lg-6 -->
         </div>
      </div>
@@ -62,11 +77,27 @@
                     </th>
                     <th>{{ $user->email }}</th>
                     <th><img src="{{ $user->avatar }}" width="50px"></th>
-                    <th>{{ $user->role->name }}</th>
                     <th>
-                        <span class="status-label label-{{ $user->status }}">
-                            {{ $user->status_text }}
-                        </span>
+                        {{ Form::select('role', [
+                            1 => 'Admin',
+                            2 => 'Member',
+                            3 => 'Artist'
+                        ], $user->role_id, [
+                            'class' => 'user-role',
+                            'data-old' => $user->role,
+                            'data-user' => $user->id
+                        ]) }}
+                    </th>
+                    <th>
+                        {{ Form::select('status', [
+                            1 => 'Active',
+                            2 => 'Block',
+                            3 => 'InActive',
+                        ], $user->status, [
+                            'class' => 'user-status',
+                            'data-old' => $user->status,
+                            'data-user' => $user->id
+                        ]) }}
                     </th>
                 </tr>
             @empty

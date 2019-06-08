@@ -1,37 +1,35 @@
 <template>
-    <div class="widget widget-recent-post video-ranking-element">
+    <div class="widget widget-recent-post video-ranking-element" v-if="videoRanking.data">
         <!--Heading Start-->
         <div class="msl-black">
             <div class="msl-heading light-color ranking-header-title">
                 <h5>
                     <span>
-                        <a href="#">
-                            {{ $t('music_video.video_ranking') }}
-                        </a>
+                        <router-link tag="a" :to="{name: 'videoRanking'}">{{ $t('music_video.video_ranking') }}</router-link>
                     </span>
                 </h5>
             </div>
         </div>
         <!--Heading End-->
         <!--Featured Thumb List Start-->
-        <router-link class="msl-featured-thumb video-list-thumb" v-if="videoRanking.length" tag="div" :to="{name: 'videoDetail', params: {id: videoRanking[0].id}}">
+        <router-link class="msl-featured-thumb video-list-thumb" tag="div" :to="{name: 'videoDetail', params: {id: videoRanking.data[0].id}}">
             <figure>
-                <img src="#" class="backgroud-image-show" :style="{backgroundImage: `url(${videoRanking[0].cover_image})`}">
+                <img src="#" class="backgroud-image-show" :style="{backgroundImage: `url(${videoRanking.data[0].cover_image})`}">
                 <a class="video-play" href="#"><i class="icon-multimedia-1"></i></a>
                 <span class="number">1</span>
                 <div class="text">
                     <!--Featured Title Start-->
                     <h4 class="featured-title">
-                        <router-link tag="a" :to="{name: 'videoDetail', params: {id: videoRanking[0].id}}">
-                            {{ videoRanking[0].name }}
+                        <router-link tag="a" :to="{name: 'videoDetail', params: {id: videoRanking.data[0].id}}">
+                            {{ videoRanking.data[0].name }}
                         </router-link>
                     </h4>
                     <!--Featured Title End-->
                     <!--Featured Meta Start-->
                     <div class="blog-post-meta">
                         <div class="blog-info blog-admin">
-                            <router-link tag="a" :to="{name: 'profileShow', params: {id: videoRanking[0].user.id}}">
-                                {{ videoRanking[0].user.name }}
+                            <router-link tag="a" :to="{name: 'profileShow', params: {id: videoRanking.data[0].user.id}}">
+                                {{ videoRanking.data[0].user.name }}
                             </router-link>
                         </div>
                     </div>
@@ -84,7 +82,7 @@
         computed: {
             ...mapGetters(['videoRanking']),
             videoRankingSlice() {
-                return this.videoRanking.slice(1);
+                return this.videoRanking.data.slice(1);
             }
         },
         methods: {

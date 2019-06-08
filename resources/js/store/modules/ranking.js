@@ -1,10 +1,11 @@
 import {get, makePathByParams} from '../../api/base_api.js'
 
 const state = {
-    musicRanking: [],
-    videoRanking: [],
-    albumRanking: [],
-    artistRanking: [],
+    musicRanking: {},
+    videoRanking: {},
+    albumRanking: {},
+    artistRanking: {},
+    weekRankings: []
 }
 
 const getters = {
@@ -19,6 +20,9 @@ const getters = {
     },
     artistRanking(state) {
         return state.artistRanking;
+    },
+    weekRankings(state) {
+        return state.weekRankings;
     }
 }
 
@@ -34,6 +38,9 @@ const mutations = {
     },
     setArtistRanking(state, payload) {
         state.artistRanking = payload;
+    },
+    setWeekRankings(state, payload) {
+        state.weekRankings = payload;
     }
 }
 
@@ -42,7 +49,7 @@ const actions = {
         return new Promise((resolve, reject) => {
             get(makePathByParams('ranking/media', data))
                 .then(res => {
-                    commit('setMusicRanking', res.data.data);
+                    commit('setMusicRanking', res.data);
                 })
                 .catch(err => {
                     reject(err)
@@ -53,7 +60,7 @@ const actions = {
         return new Promise((resolve, reject) => {
             get(makePathByParams('ranking/media', data))
                 .then(res => {
-                    commit('setVideoRanking', res.data.data);
+                    commit('setVideoRanking', res.data);
                 })
                 .catch(err => {
                     reject(err)
@@ -64,7 +71,7 @@ const actions = {
         return new Promise((resolve, reject) => {
             get(makePathByParams('ranking/media', data))
                 .then(res => {
-                    commit('setAlbumRanking', res.data.data);
+                    commit('setAlbumRanking', res.data);
                 })
                 .catch(err => {
                     reject(err)
@@ -76,6 +83,17 @@ const actions = {
             get(makePathByParams('ranking/artist', data))
                 .then(res => {
                     commit('setArtistRanking', res.data.data);
+                })
+                .catch(err => {
+                    reject(err)
+                });
+        });
+    },
+    getWeekRankings({commit}, data) {
+        return new Promise((resolve, reject) => {
+            get(makePathByParams('ranking/week-ranking', data))
+                .then(res => {
+                    commit('setWeekRankings', res.data);
                 })
                 .catch(err => {
                     reject(err)

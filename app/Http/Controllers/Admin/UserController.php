@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\User\UserInterface;
+use DB;
 
 class UserController extends Controller
 {
@@ -20,11 +21,14 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         try {
             $users = $this->userRepository->search([
-                'eagle_loading' => ['role']
+                'eagle_loading' => ['role'],
+                'keyword' => $request->keyword,
+                'status' => $request->status,
+                'role' => $request->role,
             ]);
 
             return view('users.index', compact('users'));
@@ -97,5 +101,75 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function changeStatus(Request $request)
+    {
+        if (!$request->ajax()) {
+            return response()->json([
+                'success' => false,
+            ]);
+        }
+
+        DB::beginTransaction();
+
+        try {
+            $data = $request->userData;
+
+            foreach ($data as $user) {
+                \App\Models\User::where('id', $user['id'])->update([
+                    'status' => $user['status']
+                ]);
+            }
+            DB::commit();
+
+            $result = true;
+            $message = 'Thành công';
+        } catch (Exception $e) {
+            DB::rollback();
+            report($e);
+            $result = false;
+            $message = 'Thất bại! Hãy thử lại';
+        }
+
+        return response()->json([
+            'success' => $result,
+            'message' => $message,
+        ]);
+    }
+
+    public function changeRole(Request $request)
+    {
+        if (!$request->ajax()) {
+            return response()->json([
+                'success' => false,
+            ]);
+        }
+
+        DB::beginTransaction();
+
+        try {
+            $data = $request->userData;
+
+            foreach ($data as $user) {
+                \App\Models\User::where('id', $user['id'])->update([
+                    'role_id' => $user['role']
+                ]);
+            }
+            DB::commit();
+
+            $result = true;
+            $message = 'Thành công';
+        } catch (Exception $e) {
+            DB::rollback();
+            report($e);
+            $result = false;
+            $message = 'Thất bại! Hãy thử lại';
+        }
+
+        return response()->json([
+            'success' => $result,
+            'message' => $message,
+        ]);
     }
 }

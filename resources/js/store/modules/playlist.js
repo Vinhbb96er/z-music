@@ -11,7 +11,8 @@ const state = {
     isPlaying: false,
     checkPlayingThisMusic: false,
     isView: false,
-    startPlay: 0
+    startPlay: 0,
+    albumsView: []
 }
 
 const getters = {
@@ -106,13 +107,18 @@ const actions = {
                 state.isView = false;
                 var currentPlaying = state.playlist[state.playingIndex];
 
-                dispatch('upViewMedia', currentPlaying.id, {root: true})
+                dispatch('upViewMedia', {id: currentPlaying.id, albumsView: state.albumsView}, {root: true})
                     .then(function (value) {
-                        currentPlaying.views = value;
+                        currentPlaying.views = value.media;
+                        state.albumsView = value.albumsView;
                         let mediaDetail = rootState.Media.mediaDetailData;
 
-                        if (mediaDetail && mediaDetail.id == currentPlaying.id) {
-                            mediaDetail.views = value;
+                        if (mediaDetail) {
+                            if (mediaDetail.media && value.album) {
+                                mediaDetail.views = value.album;
+                            } else if (mediaDetail.id == currentPlaying.id) {
+                                mediaDetail.views = value.media;
+                            }
                         }
                     });
             }
@@ -206,6 +212,9 @@ const actions = {
         if (index == state.playingIndex) {
             dispatch('playMusic', state.playingIndex);
         }
+    },
+    removeAll({commit, dispatch, state}, index) {
+        state.playlist = [];
     },
     pauseMusic({commit, state}) {
         state.audio.pause();

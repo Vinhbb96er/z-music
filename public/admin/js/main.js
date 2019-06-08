@@ -232,7 +232,7 @@
               top: y+'px',
               left:x+'px',
             }).addClass("animate");
-                
+
             rippler.css({'z-index':9999});
             rippler.animate({
               backgroundColor: "#FF6656",
@@ -245,7 +245,7 @@
                 $("#mimin-mobile-menu-opener span").removeClass("fa-bars").addClass("fa-close").css({"font-size":"2em"});
               });
         }else{
-            
+
                 if(rippler.find(".ink").length == 0) {
                   rippler.append("<div class='ink'></div>");
                 }
@@ -304,8 +304,8 @@
 
     $(".fileupload-v1-btn").on("click",function(){
       var wrapper = $(this).parent("span").parent("div");
-      var path    = wrapper.find($(".fileupload-v1-path"));   
-      $(".fileupload-v1-file").click();   
+      var path    = wrapper.find($(".fileupload-v1-path"));
+      $(".fileupload-v1-file").click();
       $(".fileupload-v1-file").on("change",function(){
           path.attr("placeholder",$(this).val());
           console.log(wrapper);
@@ -399,6 +399,141 @@ $(document).ready(function(){
                 method: 'POST',
                 data: {
                     dataId: dataId
+                }
+            }).done(function (data) {
+                if (data.success) {
+                    alertSuccess({message: data.message}, function () {
+                        location.reload();
+                    });
+                } else {
+                    alertDanger({message: data.message}, function () {
+                        location.reload();
+                    });
+                }
+            });
+        });
+    });
+
+    $(document).on('change', '.user-status', function () {
+        if ($(this).val() == $(this).data('old')) {
+            $(this).removeClass('changed');
+        } else {
+            $(this).addClass('changed');
+        }
+    });
+
+    $(document).on('change', '.media-status', function () {
+        if ($(this).val() == $(this).data('old')) {
+            $(this).removeClass('changed');
+        } else {
+            $(this).addClass('changed');
+        }
+    });
+
+    $('.change-media-status').on('click', function () {
+        var data = [];
+
+        $('select.media-status.changed').each(function () {
+            data.push({
+                id: $(this).data('media'),
+                status: $(this).val()
+            })
+        });
+
+        if (!data.length) {
+            alertWarning({message: 'Bạn chưa thay đổi trạng thái nào!'});
+
+            return false;
+        }
+
+        confirmInfo({message: 'Bạn có chắc chắn muốn thay đổi tất cả trạng thái này?'}, function () {
+            $.ajax({
+                url: '/ajax/media/change-status',
+                method: 'POST',
+                data: {
+                    mediaData: data
+                }
+            }).done(function (data) {
+                if (data.success) {
+                    alertSuccess({message: data.message}, function () {
+                        location.reload();
+                    });
+                } else {
+                    alertDanger({message: data.message}, function () {
+                        location.reload();
+                    });
+                }
+            });
+        });
+    });
+
+    $('.change-user-status').on('click', function () {
+        var data = [];
+
+        $('select.user-status.changed').each(function () {
+            data.push({
+                id: $(this).data('user'),
+                status: $(this).val()
+            })
+        });
+
+        if (!data.length) {
+            alertWarning({message: 'Bạn chưa thay đổi trạng thái nào!'});
+
+            return false;
+        }
+
+        confirmInfo({message: 'Bạn có chắc chắn muốn thay đổi tất cả trạng thái này?'}, function () {
+            $.ajax({
+                url: '/ajax/user/change-status',
+                method: 'POST',
+                data: {
+                    userData: data
+                }
+            }).done(function (data) {
+                if (data.success) {
+                    alertSuccess({message: data.message}, function () {
+                        location.reload();
+                    });
+                } else {
+                    alertDanger({message: data.message}, function () {
+                        location.reload();
+                    });
+                }
+            });
+        });
+    });
+
+    $(document).on('change', '.user-role', function () {
+        if ($(this).val() == $(this).data('old')) {
+            $(this).removeClass('changed');
+        } else {
+            $(this).addClass('changed');
+        }
+    });
+
+    $('.change-user-role').on('click', function () {
+        var data = [];
+
+        $('select.user-role.changed').each(function () {
+            data.push({
+                id: $(this).data('user'),
+                role: $(this).val()
+            })
+        });
+
+        if (!data.length) {
+            alertWarning({message: 'Bạn chưa thay đổi quyền nào!'});
+
+            return false;
+        }
+
+        confirmInfo({message: 'Bạn có chắc chắn muốn thay đổi tất cả quyền của các người thành viên này?'}, function () {
+            $.ajax({
+                url: '/ajax/user/change-role',
+                method: 'POST',
+                data: {
+                    userData: data
                 }
             }).done(function (data) {
                 if (data.success) {

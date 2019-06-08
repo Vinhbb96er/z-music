@@ -25,7 +25,7 @@
                                     <span>{{ comment.created_at }}</span>
                                 </div>
                                 <p>{{ comment.content }}</p>
-                                <a class="comment-reply-link" href="#">Reply</a>
+                                <a role="button" class="comment-reply-link" @click.prevent="replyComment(comment.id, comment.user.name)">Trả lời</a>
                             </div>
                         </div>
                         <!-- Kode Comment Form End -->
@@ -47,8 +47,8 @@
                                             </h5>
                                             <span>{{ reply.created_at }}</span>
                                         </div>
-                                        <p>reply.content</p>
-                                        <a class="comment-reply-link" href="#">Reply</a>
+                                        <p>{{ reply.content }}</p>
+                                        <a role="button" class="comment-reply-link" @click.prevent="replyComment(comment.id, reply.user.name)">Trả lời</a>
                                     </div>
                                 </div>
                                 <!-- Kode Comment Form End -->
@@ -68,12 +68,18 @@
             <!--Heading End-->
             <p></p>
             <form method="post" id="commentform" class="comment-form light_bg">
-                <figure class="backgroud-image-show" style="background-image: url(https://lorempixel.com/100/100/?50171);"></figure>
+                <figure class="backgroud-image-show" :style="{backgroundImage: `url(${authenticated ? user.avatar : '/frontend/images/user_avatar_default.png'})`}"></figure>
                 <div class="kode-textarea">
-                    <textarea placeholder="Type Your Comments" name="comment"></textarea>
+                    <div class="reply-content" v-if="reply_id">
+                        Trả lời: <strong>@{{ reply_name }}</strong>
+                        <button class="btn btn-danger btn-sm" @click="clearReply">
+                            <i class="fa fa-close"></i>
+                        </button>
+                    </div>
+                    <textarea placeholder="Type Your Comments" name="comment" v-model="commentContent" id="comment"></textarea>
                     <div class="btn-comment-group">
-                        <button type="reset"  class="submit btn-1 theme-bg">{{ $t('button.cancel') }}</button>
-                        <button type="reset"  class="submit btn-1 btn-comment">{{ $t('button.comment') }}</button>
+                        <button type="reset" @click="clearComment" class="submit btn-1 theme-bg">{{ $t('button.cancel') }}</button>
+                        <button @click.prevent="submitComment" class="submit btn-1 btn-comment">{{ $t('button.comment') }}</button>
                     </div>
                 </div>
             </form>
@@ -91,6 +97,10 @@
             return {
                 type: window.Laravel.setting.media.type.video,
                 id: this.$route.params.id,
+                commentContent: '',
+                page: 1,
+                reply_id: 0,
+                reply_name: ''
             }
         },
         components: {
@@ -109,17 +119,54 @@
         },
         computed: {
             ...mapGetters({
-                commentData: 'mediaComments'
+                commentData: 'mediaComments',
+                authenticated: 'authenticated',
+                user: 'user'
             })
         },
         methods: {
-            ...mapActions(['getMediaComments']),
+            ...mapActions(['getMediaComments', 'commentMedia']),
             loadComment(page) {
+                this.page = page;
                 this.getMediaComments({
                     type: this.type,
                     id: this.id,
                     page: page
                 });
+            },
+            submitComment() {
+                if (!this.authenticated) {
+                    $('#login-register1').modal('show');
+
+                    return;
+                }
+
+                confirmInfo({message: 'Bạn có chắc chắn muốn bình luận không'}, () => {
+                    this.commentMedia({
+                        type: this.type,
+                        id: this.id,
+                        content: this.commentContent,
+                        reply_id: this.reply_id,
+                        page: this.page
+                    }).then(res => {
+                        this.clearComment();
+                    }).catch(err => {
+                        reject(err);
+                    });
+                });
+            },
+            replyComment(id, name) {
+                this.reply_id = id;
+                this.reply_name = name;
+                $('#comment').focus();
+            },
+            clearReply() {
+                this.reply_id = 0,
+                this.reply_name = '';
+            },
+            clearComment() {
+                this.commentContent = '';
+                this.clearReply();
             }
         },
         created() {

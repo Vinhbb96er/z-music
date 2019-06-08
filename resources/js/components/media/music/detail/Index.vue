@@ -51,8 +51,9 @@
                     <a class="btn-1 theme-bg" href="#" @click.prevent="downloadMedia(id)">
                         <i class="fa fa-download"></i>{{ $t('playlist.download') }}
                     </a>
-                    <a class="btn-1 theme-bg" href="#"><i class="fa fa-plus"></i>{{ $t('playlist.add_my_favourite') }}</a>
-                    <a class="btn-1 theme-bg" href="#"><i class="fa fa-flag-o"></i>{{ $t('playlist.report') }}</a>
+                    <a class="btn-1 theme-bg" href="#" @click.prevent="addFavouriteList(id)"><i class="fa fa-plus"></i>{{ $t('playlist.add_my_favourite') }}</a>
+                    <a class="btn-1 theme-bg" data-toggle="modal" data-target="#report-form">
+                        <i class="fa fa-flag-o"></i>{{ $t('playlist.report') }}</a>
                 </div>
                 <!--Music Album Wrap Start-->
             </div>
@@ -88,12 +89,14 @@
                 </div>
             </section>
         </div>
+        <report-form :reportFunc="reportFunc"></report-form>
     </div>
 </template>
 <script>
     import MusicDescription from './Description.vue'
     import MusicComment from './Comment.vue'
     import MusicSuggest from './Suggest.vue'
+    import ReportForm from './../../../layouts/partials/ReportForm.vue'
 
     import {mapGetters} from 'vuex'
     import {mapActions} from 'vuex'
@@ -106,13 +109,14 @@
                 id: this.$route.params.id,
                 images: {
                     music_playing: window.Laravel.setting.images.music_playing
-                }
+                },
             }
         },
         components: {
             MusicDescription,
             MusicComment,
-            MusicSuggest
+            MusicSuggest,
+            ReportForm
         },
         watch: {
             '$route'(to, from) {
@@ -138,8 +142,17 @@
                 'playingMusic',
                 'pauseMusic',
                 'likeMedia',
-                'downloadMedia'
-            ])
+                'downloadMedia',
+                'addFavouriteList',
+                'reportMedia'
+            ]),
+            reportFunc(content) {
+                this.reportMedia({
+                    type: this.type,
+                    id: this.id,
+                    content: content
+                })
+            }
         },
         created() {
             this.getMediaDetail({

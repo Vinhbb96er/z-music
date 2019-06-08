@@ -38,6 +38,11 @@ class Album extends Model
         return $this->morphMany(Comment::class, 'commentable');
     }
 
+    public function weekyViews()
+    {
+        return $this->morphMany(WeekyView::class, 'weeky_viewable');
+    }
+
     public function reports()
     {
         return $this->morphMany(Report::class, 'reportable');

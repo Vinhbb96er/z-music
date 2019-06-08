@@ -36,6 +36,11 @@ import CategoryTopicMusic from '../components/category/topic/Music.vue'
 import CategoryTopicVideo from '../components/category/topic/Video.vue'
 import CategoryTopicAlbum from '../components/category/topic/Album.vue'
 
+// import Ranking from '../components/ranking/Index.vue'
+import MusicRanking from '../components/ranking/Music.vue'
+import VideoRanking from '../components/ranking/Video.vue'
+import AlbumRanking from '../components/ranking/Album.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -210,6 +215,21 @@ const routes = [
         path: '/category/topic/:id/album',
         component: CategoryTopicAlbum,
         name: 'categoryTopicAlbum'
+    },
+    {
+        path: '/rank/music',
+        component: MusicRanking,
+        name: 'musicRanking'
+    },
+    {
+        path: '/rank/video',
+        component: VideoRanking,
+        name: 'videoRanking'
+    },
+    {
+        path: '/rank/album',
+        component: AlbumRanking,
+        name: 'albumRanking'
     }
 ];
 

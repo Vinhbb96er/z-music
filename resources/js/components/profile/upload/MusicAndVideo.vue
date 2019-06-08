@@ -78,7 +78,7 @@
                 <span class="error"></span>
             </div>
             <div class="btn-comment-group">
-                <button type="reset" class="submit btn-1 theme-bg btn-reset">{{ $t('button.cancel') }}</button>
+                <button type="reset" class="submit btn-1 theme-bg btn-reset" @click="clearData">{{ $t('button.cancel') }}</button>
                 <button type="submit" class="submit btn-1 btn-comment">{{ $t('button.upload') }}</button>
             </div>
         </div>

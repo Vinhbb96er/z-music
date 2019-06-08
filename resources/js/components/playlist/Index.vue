@@ -29,11 +29,16 @@
                                 <i role="button" class="fa fa-retweet"></i>
                             </a>
                         </li>
-                        <li>
+                        <li @click.prevent="removeAll">
+                            <a href="#" :title="$t('playlist.search')">
+                                <i role="button" class="fa fa-trash"></i>
+                            </a>
+                        </li>
+                        <!-- <li>
                             <a href="#" :title="$t('playlist.search')">
                                 <i role="button" class="fa fa-search"></i>
                             </a>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
                 <hr />
@@ -61,14 +66,14 @@
                                         </router-link>
                                         <span class="btn-open-menu btn-action"><i role="button" class="fa fa-bars"></i></span>
                                         <ul class="menu-content text-left">
-                                            <li>
-                                                <a class="">
+                                            <li @click.prevent="addFavouriteList(music.id)">
+                                                <a class="" @click.prevent>
                                                     <i class="fa fa-plus"></i>
                                                     {{ $t('playlist.add_my_favourite') }}
                                                 </a>
                                             </li>
-                                            <li>
-                                                <a class="">
+                                            <li @click.prevent="downloadMedia(music.id)">
+                                                <a class="" @click.prevent>
                                                    <i class="fa fa-download"></i> {{ $t('playlist.download') }}
                                                 </a>
                                             </li>
@@ -127,7 +132,7 @@
                             <i role="button" class="fa fa-plus"></i>
                         </a>
                     </li>
-                    <li>
+                    <li @click.prevent="downloadMedia(music.id)">
                         <a role="button">
                             <i role="button" class="fa fa-download"></i>
                         </a>
@@ -195,7 +200,10 @@
                 'playMusic',
                 'nextMusic',
                 'prevMusic',
-                'removeMusicFromPlaylist'
+                'removeMusicFromPlaylist',
+                'downloadMedia',
+                'addFavouriteList',
+                'removeAll'
             ]),
             clickPlayMusic(index) {
                 if (index !== this.playingIndex) {

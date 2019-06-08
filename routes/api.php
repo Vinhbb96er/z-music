@@ -33,6 +33,7 @@ Route::group(['namespace' => 'Api'], function () {
 
     Route::get('/ranking/media', 'RankingController@getRankingMedia');
     Route::get('/ranking/artist', 'RankingController@getRankingArtist');
+    Route::get('/ranking/week-ranking', 'RankingController@getWeekRankings');
 
     Route::get('profile/{id}', 'ProfileController@show');
 
@@ -46,6 +47,11 @@ Route::group(['namespace' => 'Api'], function () {
 
         Route::post('/media', 'MediaController@store');
         Route::post('/media/like', 'MediaController@like');
+        Route::post('/media/comment', 'MediaController@comment');
+        Route::post('/media/report', 'MediaController@report');
+        Route::post('/media/{id}/add-favourite', 'MediaController@addFavouriteList');
+        Route::post('/media/{id}/remove-favourite', 'MediaController@removeFavouriteList');
+        Route::get('/media/favourite-list', 'MediaController@getFavouriteList');
     });
 
     Route::middleware('jwt.refresh')->get('/token/refresh', 'AuthController@refresh');

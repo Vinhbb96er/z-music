@@ -20,9 +20,9 @@
                         <router-link tag="a" :to="{name: 'profileShow', params: {id: artist.id}}">
                             {{ artist.name }}
                         </router-link>
-                        <button class="btn btn-success btn-follow" v-if="!checkIsAuthUser(artist.id)">
+                        <!-- <button class="btn btn-success btn-follow" v-if="!checkIsAuthUser(artist.id)">
                             {{ $t('button.follow') }}
-                        </button>
+                        </button> -->
                     </h6>
                 </div>
             </div>

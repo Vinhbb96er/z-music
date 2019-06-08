@@ -49,6 +49,7 @@ const actions = {
                 .then((res) => {
                     commit('setAuthenticated', res.data);
                     resolve(state.authenticated);
+                    location.reload();
                 })
                 .catch((err) => {
                     reject(err);

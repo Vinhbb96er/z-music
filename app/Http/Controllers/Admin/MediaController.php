@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\Media\MediaInterface;
+use DB;
 
 class MediaController extends Controller
 {
@@ -20,17 +21,18 @@ class MediaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         try {
             $mediaData = $this->mediaRepository->search([
                 'eagle_loading' => ['user'],
-                'with_count' => ['likes']
+                'with_count' => ['likes'],
+                'keyword' => $request->keyword,
+                'status' => $request->status
             ]);
 
             return view('media.index', compact('mediaData'));
         } catch (Exception $e) {
-            dd($e);
             abort(404);
         }
     }
@@ -100,4 +102,57 @@ class MediaController extends Controller
     {
         //
     }
+
+    public function changeStatus(Request $request)
+    {
+        if (!$request->ajax()) {
+            return response()->json([
+                'success' => false,
+            ]);
+        }
+
+        DB::beginTransaction();
+
+        try {
+            $data = $request->mediaData;
+
+            foreach ($data as $media) {
+                \App\Models\Media::where('id', $media['id'])->update([
+                    'status' => $media['status']
+                ]);
+            }
+            DB::commit();
+
+            $result = true;
+            $message = 'Thành công';
+        } catch (Exception $e) {
+            DB::rollback();
+            report($e);
+            $result = false;
+            $message = 'Thất bại! Hãy thử lại';
+        }
+
+        return response()->json([
+            'success' => $result,
+            'message' => $message,
+        ]);
+    }
+
+    public function getReport(Request $request)
+    {
+        try {
+            $mediaData = $this->mediaRepository->search([
+                'eagle_loading' => ['user'],
+                'with_count' => ['likes'],
+                'keyword' => $request->keyword,
+                'status' => $request->status,
+                'report' => true,
+            ]);
+
+            return view('media.report', compact('mediaData'));
+        } catch (Exception $e) {
+            abort(404);
+        }
+    }
+
 }

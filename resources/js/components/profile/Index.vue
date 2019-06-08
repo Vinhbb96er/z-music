@@ -39,9 +39,14 @@
                         <li @click.prevent="tabName = 'Album'" :class="{active: tabName == 'Album'}">
                             <a href="#">{{ $t('album.name') }}</a>
                         </li>
-                        <li @click.prevent="tabName = 'Create'" :class="{active: tabName == 'Create'}">
-                            <a href="#">Upload</a>
-                        </li>
+                        <template v-if="user && user.id == profileData.id">
+                            <li @click.prevent="tabName = 'FavouriteList'" :class="{active: tabName == 'FavouriteList'}" >
+                                <a href="#">Danh sách yêu thích</a>
+                            </li>
+                            <li @click.prevent="tabName = 'Create'" :class="{active: tabName == 'Create'}">
+                                <a href="#">Upload</a>
+                            </li>
+                        </template>
                     </ul>
                 </div>
                 <!--Music Album Wrap End-->
@@ -72,6 +77,7 @@
     import Album from './Album.vue'
     import ArtistSuggest from './Suggest.vue'
     import Create from './upload/Create.vue'
+    import FavouriteList from './FavouriteList.vue'
 
     import {mapGetters} from 'vuex'
     import {mapActions} from 'vuex'
@@ -93,7 +99,8 @@
             Music,
             Video,
             Album,
-            Create
+            Create,
+            FavouriteList
         },
         watch: {
             '$route'(to, from) {
@@ -142,5 +149,9 @@
 
     .artist-banner-thumb .text-overflow p {
         font-size: 14px;
+    }
+
+    .action-group .btn-1 {
+        font-size: 12px;
     }
 </style>

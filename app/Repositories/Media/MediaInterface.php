@@ -22,7 +22,19 @@ interface MediaInterface
 
     public function getMediaSuggest($params);
 
+    public function upViewMedia($id);
+
     public function createMedia($data, $dataKinds = [], $dataTags = []);
 
     public function like($data);
+
+    public function comment($data);
+
+    public function report($data);
+
+    public function addFavouriteList($user, $id);
+
+    public function removeFavouriteList($user, $id);
+
+    public function getFavouriteList($user, $size);
 }

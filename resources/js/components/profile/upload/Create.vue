@@ -3,10 +3,11 @@
         <div class="kode-comment-form">
             <div class="msl-black">
                 <div class="heading3">
-                    <h4><i class="fa fa-comment-o"></i>{{ $t('media.upload_title') }}</h4>
+                    <!-- <h4><i class="fa fa-upload"></i>{{ $t('media.upload_title') }}</h4> -->
+                    <h4><i class="fa fa-upload"></i>Đăng tải Bài hát/Video</h4>
                 </div>
             </div>
-            <div class="album-inner type-tab">
+            <!-- <div class="album-inner type-tab">
                 <ul class="nav-tabs msl-tab-nav">
                     <li class="region-title" @click="tabName = 'MusicAndVideo'" :class="{active: tabName == 'MusicAndVideo'}">
                         <a href="#" @click.prevent>{{ $t('media.music_video') }}</a>
@@ -15,7 +16,7 @@
                         <a href="#" @click.prevent>{{ $t('album.name') }}</a>
                     </li>
                 </ul>
-            </div>
+            </div> -->
             <components :is="tabName"></components>
         </div>
     </div>

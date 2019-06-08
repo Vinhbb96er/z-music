@@ -20,6 +20,11 @@ Route::get('/', function () {
 Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function () {
     Route::resource('/admin/user', 'UserController');
     Route::resource('/admin/media', 'MediaController');
+    Route::get('admin/report/media', 'MediaController@getReport')->name('media.report');
+
+    Route::post('ajax/media/change-status', 'MediaController@changeStatus');
+    Route::post('ajax/user/change-status', 'UserController@changeStatus');
+    Route::post('ajax/user/change-role', 'UserController@changeRole');
 });
 
 Route::get('/admin-home', 'HomeController@index')->name('home');

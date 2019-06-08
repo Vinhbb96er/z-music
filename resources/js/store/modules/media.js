@@ -11,6 +11,7 @@ const state = {
     mediaComments: {},
     mediaSuggest: [],
     mediaSearch: null,
+    favouriteList: null,
 }
 
 const getters = {
@@ -49,6 +50,9 @@ const getters = {
         });
 
         return check;
+    },
+    favouriteList(state) {
+        return state.favouriteList;
     }
 }
 
@@ -76,6 +80,9 @@ const mutations = {
     },
     setMediaSearch(state, payload) {
         state.mediaSearch = payload;
+    },
+    setFavouriteList(state, payload) {
+        state.favouriteList = payload;
     }
 }
 
@@ -189,9 +196,9 @@ const actions = {
                 });
         });
     },
-    upViewMedia({commit}, id) {
+    upViewMedia({commit}, data) {
         return new Promise((resolve, reject) => {
-            post(`media/${id}/up-view`)
+            post(`media/${data.id}/up-view`, data)
                 .then(res => {
                     resolve(res.data);
                 })
@@ -280,7 +287,93 @@ const actions = {
                     flashMessage(i18n.t('message.failed'), 'danger');
                 });
         });
-    }
+    },
+    addFavouriteList({commit, rootState}, id) {
+        if (!rootState.Auth.authenticated) {
+            $('#login-register1').modal('show');
+
+            return;
+        }
+
+        return new Promise((resolve, reject) => {
+            post(`media/${id}/add-favourite`)
+                .then(res => {
+                    flashMessage(i18n.t('message.success'));
+                })
+                .catch(err => {
+                    reject(err);
+                    flashMessage(i18n.t('message.failed'), 'danger');
+                });
+        });
+    },
+    removeFavouriteList({commit, state}, id) {
+        return new Promise((resolve, reject) => {
+            post(`media/${id}/remove-favourite`)
+                .then(res => {
+                    let index;
+                    state.favouriteList.data.forEach((media, i) => {
+                        if (media.id == id) {
+                            index = i;
+                        }
+                    });
+
+                    state.favouriteList.data.splice(index, 1);
+                    flashMessage(i18n.t('message.success'));
+                })
+                .catch(err => {
+                    reject(err);
+                    flashMessage(i18n.t('message.failed'), 'danger');
+                });
+        });
+    },
+    getFavouriteList({commit}, data) {
+        return new Promise((resolve, reject) => {
+            get(makePathByParams('media/favourite-list', data))
+                .then(res => {
+                    commit('setFavouriteList', res.data);
+                })
+                .catch(err => {
+                    reject(err);
+                });
+        });
+    },
+    commentMedia({commit, state, rootState, dispatch}, data) {
+        return new Promise((resolve, reject) => {
+            post('media/comment', data)
+                .then(res => {
+                    flashMessage(i18n.t('message.success'));
+                    let params = {
+                        type: data.type,
+                        id: data.id,
+                    }
+
+                    if (data.reply_id) {
+                        params.page = data.page
+                    }
+
+                    dispatch('getMediaComments', params);
+
+                    resolve(true);
+                })
+                .catch(err => {
+                    reject(err);
+                    flashMessage(i18n.t('message.failed'), 'danger');
+                });
+        });
+    },
+    reportMedia({commit, state, rootState, dispatch}, data) {
+        return new Promise((resolve, reject) => {
+            post('media/report', data)
+                .then(res => {
+                    flashMessage(i18n.t('message.success'));
+                    resolve(true);
+                })
+                .catch(err => {
+                    reject(err);
+                    flashMessage(i18n.t('message.failed'), 'danger');
+                });
+        });
+    },
 }
 
 export default {

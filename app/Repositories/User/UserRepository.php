@@ -23,6 +23,20 @@ class UserRepository extends BaseRepository implements UserInterface
             });
         }
 
+        if (isset($params['status'])) {
+            if ($params['status'] != 0) {
+                $query->where('status', $params['status']);
+            }
+        } else {
+            $query->where('status', 1);
+        }
+
+        if (isset($params['role'])) {
+            if ($params['role'] != 0) {
+                $query->where('role_id', $params['role']);
+            }
+        }
+
         if (!empty($params['is_artist'])) {
             $query->where('role_id', config('setting.user.role.artist'));
         }

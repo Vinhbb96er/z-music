@@ -45,6 +45,8 @@ return [
     'views' => 'Views',
     'likes' => 'Likes',
     'owner' => 'Owner',
+    'new' => 'new',
     'music_admin' => 'Music Admin',
+    'week_ranking_text' => 'Week :weekNumber (:firstDateOfWeek - :lastDateOfWeek)',
     'copyright' => 'Copyright by Vinh14T1'
 ];

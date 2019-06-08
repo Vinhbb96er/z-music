@@ -41,9 +41,9 @@
             <th>@lang('admin.name')</th>
             <th>@lang('admin.type')</th>
             <th>@lang('admin.cover_image')</th>
-            <th>@lang('admin.views')</th>
-            <th>@lang('admin.likes')</th>
             <th>@lang('admin.owner')</th>
+            <th>Số lượng báo cáo</th>
+            <th>Nội dung báo cáo</th>
             <th>Status</th>
           </tr>
         </thead>
@@ -56,9 +56,13 @@
                     </th>
                     <th>{{ $media->type_text }}</th>
                     <th><img src="{{ $media->cover_image }}" width="80px"></th>
-                    <th>{{ $media->views }}</th>
-                    <th>{{ $media->likes_count }}</th>
                     <th>{{ $media->user->name }}</th>
+                    <th>{{ $media->reports->count() }}</th>
+                    <th>
+                        @foreach($media->reports as $report)
+                            <p>{{ $report->content }}</p>
+                        @endforeach
+                    </th>
                     <th>
                         {{ Form::select('status', [
                             1 => 'Active',

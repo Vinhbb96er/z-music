@@ -5,9 +5,7 @@
             <div class="msl-heading light-color ranking-header-title">
                 <h5>
                     <span>
-                        <a href="#">
-                            {{ $t('music.music_ranking') }}
-                        </a>
+                        <router-link tag="a" :to="{name: 'musicRanking'}">{{ $t('music.music_ranking') }}</router-link>
                         <a href="#" @click.prevent="playAll">
                             <i class="icon-multimedia-1 icon" :title="$t('playlist.play_all')"></i>
                         </a>
@@ -19,7 +17,7 @@
         <!--Artist Rank List Start-->
         <div class="artists-rank-list">
             <!--Artist Rank End-->
-            <div class="artists-rank" v-for="(music, index) in musicRanking"  :key="music.id" @click="playingMusic({id: music.id, type: type})">
+            <div class="artists-rank" v-for="(music, index) in musicRanking.data"  :key="music.id" @click="playingMusic({id: music.id, type: type})">
                 <span class="rank-no">{{ index + 1 }}</span>
                 <figure class="backgroud-image-show" :style="{backgroundImage: `url(${music.cover_image})`}">
                     <img :src="images.music_playing" class="playing-icon" v-if="checkPlayingMusic(music.id)">
@@ -63,7 +61,7 @@
             playAll() {
                 let musicIds = [];
 
-                this.musicRanking.forEach((music) => {
+                this.musicRanking.data.forEach((music) => {
                     musicIds.push(music.id);
                 });
 

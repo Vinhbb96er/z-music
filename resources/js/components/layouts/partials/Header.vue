@@ -3,8 +3,8 @@
         <div class="header-1st-row">
             <div class="container">
                 <div class="breaking-news-column">
-                    <strong>Breaking News:</strong>
-                    <div class="brk-slider">
+                    <!-- <strong>Breaking News:</strong> -->
+                    <!-- <div class="brk-slider">
                         <div class="news_items">
                             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
                         </div>
@@ -14,7 +14,7 @@
                         <div class="news_items">
                             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -60,14 +60,11 @@
                             </a>
                             <!-- Start dropdown menu -->
                             <ul class="dropdown-menu animated">
-                                <li>
+                                <router-link tag="li" :to="{name: 'profile'}">
                                     <a href="#"><i class="fa fa-user"></i> {{ $t('auth.my_profile') }}</a>
-                                </li>
+                                </router-link>
                                 <li>
                                     <a href="#"><i class="fa fa-heart"></i> {{ $t('auth.my_favourite_list')}}</a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="icon-music"></i> {{ $t('auth.music_management') }}</a>
                                 </li>
                                 <li>
                                     <a href="#" @click.prevent="logout"><i class="fa fa-sign-out"> {{ $t('auth.logout')}}</i> </a>
@@ -154,7 +151,13 @@
                                 <a @click.prevent>{{ $t('home.ranking') }}</a>
                                 <ul class="dl-submenu">
                                     <li>
-                                        <a href="event-list.html">event list</a>
+                                        <router-link tag="a" :to="{name: 'musicRanking'}">{{ $t('music.name') }}</router-link>
+                                    </li>
+                                    <li>
+                                        <router-link tag="a" :to="{name: 'videoRanking'}">{{ $t('music_video.name') }}</router-link>
+                                    </li>
+                                    <li>
+                                        <router-link tag="a" :to="{name: 'albumRanking'}">{{ $t('album.name') }}</router-link>
                                     </li>
                                 </ul>
                             </li>

@@ -45,6 +45,9 @@ return [
     'views' => 'Lượt xem',
     'likes' => 'Yêu thích',
     'owner' => 'Chủ sở hữu',
+    'new' => 'Mới',
     'music_admin' => 'Music Admin',
-    'copyright' => 'Copyright by Vinh14T1'
+    'week_ranking_text' => 'Tuần :weekNumber (:firstDateOfWeek - :lastDateOfWeek)',
+    'copyright' => 'Copyright by Vinh14T1',
+    'no_result' => 'Không có kết quả nào'
 ];

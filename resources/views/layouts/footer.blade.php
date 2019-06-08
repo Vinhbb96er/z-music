@@ -18,9 +18,8 @@
         {{ Html::script(asset('admin/js/bootstrap.min.js')) }}
         {{ Html::script(asset('admin/js/plugins/moment.min.js')) }}
         {{ Html::script(asset('admin/js/plugins/jquery.nicescroll.js')) }}
-        {{ Html::script(asset('vendor/sweetalert/dist/sweetalert.min.js')) }}
+        {{ Html::script(asset('frontend/vendor/sweetalert/dist/sweetalert.min.js')) }}
         {{ Html::script(asset('admin/js/alert.js')) }}
-        {{ Html::script(asset('admin/js/messages.js')) }}
         {{ Html::script(asset('admin/js/main.js')) }}
         @stack('js')
   </body>

@@ -5,9 +5,7 @@
             <div class="msl-heading light-color ranking-header-title">
                 <h5>
                     <span>
-                        <a href="#">
-                            {{ $t('album.album_ranking') }}
-                        </a>
+                        <router-link tag="a" :to="{name: 'albumRanking'}">{{ $t('album.album_ranking') }}</router-link>
                     </span>
                 </h5>
             </div>
@@ -16,7 +14,7 @@
         <!--Artist Rank List Start-->
         <div class="artists-rank-list">
             <!--Artist Rank End-->
-            <div class="artists-rank" v-for="(album, index) in albumRanking"  :key="album.id" @click="addMusicToPlaylist({id: album.id, type: type})">
+            <div class="artists-rank" v-for="(album, index) in albumRanking.data"  :key="album.id" @click="addMusicToPlaylist({id: album.id, type: type})">
                 <span class="rank-no">{{ index + 1 }}</span>
                 <figure class="backgroud-image-show" :style="{backgroundImage: `url(${album.cover_image})`}"></figure>
                 <div class="text-overflow">

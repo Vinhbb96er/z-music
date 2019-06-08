@@ -4,6 +4,9 @@ namespace App\Repositories\Album;
 
 use App\Repositories\BaseRepository;
 use App\Models\Album;
+use Auth;
+use Carbon\Carbon;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class AlbumRepository extends BaseRepository implements AlbumInterface
 {
@@ -104,16 +107,55 @@ class AlbumRepository extends BaseRepository implements AlbumInterface
 
     public function getRankingAlbum($params = [])
     {
-        unset($params['type']);
-        $params['is_artist'] = true;
-        $params['sort_field'] = 'views';
-        $params['sort_type'] = 'desc';
-        $params['eagle_loading'] = [
-            'user',
-            'kinds',
-        ];
+        $query = $this->model->newQuery();
+        $eagleLoading = ['user'];
 
-        return $this->search($params);
+        if (!empty($params['full_loading'])) {
+            $eagleLoading = ['user', 'kinds', 'region'];
+        }
+
+        $query->with($eagleLoading);
+        $size = isset($params['size']) ? $params['size'] : 10;
+
+        if (isset($params['week'])) {
+            $firstDateOfWeek = Carbon::parse($params['week'])->startOfWeek();
+            $lastDateOfWeek = Carbon::parse($params['week'])->endOfWeek();
+            $oldFirstDateOfWeek = Carbon::parse($params['week'])->subWeek(1)->startOfWeek();
+            $oldLastDateOfWeek = Carbon::parse($params['week'])->subWeek(1)->endOfWeek();
+        } else {
+            $firstDateOfWeek = Carbon::now()->startOfWeek();
+            $lastDateOfWeek = Carbon::now()->endOfWeek();
+            $oldFirstDateOfWeek = Carbon::now()->subWeek(1)->startOfWeek();
+            $oldLastDateOfWeek = Carbon::now()->subWeek(1)->endOfWeek();
+        }
+
+        $newData = $query->join('weeky_views', 'albums.id', '=', 'weeky_views.weeky_viewable_id')
+            ->where('weeky_views.weeky_viewable_type', Album::class)
+            ->whereDate('date', '>=', $firstDateOfWeek)
+            ->whereDate('date', '<=', $lastDateOfWeek)
+            ->orderBy('weeky_views.views', 'desc')->select('albums.*')->take(50)->get();
+
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+        $items = $newData->slice(($currentPage - 1) * $size, $size)->all();
+
+        $newData = new LengthAwarePaginator(array_values($items), $newData->count(), 10, $currentPage, [
+            'path' => LengthAwarePaginator::resolveCurrentPath(),
+            'pageName' => 'page'
+        ]);
+
+        $oldDataIds = $this->model
+            ->join('weeky_views', 'albums.id', '=', 'weeky_views.weeky_viewable_id')
+            ->where('weeky_views.weeky_viewable_type', Album::class)
+            ->whereDate('date', '>=', $oldFirstDateOfWeek)
+            ->whereDate('date', '<=', $oldLastDateOfWeek)
+            ->orderBy('weeky_views.views', 'desc')->pluck('albums.id')->all();
+
+        foreach ($newData as $rank => $album) {
+            $oldRank = array_search($album->id, $oldDataIds);
+            $album->differentRank = $oldRank === false ? trans('admin.new') : $oldRank - $rank;
+        }
+
+        return $newData;
     }
 
     public function getAlbum($id, $params = [])
@@ -147,14 +189,36 @@ class AlbumRepository extends BaseRepository implements AlbumInterface
         return $query->findOrFail($id);
     }
 
-    public function upViewAlbum($id)
+    public function upViewAlbum($media, $albumsView = [])
     {
-        $media = $this->model->findOrFail($id);
-        $media->update([
-            'views' => $media->views + 1
+        $album = $media->album()->first();
+
+        if (!$album || in_array($album->id, $albumsView)) {
+            return false;
+        }
+
+        $album->update([
+            'views' => $album->views + 1
         ]);
 
-        return $media->views;
+        $firstDateOfWeek = Carbon::now()->startOfWeek();
+        $lastDateOfWeek = Carbon::now()->endOfWeek();
+        $weekyViewer = $album->weekyViews()
+            ->whereDate('date', '>=', $firstDateOfWeek)
+            ->whereDate('date', '<=', $lastDateOfWeek)->first();
+
+        if ($weekyViewer) {
+            $weekyViewer->update([
+                'views' => $weekyViewer->views + 1
+            ]);
+        } else {
+            $album->weekyViews()->create([
+                'views' => 1,
+                'date' => Carbon::now()
+            ]);
+        }
+
+        return $album;
     }
 
     public function getAlbumComment($mediaId, $size = 5)
@@ -179,5 +243,26 @@ class AlbumRepository extends BaseRepository implements AlbumInterface
         }
 
         return $this->model->withCount('likes')->findOrFail($data['id'])->likes_count;
+    }
+
+    public function comment($data)
+    {
+        $album = $this->model->findOrFail($data['id']);
+        $album->comments()->create([
+            'status' => 1,
+            'user_id' => Auth::user()->id,
+            'content' => $data['content'],
+            'reply_id' => isset($data['reply_id']) ? $data['reply_id'] : 0
+        ]);
+    }
+
+    public function report($data)
+    {
+        $album = $this->model->findOrFail($data['id']);
+        $album->reports()->create([
+            'status' => 1,
+            'user_id' => Auth::user()->id,
+            'content' => $data['content'],
+        ]);
     }
 }

@@ -14,9 +14,13 @@ interface AlbumInterface
 
     public function getAlbum($id, $params = []);
 
-    public function upViewAlbum($id);
+    public function upViewAlbum($media, $albumsView = []);
 
     public function getAlbumComment($mediaId, $size = 5);
 
     public function like($data);
+
+    public function comment($data);
+
+    public function report($data);
 }

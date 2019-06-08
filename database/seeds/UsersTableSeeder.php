@@ -11,6 +11,8 @@ use App\Models\Media;
 use App\Models\Like;
 use App\Models\Follow;
 use App\Models\Comment;
+use App\Models\WeekyView;
+use Carbon\Carbon;
 
 class UsersTableSeeder extends Seeder
 {
@@ -32,12 +34,25 @@ class UsersTableSeeder extends Seeder
         factory(Follow::class, 300)->create();
 
         Album::truncate();
-        factory(Album::class, 50)->create()->each(function ($album) {
+        factory(Album::class, 50)->create()->each(function ($album) use ($faker) {
             $kindId = Kind::all()->random()->id;
             $album->kinds()->attach($kindId);
 
             $tagId = Tag::all()->random()->id;
             $album->kinds()->attach($tagId);
+
+            $album->comments()->createMany([
+                [
+                    'user_id' => User::all()->random()->id,
+                    'content' => $faker->sentence,
+                    'status' => 1,
+                ],
+                [
+                    'user_id' => User::all()->random()->id,
+                    'content' => $faker->sentence,
+                    'status' => 1,
+                ]
+            ]);
         });
 
         Media::truncate();
@@ -98,6 +113,40 @@ class UsersTableSeeder extends Seeder
                 'commentable_id' => $commentableId,
                 'commentable_type' => $commentableType,
                 'reply_id' => $parentId,
+            ]);
+        }
+
+        $mediaData = Media::orderBy('views', 'desc')->take(100)->get();
+
+        foreach ($mediaData as $media) {
+            $media->weekyViews()->create([
+                'views' => $faker->numberBetween(100, 5000),
+                'date' => Carbon::now(),
+            ]);
+            $media->weekyViews()->create([
+                'views' => $faker->numberBetween(100, 5000),
+                'date' => Carbon::now()->subWeek(1),
+            ]);
+            $media->weekyViews()->create([
+                'views' => $faker->numberBetween(100, 5000),
+                'date' => Carbon::now()->subWeek(2),
+            ]);
+        }
+
+        $albumData = Album::orderBy('views', 'desc')->take(100)->get();
+
+        foreach ($albumData as $album) {
+            $album->weekyViews()->create([
+                'views' => $faker->numberBetween(100, 1000),
+                'date' => Carbon::now(),
+            ]);
+            $album->weekyViews()->create([
+                'views' => $faker->numberBetween(100, 1000),
+                'date' => Carbon::now()->subWeek(1),
+            ]);
+            $album->weekyViews()->create([
+                'views' => $faker->numberBetween(100, 1000),
+                'date' => Carbon::now()->subWeek(2),
             ]);
         }
     }

@@ -5,6 +5,8 @@ namespace App\Repositories\Media;
 use App\Repositories\BaseRepository;
 use App\Models\Media;
 use Auth;
+use Carbon\Carbon;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class MediaRepository extends BaseRepository implements MediaInterface
 {
@@ -54,10 +56,22 @@ class MediaRepository extends BaseRepository implements MediaInterface
             $query->where('type', $params['type']);
         }
 
+        if (isset($params['status'])) {
+            if ($params['status'] != 0) {
+                $query->where('media.status', $params['status']);
+            }
+        } else {
+            $query->where('media.status', 1);
+        }
+
         if (!empty($params['is_artist'])) {
             $query->whereHas('user', function($query) {
                 $query->where('role_id', config('setting.user.role.artist'));
             });
+        }
+
+        if (!empty($params['report'])) {
+            $query->has('reports')->with('reports');
         }
 
         if (!empty($params['user'])) {
@@ -101,20 +115,63 @@ class MediaRepository extends BaseRepository implements MediaInterface
 
     public function getRankingMedia($params = [])
     {
-        $params['is_artist'] = true;
-        $params['sort_field'] = 'views';
-        $params['sort_type'] = 'desc';
-        $params['eagle_loading'] = [
-            'user',
-            'kinds',
-        ];
+        $query = $this->model->newQuery();
 
-        return $this->search($params);
+        $query->where('type', $params['type']);
+        $eagleLoading = ['user'];
+
+        if (!empty($params['full_loading'])) {
+            $eagleLoading = ['user', 'kinds', 'region'];
+        }
+
+        $query->with($eagleLoading);
+        $size = isset($params['size']) ? $params['size'] : 10;
+
+        if (isset($params['week'])) {
+            $firstDateOfWeek = Carbon::parse($params['week'])->startOfWeek();
+            $lastDateOfWeek = Carbon::parse($params['week'])->endOfWeek();
+            $oldFirstDateOfWeek = Carbon::parse($params['week'])->subWeek(1)->startOfWeek();
+            $oldLastDateOfWeek = Carbon::parse($params['week'])->subWeek(1)->endOfWeek();
+        } else {
+            $firstDateOfWeek = Carbon::now()->startOfWeek();
+            $lastDateOfWeek = Carbon::now()->endOfWeek();
+            $oldFirstDateOfWeek = Carbon::now()->subWeek(1)->startOfWeek();
+            $oldLastDateOfWeek = Carbon::now()->subWeek(1)->endOfWeek();
+        }
+
+        $newData = $query->join('weeky_views', 'media.id', '=', 'weeky_views.weeky_viewable_id')
+            ->where('weeky_views.weeky_viewable_type', Media::class)
+            ->whereDate('date', '>=', $firstDateOfWeek)
+            ->whereDate('date', '<=', $lastDateOfWeek)
+            ->orderBy('weeky_views.views', 'desc')->select('media.*')->take(50)->get();
+
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+        $items = $newData->slice(($currentPage - 1) * $size, $size)->all();
+
+        $newData = new LengthAwarePaginator(array_values($items), $newData->count(), 10, $currentPage, [
+            'path' => LengthAwarePaginator::resolveCurrentPath(),
+            'pageName' => 'page'
+        ]);
+
+        $oldDataIds = $this->model->where('type', $params['type'])
+            ->join('weeky_views', 'media.id', '=', 'weeky_views.weeky_viewable_id')
+            ->where('weeky_views.weeky_viewable_type', Media::class)
+            ->whereDate('date', '>=', $oldFirstDateOfWeek)
+            ->whereDate('date', '<=', $oldLastDateOfWeek)
+            ->orderBy('weeky_views.views', 'desc')->pluck('media.id')->all();
+
+        foreach ($newData as $rank => $media) {
+            $oldRank = array_search($media->id, $oldDataIds);
+            $media->differentRank = $oldRank === false ? trans('admin.new') : $oldRank - $rank;
+        }
+
+        return $newData;
     }
 
     public function getMedia($id, $params = [])
     {
         $query = $this->model->newQuery();
+        $query->where('status', 1);
 
         if (isset($params['type'])) {
             $query->where('type', $params['type']);
@@ -223,13 +280,13 @@ class MediaRepository extends BaseRepository implements MediaInterface
 
     public function getMediaComment($mediaId, $size = 5)
     {
-        return $this->model->findOrFail($mediaId)->comments()->where('reply_id', 0)->with(['user', 'replies.user'])->paginate($size);
+        return $this->model->findOrFail($mediaId)->comments()->where('reply_id', 0)->with(['user', 'replies.user'])->orderBy('created_at', 'desc')->paginate($size);
     }
 
     public function getMediaSuggest($params)
     {
         $query = $this->model->newQuery();
-        $params['media_id'] = array_wrap($params['media_id']);
+        $params['media_id'] = isset($params['media_id']) ? array_wrap($params['media_id']) : [];
         $query->with('user')->whereNotIn('id', $params['media_id']);
 
         if (isset($params['type'])) {
@@ -263,12 +320,34 @@ class MediaRepository extends BaseRepository implements MediaInterface
             'views' => $media->views + 1
         ]);
 
-        return $media->views;
+        $firstDateOfWeek = Carbon::now()->startOfWeek();
+        $lastDateOfWeek = Carbon::now()->endOfWeek();
+        $weekyViewer = $media->weekyViews()
+            ->whereDate('date', '>=', $firstDateOfWeek)
+            ->whereDate('date', '<=', $lastDateOfWeek)->first();
+
+        if ($weekyViewer) {
+            $weekyViewer->update([
+                'views' => $weekyViewer->views + 1
+            ]);
+        } else {
+            $media->weekyViews()->create([
+                'views' => 1,
+                'date' => Carbon::now()
+            ]);
+        }
+
+        return $media;
     }
 
     public function createMedia($data, $dataKinds = [], $dataTags = [])
     {
-        $data['status'] = 0;
+        $data['status'] = 3;
+
+        if (Auth::user()->role_id == 3) {
+            $data['status'] = 1;
+        }
+
         $media = $this->model->create($data);
 
         if (count($dataKinds)) {
@@ -297,5 +376,65 @@ class MediaRepository extends BaseRepository implements MediaInterface
         }
 
         return $this->model->withCount('likes')->findOrFail($data['id'])->likes_count;
+    }
+
+    public function comment($data)
+    {
+        $media = $this->model->findOrFail($data['id']);
+        $media->comments()->create([
+            'status' => 1,
+            'user_id' => Auth::user()->id,
+            'content' => $data['content'],
+            'reply_id' => isset($data['reply_id']) ? $data['reply_id'] : 0
+        ]);
+    }
+
+    public function report($data)
+    {
+        $media = $this->model->findOrFail($data['id']);
+        $media->reports()->create([
+            'status' => 1,
+            'user_id' => Auth::user()->id,
+            'content' => $data['content'],
+        ]);
+    }
+
+    public function addFavouriteList($user, $id)
+    {
+        $media = $this->model->findOrFail($id);
+
+        if (!$media) {
+            throw new Exception("not found", 1);
+        }
+
+        $favourite = $user->favourites()->where('media_id', $id)->first();
+
+        if (!$favourite) {
+            $user->favourites()->create([
+                'media_id' => $id
+            ]);
+        }
+    }
+
+    public function removeFavouriteList($user, $id)
+    {
+        $media = $this->model->findOrFail($id);
+
+        if (!$media) {
+            throw new Exception("not found", 1);
+        }
+
+        $favourite = $user->favourites()->where('media_id', $id)->first();
+
+        if ($favourite) {
+            $favourite->delete();
+        }
+    }
+
+    public function getFavouriteList($user, $size)
+    {
+        $mediaIds = $user->favourites()->pluck('media_id')->all();
+
+        return $this->model->whereIn('id', $mediaIds)->with('user')->paginate($size);
     }
 }

@@ -101,4 +101,29 @@ class UserRepository extends BaseRepository implements UserInterface
 
         return $query->findOrFail($id);
     }
+
+    public function follow($user, $id)
+    {
+        $otherUser = $this->model->findOrFail($id);
+
+        if ($user->id == $otherUser->id) {
+            throw new Exception("Cant follow", 1);
+        }
+
+        $following = $user->followings()
+            ->where('follow_id', $id)
+            ->first();
+
+        if ($following) {
+            $user->followings()->detach([
+                'follow_id' => $id,
+            ]);
+        } else {
+            $user->followings()->attach([
+                'follow_id' => $id,
+            ]);
+        }
+
+        return $this->model->withCount('followers')->findOrFail($id)->followers_count;
+    }
 }

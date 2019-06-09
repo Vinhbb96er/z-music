@@ -76,6 +76,8 @@ class AuthController extends Controller
                 'album' => $user->likes()->where('likeable_type', 'App\Models\Album')->pluck('likeable_id')->all(),
             ];
 
+            $user->load('followings');
+
             if (!$user) {
                 throw new Exception("Error Processing Request", 1);
             }
@@ -110,6 +112,19 @@ class AuthController extends Controller
             report($e);
 
             return response()->json(null, Response::HTTP_BAD_REQUEST);
+        }
+    }
+
+    public function getFollowings(Request $request)
+    {
+        try {
+            $data = Auth::user()->followings()->paginate($request->size);
+
+            return response()->json($data, Response::HTTP_OK);
+        } catch (Exception $e) {
+            report($e);
+
+            return response()->json(false, Response::HTTP_NOT_FOUND);
         }
     }
 }

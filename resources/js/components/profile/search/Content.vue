@@ -10,9 +10,14 @@
                         {{ artist.name }}
                     </router-link>
                     <p class="followers">{{ artist.followers_count }} {{ $t('artist.followers') }}</p>
-                    <button class="btn btn-success btn-follow" v-if="!checkIsAuthUser(artist.id)">
-                        {{ $t('button.follow') }}
-                    </button>
+                    <template v-if="!checkIsAuthUser(artist.id)">
+                        <button class="btn btn-primary btn-follow" v-if="user && checkFollowed(artist.id, user.followings)" @click="follow(artist.id)">
+                            {{ $t('button.followed') }}
+                        </button>
+                        <button class="btn btn-success btn-follow" v-else @click="follow(artist.id)">
+                            {{ $t('button.follow') }}
+                        </button>
+                    </template>
                 </h6>
             </div>
         </div>
@@ -30,8 +35,11 @@
             }
         },
         computed: {
-            ...mapGetters(['checkIsAuthUser'])
-        }
+            ...mapGetters(['checkIsAuthUser', 'checkIsAuthUser', 'user', 'checkFollowed'])
+        },
+        methods: {
+            ...mapActions(['follow'])
+        },
     }
 </script>
 <style scoped>

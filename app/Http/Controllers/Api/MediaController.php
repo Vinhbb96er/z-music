@@ -9,12 +9,12 @@ use App\Repositories\Media\MediaInterface;
 use App\Repositories\Album\AlbumInterface;
 use App\Repositories\User\UserInterface;
 use Exception;
-use App\Traits\DropboxFileUploadTrait;
+use App\Traits\FileUploadTrait;
 use DB, Auth;
 
 class MediaController extends BaseApiController
 {
-    use DropboxFileUploadTrait;
+    use FileUploadTrait;
 
     protected $mediaRepository;
     protected $albumRepository;
@@ -369,15 +369,13 @@ class MediaController extends BaseApiController
             $dataTags = isset($tags) ? explode(',', $tags) : [];
 
             if ($request->hasFile('file')) {
-                $result = $this->uploadFile($request->file('file'));
+                $result = $this->uploadMediaFile($request->file('file'));
                 $data['url'] = $result['url'];
                 $data['path_media'] = $result['path'];
             }
 
             if ($request->hasFile('cover_image')) {
-                $result = $this->uploadFile($request->file('cover_image'));
-                $data['cover_image'] = $result['url'];
-                $data['path_image'] = $result['path'];
+                $data['cover_image'] = $this->uploadImage($request->file('cover_image'));
             }
 
             $this->mediaRepository->createMedia($data, $dataKinds, $dataTags);
@@ -389,11 +387,11 @@ class MediaController extends BaseApiController
             report($e);
 
             if (isset($data['path_media'])) {
-                $this->deleteFile($data['path_media']);
+                $this->deleteMediaFile($data['path_media']);
             }
 
-            if (isset($data['path_image'])) {
-                $this->deleteFile($data['path_image']);
+            if (isset($data['cover_image'])) {
+                $this->deleteImage($data['cover_image']);
             }
 
             return response()->json(false, Response::HTTP_NOT_FOUND);

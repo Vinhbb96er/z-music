@@ -16,7 +16,14 @@
                         {{ music.user.name }}
                     </router-link>
                     <div class="follower-info">{{ music.user.followers_count }} {{ $t('artist.followers') }}</div>
-                    <button class="btn btn-success btn-follow">{{ $t('button.follow') }}</button>
+                    <template v-if="!checkIsAuthUser(music.user.id)">
+                        <button class="btn btn-primary btn-follow" v-if="user && checkFollowed(music.user.id, user.followings)" @click="follow(music.user.id)">
+                            {{ $t('button.followed') }}
+                        </button>
+                        <button class="btn btn-success btn-follow" v-else @click="follow(music.user.id)">
+                            {{ $t('button.follow') }}
+                        </button>
+                    </template>
                 </div>
             </div>
             <div class="msl-black">
@@ -41,12 +48,19 @@
 </template>
 <script>
     import {mapGetters} from 'vuex'
+    import {mapActions} from 'vuex'
 
     export default {
         computed: {
             ...mapGetters({
-                music: 'mediaDetailData'
+                music: 'mediaDetailData',
+                user: 'user',
+                checkFollowed: 'checkFollowed',
+                checkIsAuthUser: 'checkIsAuthUser'
             })
+        },
+        methods: {
+            ...mapActions(['follow'])
         }
     }
 </script>

@@ -75,6 +75,7 @@
     },
     "button": {
         "follow": "Follow",
+        "followed": "Followed",
         "contribute_lyrics": "Contribute lyrics",
         "comment": "Comment",
         "cancel": "Cancel",
@@ -135,7 +136,10 @@
         "empty_description": "Description have not updated",
         "introduce": "Introduce",
         "real_name": "Real name",
-        "birthday": "Birthday"
+        "birthday": "Birthday",
+        "followings": "Followings",
+        "upload": "Upload",
+        "followings_list": "List Followings"
     },
     "search": {
         "name": "Search",

@@ -38,10 +38,10 @@
                 <div class="center-logo">
                     <div class="logo">
                         <h1>
-                            <a href="#">
-                                <img class="logo-light" src="frontend/images/logo-light.png" alt="logo here">
-                                <img class="logo-drak" src="frontend/images/logo-dark.png" alt="logo here">
-                            </a>
+                            <router-link :to="{name: 'home'}" tag="a">
+                                <img class="logo-light" src="frontend/images/logo-light.png">
+                                <img class="logo-drak" src="frontend/images/logo-dark.png">
+                            </router-link>
                         </h1>
                     </div>
                 </div>

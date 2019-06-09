@@ -16,7 +16,14 @@
                         {{ album.user.name }}
                     </router-link>
                     <div class="follower-info">{{ album.user.followers_count }} {{ $t('artist.followers') }}</div>
-                    <button class="btn btn-success btn-follow">{{ $t('button.follow') }}</button>
+                    <template v-if="!checkIsAuthUser(album.user.id)">
+                        <button class="btn btn-primary btn-follow" v-if="user && checkFollowed(album.user.id, user.followings)" @click="follow(album.user.id)">
+                            {{ $t('button.followed') }}
+                        </button>
+                        <button class="btn btn-success btn-follow" v-else @click="follow(album.user.id)">
+                            {{ $t('button.follow') }}
+                        </button>
+                    </template>
                 </div>
             </div>
             <div class="msl-black">
@@ -85,11 +92,14 @@
         computed: {
             ...mapGetters({
                 album: 'mediaDetailData',
-                checkPlayingMusic: 'checkPlayingMusic'
+                checkPlayingMusic: 'checkPlayingMusic',
+                user: 'user',
+                checkFollowed: 'checkFollowed',
+                checkIsAuthUser: 'checkIsAuthUser'
             })
         },
         methods: {
-            ...mapActions(['playingMusic', 'downloadMedia'])
+            ...mapActions(['playingMusic', 'downloadMedia', 'follow'])
         }
     }
 </script>

@@ -110,4 +110,13 @@ class Media extends Model
             return trans('admin.media.type_text.video');
         }
     }
+
+    public function getCoverImageAttribute()
+    {
+        if (!Storage::disk('public')->exists($this->attributes['cover_image']) || empty($this->attributes['cover_image'])) {
+            return config('settings.image_user_default');
+        }
+
+        return Storage::url($this->attributes['cover_image']);
+    }
 }

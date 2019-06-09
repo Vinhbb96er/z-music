@@ -45,7 +45,8 @@ class ProfileController extends Controller
             $user = $this->userRepository->getUser($id, [
                 'eagle_loading' => [
                     'followers'
-                ]
+                ],
+                'with_count' => ['followers']
             ]);
 
             return response()->json($user, Response::HTTP_OK);
@@ -53,6 +54,20 @@ class ProfileController extends Controller
             report($e);
 
             return response()->json(null, Response::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function follow(Request $request, $id)
+    {
+        try {
+            $data['followers_count'] = $this->userRepository->follow(Auth::user(), $id);
+            $data['followings'] = Auth::user()->followings()->get();
+
+            return response()->json($data, Response::HTTP_OK);
+        } catch (Exception $e) {
+            report($e);
+
+            return response()->json(false, Response::HTTP_NOT_FOUND);
         }
     }
 }

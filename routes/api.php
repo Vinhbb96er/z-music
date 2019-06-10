@@ -45,6 +45,9 @@ Route::group(['namespace' => 'Api'], function () {
         Route::post('logout', 'AuthController@logout');
         Route::get('profile', 'ProfileController@index');
 
+        Route::post('profile/{id}/follow', 'ProfileController@follow');
+        Route::get('auth/followings', 'AuthController@getFollowings');
+
         Route::post('/media', 'MediaController@store');
         Route::post('/media/like', 'MediaController@like');
         Route::post('/media/comment', 'MediaController@comment');

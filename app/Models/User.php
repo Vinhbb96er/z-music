@@ -132,11 +132,7 @@ class User extends Authenticatable implements JWTSubject
 
     public function getAvatarAttribute($value)
     {
-        // if (checkExistsRemoteImage($this->attributes['avatar'])) {
-        //     return $this->attributes['avatar'];
-        // }
-
-        if (!Storage::disk('local')->exists($this->attributes['avatar']) || empty($this->attributes['avatar'])) {
+        if (!Storage::disk('public')->exists($this->attributes['avatar']) || empty($this->attributes['avatar'])) {
             return config('setting.images.user_avatar_default');
         }
 
@@ -145,7 +141,7 @@ class User extends Authenticatable implements JWTSubject
 
     public function getBackgroundAttribute($value)
     {
-        if (!Storage::disk('local')->exists($this->attributes['background']) || empty($this->attributes['background'])) {
+        if (!Storage::disk('public')->exists($this->attributes['background']) || empty($this->attributes['background'])) {
             return config('setting.images.user_background_default');
         }
 

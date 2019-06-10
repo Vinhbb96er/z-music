@@ -11,4 +11,6 @@ interface UserInterface
     public function createUser($data);
 
     public function getUser($id, $params = []);
+
+    public function follow($user, $id);
 }

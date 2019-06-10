@@ -11,11 +11,14 @@
                                 {{ profileData.name }}
                                 <span class="label" v-if="profileData.type_text">{{ profileData.type_text }}</span>
                             </h5>
-                            <p v-if="profileData.followers">{{ profileData.followers.length }} {{ $t('artist.followers') }}</p>
-                            <p></p>
+                            <p v-if="profileData.followers_count">{{ profileData.followers_count }} {{ $t('artist.followers') }}</p>
+                            <p v-else-if="profileData.followers">{{ profileData.followers.length }} {{ $t('artist.followers') }}</p>
                         </div>
                         <div class="action-group" v-show="!user || user && user.id != profileData.id">
-                            <a class="btn-1 theme-bg" href="#">
+                            <a class="btn-1 theme-bg btn-followed" href="#" v-if="user && checkFollowed(profileData.id, user.followings)" @click.prevent="follow(profileData.id)">
+                                <i class="fa fa-user-plus"></i>{{ $t('button.followed') }}
+                            </a>
+                            <a class="btn-1 theme-bg" href="#" v-else @click.prevent="follow(profileData.id)">
                                 <i class="fa fa-user-plus"></i>{{ $t('button.follow') }}
                             </a>
                             <a class="btn-1 theme-bg" href="#"><i class="fa fa-flag-o"></i>{{ $t('playlist.report') }}</a>
@@ -43,8 +46,11 @@
                             <li @click.prevent="tabName = 'FavouriteList'" :class="{active: tabName == 'FavouriteList'}" >
                                 <a href="#">Danh sách yêu thích</a>
                             </li>
+                            <li @click.prevent="tabName = 'Followings'" :class="{active: tabName == 'Followings'}">
+                                <a href="#">{{ $t('auth.followings') }}</a>
+                            </li>
                             <li @click.prevent="tabName = 'Create'" :class="{active: tabName == 'Create'}">
-                                <a href="#">Upload</a>
+                                <a href="#">{{ $t('auth.upload') }}</a>
                             </li>
                         </template>
                     </ul>
@@ -78,6 +84,7 @@
     import ArtistSuggest from './Suggest.vue'
     import Create from './upload/Create.vue'
     import FavouriteList from './FavouriteList.vue'
+    import Followings from './Followings.vue'
 
     import {mapGetters} from 'vuex'
     import {mapActions} from 'vuex'
@@ -100,7 +107,8 @@
             Video,
             Album,
             Create,
-            FavouriteList
+            FavouriteList,
+            Followings
         },
         watch: {
             '$route'(to, from) {
@@ -109,10 +117,10 @@
             }
         },
         computed: {
-            ...mapGetters(['profileData', 'user', 'checkIsAuthUser'])
+            ...mapGetters(['profileData', 'user', 'checkIsAuthUser', 'checkFollowed'])
         },
         methods: {
-            ...mapActions(['getProfile'])
+            ...mapActions(['getProfile', 'follow'])
         },
         created() {
             this.getProfile(this.id);

@@ -4,6 +4,7 @@ import axios from 'axios'
 const state = {
     authenticated: false,
     user: null,
+    followings: {}
 }
 
 const getters = {
@@ -15,6 +16,9 @@ const getters = {
     },
     checkIsAuthUser: state => (userId) => {
         return state.user && state.user.id == userId;
+    },
+    followings(state) {
+        return state.followings;
     }
 }
 
@@ -39,6 +43,9 @@ const mutations = {
     },
     setUser(state, data) {
         state.user = data;
+    },
+    setFollowings(state, data) {
+        state.followings = data;
     }
 }
 
@@ -112,6 +119,17 @@ const actions = {
                 })
                 .catch((err) => {
                     reject(false);
+                });
+        });
+    },
+    getFollowings({commit, state, dispatch}, data) {
+        return new Promise((resolve, reject) => {
+            get(makePathByParams('auth/followings', data))
+                .then(res => {
+                    commit('setFollowings', res.data);
+                })
+                .catch(err => {
+                    reject(err);
                 });
         });
     },

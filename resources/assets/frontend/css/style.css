@@ -10214,12 +10214,14 @@ body.msl-black .albums-tables ul li span{
     transition: all 0.15s ease;
 }
 
-.btn-liked {
+.btn-liked,
+.btn-followed {
     background: #fff !important;
     color: #333 !important;
 }
 
-.btn-liked:hover {
+.btn-liked:hover,
+.btn-followed:hover {
     color: #fff !important;
 }
 

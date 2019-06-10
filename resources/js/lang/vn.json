@@ -75,6 +75,7 @@
     },
     "button": {
         "follow": "Theo dõi",
+        "followed": "Đã theo dõi",
         "contribute_lyrics": "Đóng góp lời bài hát",
         "comment": "Bình luận",
         "cancel": "Hủy bỏ",
@@ -135,7 +136,10 @@
         "empty_description": "Thông tin giới thiệu chưa được cập nhật.",
         "introduce": "Giới thiệu",
         "real_name": "Tên thật",
-        "birthday": "Ngày sinh"
+        "birthday": "Ngày sinh",
+        "followings": "Đang theo dõi",
+        "upload": "Đăng tải",
+        "followings_list": "Danh sách nghệ sĩ đang theo dõi"
     },
     "search": {
         "name": "Tìm kiếm",

@@ -20,9 +20,14 @@
                         <router-link tag="a" :to="{name: 'profileShow', params: {id: artist.id}}">
                             {{ artist.name }}
                         </router-link>
-                        <!-- <button class="btn btn-success btn-follow" v-if="!checkIsAuthUser(artist.id)">
-                            {{ $t('button.follow') }}
-                        </button> -->
+                        <template v-if="!checkIsAuthUser(artist.id)">
+                            <button class="btn btn-primary btn-follow" v-if="user && checkFollowed(artist.id, user.followings)" @click="follow(artist.id)">
+                                {{ $t('button.followed') }}
+                            </button>
+                            <button class="btn btn-success btn-follow" v-else @click="follow(artist.id)">
+                                {{ $t('button.follow') }}
+                            </button>
+                        </template>
                     </h6>
                 </div>
             </div>
@@ -40,10 +45,10 @@
             };
         },
         computed: {
-            ...mapGetters(['artistRanking', 'checkIsAuthUser'])
+            ...mapGetters(['artistRanking', 'checkIsAuthUser', 'user', 'checkFollowed'])
         },
         methods: {
-            ...mapActions(['getArtistRanking'])
+            ...mapActions(['getArtistRanking', 'follow'])
         },
         created() {
             this.getArtistRanking({
@@ -51,17 +56,19 @@
             });
         },
         updated() {
-            $('.artist-slider').slick({
-                infinite: true,
-                slidesToShow: 4,
-                centerMode: true,
-                arrows: true,
-                dots: true,
-                centerPadding: '20px',
-                autoplay: true,
-                speed: 1000,
-                autoplaySpeed: 3000
-            });
+            if (!$('.artist-slider').hasClass('slick-slider')) {
+                $('.artist-slider').slick({
+                    infinite: true,
+                    slidesToShow: 4,
+                    centerMode: true,
+                    arrows: true,
+                    dots: true,
+                    centerPadding: '20px',
+                    autoplay: true,
+                    speed: 1000,
+                    autoplaySpeed: 3000
+                });
+            }
         }
     }
 </script>

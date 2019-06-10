@@ -16,7 +16,14 @@
                         {{ video.user.name }}
                     </router-link>
                     <div class="follower-info">{{ video.user.followers_count }} {{ $t('artist.followers') }}</div>
-                    <button class="btn btn-success btn-follow">{{ $t('button.follow') }}</button>
+                    <template v-if="!checkIsAuthUser(video.user.id)">
+                        <button class="btn btn-primary btn-follow" v-if="user && checkFollowed(video.user.id, user.followings)" @click="follow(video.user.id)">
+                            {{ $t('button.followed') }}
+                        </button>
+                        <button class="btn btn-success btn-follow" v-else @click="follow(video.user.id)">
+                            {{ $t('button.follow') }}
+                        </button>
+                    </template>
                 </div>
             </div>
             <div class="msl-black">
@@ -41,12 +48,19 @@
 </template>
 <script>
     import {mapGetters} from 'vuex'
+    import {mapActions} from 'vuex'
 
     export default {
         computed: {
             ...mapGetters({
-                video: 'mediaDetailData'
+                video: 'mediaDetailData',
+                user: 'user',
+                checkFollowed: 'checkFollowed',
+                checkIsAuthUser: 'checkIsAuthUser'
             })
+        },
+        methods: {
+            ...mapActions(['follow'])
         }
     }
 </script>

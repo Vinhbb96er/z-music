@@ -15,6 +15,7 @@ class Media extends Model
         'name',
         'type',
         'lyrics',
+        'karaoke_lyrics',
         'artist_name',
         'cover_image',
         'views',
@@ -95,11 +96,12 @@ class Media extends Model
 
     public function getLyricsAttribute()
     {
-        if ($this->type == config('setting.media.type.music')) {
-            return empty($this->attributes['lyrics']) ? trans('admin.empty_lyrics') : $this->attributes['lyrics'];
-        }
+        return empty($this->attributes['lyrics']) ? trans('admin.empty_lyrics') : $this->attributes['lyrics'];
+    }
 
-        return null;
+    public function getKaraokeLyricsAttribute()
+    {
+        return empty($this->attributes['karaoke_lyrics']) ? '' : json_decode($this->attributes['karaoke_lyrics'], true);
     }
 
     public function getTypeTextAttribute()
@@ -114,7 +116,7 @@ class Media extends Model
     public function getCoverImageAttribute()
     {
         if (!Storage::disk('public')->exists($this->attributes['cover_image']) || empty($this->attributes['cover_image'])) {
-            return config('settings.image_user_default');
+            return config('setting.images.media_cover_image_default');
         }
 
         return Storage::url($this->attributes['cover_image']);

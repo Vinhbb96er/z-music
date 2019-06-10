@@ -43,7 +43,8 @@
         "tag_placeholder": "Tìm và thêm thẻ...",
         "lyrics_placeholder": "Nhập lời bài hát...",
         "upload_title": "Đăng tải Bài hát/Video/Album",
-        "music_video": "Bài hát/Video"
+        "music_video": "Bài hát/Video",
+        "karaoke_lyrics": "Karaoke"
     },
     "album": {
         "name": "Album",
@@ -80,7 +81,8 @@
         "comment": "Bình luận",
         "cancel": "Hủy bỏ",
         "edit": "Chỉnh sửa",
-        "upload": "Đăng tải"
+        "upload": "Đăng tải",
+        "save": "Lưu"
     },
     "playlist": {
         "name": "Danh sách phát",
@@ -109,11 +111,17 @@
         "register_success": "Đăng ký tài khoản mới thành công!",
         "register_failed": "Thất bại! Email này đã được sử dụng!",
         "register_error": "Có lỗi xảy ra khi đăng ký tài khoản! Hãy thử lại!",
-        "confirm_upload_media": "Bạn có chắc chắn muốn đăng tải Music/Video/Album?",
+        "confirm_upload_media": "Bạn có chắc chắn muốn đăng tải Music/Video?",
         "upload_media_success": "Đăng tải thành công! Đang chờ Quản trị viên phê duyệt!",
         "upload_media_failed": "Đăng tải thất bại! Hãy thử lại!",
         "success": "Thành công!",
-        "failed": "Thất bại! Hãy thử lại!"
+        "failed": "Thất bại! Hãy thử lại!",
+        "confirm_delete_media": "Bạn có chắc chắn muốn xóa Music/Video?",
+        "delete_media_success": "Xóa Music/Video thành công! Nếu bạn muốn khôi phục Music/Video này thì hãy liên hệ Admin!",
+        "delete_media_failed": "Xóa thất bại! Hãy thử lại!",
+        "confirm_update_media": "Bạn có chắc chắn muốn cập nhật Music/Video?",
+        "update_media_success": "Cập nhật Music/Video thành công!",
+        "update_media_failed": "Cập nhật thất bại! Hãy thử lại!"
     },
     "auth": {
         "sign_in": "Đăng nhập",

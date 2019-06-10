@@ -1,6 +1,6 @@
 <template>
     <div class="tab-pane active">
-        <div class="artist-bio no-margin" v-if="mediaSearch">
+        <div class="artist-bio no-margin" v-if="!isEdit">
             <div class="msl-black">
                 <div class="heading3">
                     <h4>
@@ -8,11 +8,14 @@
                     </h4>
                 </div>
             </div>
-            <div>
-                <div class="media-filter-element" v-if="mediaSearch.data">
+            <div v-if="mediaSearch">
+                <div class="media-filter-element">
                     <div class="tab-pane active">
+                        <div v-if="!mediaSearch.data.length">
+                            {{ $t('home.no_results') }}
+                        </div>
                         <!--Music Album Inner Wrap Start-->
-                        <div class="album-inner">
+                        <div class="album-inner" v-else>
                             <!--Music Album Inner Nav End-->
                             <div class="grid-container">
                                 <router-link class="grid-item" v-for="video in videoSlice.largeItem" tag="div" :to="{name: 'videoDetail', params: {id: video.id}}" :key="video.id">
@@ -32,10 +35,10 @@
                                                 <div class="blog-post-meta">
                                                     <div class="blog-info blog-admin music-icon-group">
                                                         <template v-if="checkIsAuthUser(id)">
-                                                            <a href="#" class="mp3-icon" :title="$t('button.edit')" @click.stop.prevent>
+                                                            <a href="#" class="mp3-icon" :title="$t('button.edit')" @click.stop.prevent="showFormEdit(video.id)">
                                                                 <i class="fa fa-pencil"></i>
                                                             </a>
-                                                            <a href="#" class="mp3-icon" :title="$t('playlist.remove')" @click.stop.prevent>
+                                                            <a href="#" class="mp3-icon" :title="$t('playlist.remove')" @click.stop.prevent="submitDeleteMedia(video.id)">
                                                                 <i class="fa fa-trash"></i>
                                                             </a>
                                                         </template>
@@ -69,10 +72,10 @@
                                             </h4>
                                             <div class="blog-info blog-admin music-icon-group">
                                                 <template v-if="checkIsAuthUser(id)">
-                                                    <a href="#" class="mp3-icon" :title="$t('button.edit')" @click.stop.prevent>
+                                                    <a href="#" class="mp3-icon" :title="$t('button.edit')" @click.stop.prevent="showFormEdit(video.id)">
                                                         <i class="fa fa-pencil"></i>
                                                     </a>
-                                                    <a href="#" class="mp3-icon" :title="$t('playlist.remove')" @click.stop.prevent>
+                                                    <a href="#" class="mp3-icon" :title="$t('playlist.remove')" @click.stop.prevent="submitDeleteMedia(video.id)">
                                                         <i class="fa fa-trash"></i>
                                                     </a>
                                                 </template>
@@ -95,6 +98,7 @@
                 </div>
             </div>
         </div>
+        <edit-form v-else :mediaId="mediaId" :mediaType="type" :cancel="cancel"></edit-form>
     </div>
 </template>
 <script>
@@ -102,6 +106,7 @@
     import {mapActions} from 'vuex'
 
     import Pagination from '../layouts/partials/Pagination.vue'
+    import EditForm from './Edit.vue'
 
     export default {
         data() {
@@ -111,11 +116,14 @@
                     music_playing: window.Laravel.setting.images.music_playing
                 },
                 id: this.$route.params.id,
-                size: 10
+                size: 10,
+                isEdit: false,
+                mediaId: ''
             }
         },
         components: {
-            Pagination
+            Pagination,
+            EditForm
         },
         watch: {
             '$route'(to, from) {
@@ -142,13 +150,50 @@
             }
         },
         methods: {
-            ...mapActions(['playingMusic', 'searchMedia', 'addMusicToPlaylist']),
+            ...mapActions(['playingMusic', 'searchMedia', 'addMusicToPlaylist', 'deleteMedia']),
             loadVideo(page) {
                 this.searchMedia({
                     type: this.type,
                     user: this.id,
                     size: this.size,
                     page: page
+                });
+            },
+            showFormEdit(id) {
+                this.mediaId = id;
+                this.isEdit = true;
+            },
+            cancel() {
+                this.isEdit = false;
+                this.searchMedia({
+                    type: this.type,
+                    user: this.id,
+                    size: this.size
+                });
+            },
+            submitDeleteMedia(id) {
+                confirmInfo({message: this.$t('message.confirm_delete_media')}, () => {
+                    showAnimationLoader();
+                    this.deleteMedia(id)
+                        .then(isSuccess => {
+                            hideAnimationLoader();
+
+                            if (isSuccess) {
+                                alertSuccess({message: this.$t('message.delete_media_success')});
+                            } else {
+                                alertDanger({message: this.$t('message.delete_media_failed')});
+                            }
+
+                            this.searchMedia({
+                                type: this.type,
+                                user: this.id,
+                                size: this.size
+                            });
+                        })
+                        .catch(err => {
+                            hideAnimationLoader();
+                            alertDanger({message: this.$t('message.delete_media_failed')});
+                        });
                 });
             }
         },

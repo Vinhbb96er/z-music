@@ -717,3 +717,14 @@ function hideAnimationLoader() {
     $('body').css('overflow', '');
     $('.modal-backdrop').css('z-index', '');
 }
+
+function alignKaraokeLyrics() {
+    let a = $('.highlighted').height();
+    let c = $('.content').height();
+    let d = $('.highlighted').offset().top - $('.highlighted').parent().offset().top;
+    let e = d + (a / 2) - (c / 2);
+
+    $('.content').animate(
+        {scrollTop: e + 'px'}, {easing: 'swing', duration: 250}
+    );
+}

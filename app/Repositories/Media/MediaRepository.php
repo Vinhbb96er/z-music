@@ -359,6 +359,20 @@ class MediaRepository extends BaseRepository implements MediaInterface
         }
     }
 
+    public function updateMedia($id, $data, $dataKinds = [], $dataTags = [])
+    {
+        $media = $this->model->findOrFail($id);
+        $media->update($data);
+        $media->kinds()->sync($dataKinds);
+        $media->tags()->sync($dataTags);
+    }
+
+    public function deleteMedia($id)
+    {
+        $media = $this->model->findOrFail($id);
+        $media->update(['status' => 4]);
+    }
+
     public function like($data)
     {
         $media = $this->model->findOrFail($data['id']);

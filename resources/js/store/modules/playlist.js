@@ -12,7 +12,9 @@ const state = {
     checkPlayingThisMusic: false,
     isView: false,
     startPlay: 0,
-    albumsView: []
+    albumsView: [],
+    currentLine: '',
+    karaokeMode: false
 }
 
 const getters = {
@@ -55,12 +57,24 @@ const getters = {
         }
 
         return state.playlist[state.playingIndex].id == musicId;
+    },
+    karaokeMode(state) {
+        return state.karaokeMode;
     }
 }
 
 const mutations = {
     setIsPlaying(state, value) {
         state.isPlaying = value;
+    },
+    changeKaraokeMode(state) {
+        if (!state.playlist[state.playingIndex].karaoke_lyrics) {
+            flashMessage('Bài hát này chưa có Karaoke', 'info');
+
+            return;
+        }
+
+        state.karaokeMode = !state.karaokeMode;
     }
 }
 
@@ -77,6 +91,8 @@ const actions = {
         $('#music-player-element #music-title').text(title);
         $('#music-player-element #music-title').attr('title', title);
         state.audio.src = state.playlist[index].url;
+        state.currentLine = '';
+        state.karaokeMode = !state.playlist[index].karaoke_lyrics ? false : true;
     },
     playMusic({commit, dispatch, state}, index) {
         dispatch('loadMusic', index);
@@ -102,10 +118,10 @@ const actions = {
             state.isView = true;
         }).on('timeupdate', function () {
             let totalTimePlay = ((state.audio.currentTime - state.startPlay) / state.audio.duration) * 100;
+            var currentPlaying = state.playlist[state.playingIndex];
 
             if (state.isView && totalTimePlay > 70) {
                 state.isView = false;
-                var currentPlaying = state.playlist[state.playingIndex];
 
                 dispatch('upViewMedia', {id: currentPlaying.id, albumsView: state.albumsView}, {root: true})
                     .then(function (value) {
@@ -122,6 +138,25 @@ const actions = {
                         }
                     });
             }
+
+            let karaokeList = currentPlaying.karaoke_lyrics;
+
+            if (!karaokeList) {
+                return;
+            }
+
+            var currentTime = this.currentTime;
+            var past = karaokeList.filter(function (item) {
+                return item.time < currentTime;
+            });
+
+            if (past.length != state.currentLine) {
+                state.currentLine = past.length;
+                $('.playlist-container .lyrics div').removeClass('highlighted');
+                $(`.playlist-container .lyrics div:nth-child(${past.length})`).addClass('highlighted');
+                alignKaraokeLyrics();
+            }
+
         }).on('pause', function () {
             commit('setIsPlaying', false);
         }).on('ended', () => {

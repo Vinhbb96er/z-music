@@ -49,6 +49,8 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('auth/followings', 'AuthController@getFollowings');
 
         Route::post('/media', 'MediaController@store');
+        Route::post('/media/{id}/update', 'MediaController@update');
+        Route::delete('/media/{id}/delete', 'MediaController@destroy');
         Route::post('/media/like', 'MediaController@like');
         Route::post('/media/comment', 'MediaController@comment');
         Route::post('/media/report', 'MediaController@report');

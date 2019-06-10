@@ -16,10 +16,11 @@
                 {{ @Form::open(['route' => 'media.index', 'method' => 'GET']) }}
                     <div class="input-group" style="float: left;">
                         {{ Form::select('status', [
-                            0 => 'All',
-                            1 => 'Active',
-                            2 => 'Block',
-                            3 => 'InActive',
+                            0 => 'Tất cả',
+                            1 => 'Hoạt động',
+                            2 => 'Bị khóa',
+                            3 => 'Đang chờ',
+                            4 => 'Đã xóa',
                         ], Request::get('status')) }}
                     </div>
                     <div class="input-group">
@@ -61,9 +62,10 @@
                     <th>{{ $media->user->name }}</th>
                     <th>
                         {{ Form::select('status', [
-                            1 => 'Active',
-                            2 => 'Block',
-                            3 => 'InActive',
+                            1 => 'Hoạt động',
+                            2 => 'Bị khóa',
+                            3 => 'Đang chờ',
+                            4 => 'Đã xóa',
                         ], $media->status, [
                             'class' => 'media-status',
                             'data-old' => $media->status,

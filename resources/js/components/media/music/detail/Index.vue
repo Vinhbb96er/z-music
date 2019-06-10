@@ -52,7 +52,7 @@
                         <i class="fa fa-download"></i>{{ $t('playlist.download') }}
                     </a>
                     <a class="btn-1 theme-bg" href="#" @click.prevent="addFavouriteList(id)"><i class="fa fa-plus"></i>{{ $t('playlist.add_my_favourite') }}</a>
-                    <a class="btn-1 theme-bg" data-toggle="modal" data-target="#report-form">
+                    <a class="btn-1 theme-bg" role="button" data-toggle="modal" data-target="#report-form">
                         <i class="fa fa-flag-o"></i>{{ $t('playlist.report') }}</a>
                 </div>
                 <!--Music Album Wrap Start-->
@@ -146,12 +146,12 @@
                 'addFavouriteList',
                 'reportMedia'
             ]),
-            reportFunc(content) {
+            reportFunc(content, callback) {
                 this.reportMedia({
                     type: this.type,
                     id: this.id,
                     content: content
-                })
+                }).then(callback);
             }
         },
         created() {

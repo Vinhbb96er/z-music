@@ -20,7 +20,7 @@
                 {{ @Form::open(['route' => 'user.index', 'method' => 'GET']) }}
                     <div class="input-group" style="float: left; margin-right: 5px;">
                         {{ Form::select('role', [
-                            0 => 'All',
+                            0 => 'Tất cả',
                             1 => 'Admin',
                             2 => 'Member',
                             3 => 'Artist'
@@ -28,9 +28,9 @@
                     </div>
                     <div class="input-group" style="float: left; margin-right: 5px;">
                         {{ Form::select('status', [
-                            0 => 'All',
-                            1 => 'Active',
-                            2 => 'Block',
+                            0 => 'Tất cả',
+                            1 => 'Hoạt động',
+                            2 => 'Bị khóa',
                         ], Request::get('status')) }}
                     </div>
                     <div class="input-group">
@@ -90,9 +90,8 @@
                     </th>
                     <th>
                         {{ Form::select('status', [
-                            1 => 'Active',
-                            2 => 'Block',
-                            3 => 'InActive',
+                            1 => 'Hoạt động',
+                            2 => 'Bị khóa',
                         ], $user->status, [
                             'class' => 'user-status',
                             'data-old' => $user->status,

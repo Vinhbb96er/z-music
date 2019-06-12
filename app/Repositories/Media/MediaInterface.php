@@ -26,6 +26,10 @@ interface MediaInterface
 
     public function createMedia($data, $dataKinds = [], $dataTags = []);
 
+    public function updateMedia($id, $data, $dataKinds = [], $dataTags = []);
+
+    public function deleteMedia($id);
+
     public function like($data);
 
     public function comment($data);

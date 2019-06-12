@@ -1,4 +1,4 @@
-import {get, post, makePathByParams} from '../../api/base_api.js'
+import {get, post, put, del, makePathByParams} from '../../api/base_api.js'
 import axios from 'axios'
 import {i18n} from '../../lang/index.js'
 
@@ -228,6 +228,35 @@ const actions = {
             }
 
             post('media', formData)
+                .then(res => {
+                    resolve(res.data);
+                })
+                .catch(err => {
+                    reject(err);
+                });
+        });
+    },
+    updateMedia({commit, state}, data) {
+        return new Promise((resolve, reject) => {
+            axios.defaults.headers.common['Content-Type'] = 'multipart/form-data';
+            let formData = new FormData(data);
+
+            for(var key in data) {
+                formData.append(key, data[key]);
+            }
+
+            post(`media/${data.id}/update`, formData)
+                .then(res => {
+                    resolve(res.data);
+                })
+                .catch(err => {
+                    reject(err);
+                });
+        });
+    },
+    deleteMedia({commit, state}, id) {
+        return new Promise((resolve, reject) => {
+            del(`media/${id}/delete`)
                 .then(res => {
                     resolve(res.data);
                 })

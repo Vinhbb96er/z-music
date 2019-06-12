@@ -169,7 +169,8 @@ class MediaController extends BaseApiController
                         'user',
                         'kinds',
                         'region',
-                        'media'
+                        'media',
+                        'tags'
                     ],
                     'load_user_followers' => true,
                 ]);
@@ -183,7 +184,8 @@ class MediaController extends BaseApiController
                         'user',
                         'album',
                         'kinds',
-                        'region'
+                        'region',
+                        'tags'
                     ],
                     'load_user_followers' => true,
                 ]);
@@ -352,7 +354,6 @@ class MediaController extends BaseApiController
     public function store(Request $request)
     {
         DB::beginTransaction();
-        $data = [];
 
         try {
             $data = $request->only(
@@ -393,6 +394,66 @@ class MediaController extends BaseApiController
             if (isset($data['cover_image'])) {
                 $this->deleteImage($data['cover_image']);
             }
+
+            return response()->json(false, Response::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function update(Request $request, $id)
+    {
+        DB::beginTransaction();
+
+        try {
+            $data = $request->only(
+                'name',
+                'region_id',
+                'type',
+                'lyrics',
+                'karaoke_lyrics'
+            );
+
+            $data['user_id'] = Auth::user()->id;
+            $kinds = $request->get('kinds');
+            $tags = $request->get('tags');
+            $dataKinds = isset($kinds) ? explode(',', $kinds) : [];
+            $dataTags = isset($tags) ? explode(',', $tags) : [];
+
+            if ($request->hasFile('cover_image')) {
+                $data['cover_image'] = $this->uploadImage($request->file('cover_image'));
+            }
+
+            $this->mediaRepository->updateMedia($id, $data, $dataKinds, $dataTags);
+
+            DB::commit();
+            return response()->json(true, Response::HTTP_OK);
+        } catch (Exception $e) {
+            DB::rollback();
+            report($e);
+
+            if (isset($data['path_media'])) {
+                $this->deleteMediaFile($data['path_media']);
+            }
+
+            if (isset($data['cover_image'])) {
+                $this->deleteImage($data['cover_image']);
+            }
+
+            return response()->json(false, Response::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function destroy(Request $request, $id)
+    {
+        DB::beginTransaction();
+
+        try {
+            $this->mediaRepository->deleteMedia($id);
+
+            DB::commit();
+            return response()->json(true, Response::HTTP_OK);
+        } catch (Exception $e) {
+            DB::rollback();
+            report($e);
 
             return response()->json(false, Response::HTTP_NOT_FOUND);
         }

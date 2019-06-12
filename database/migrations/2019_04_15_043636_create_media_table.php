@@ -22,6 +22,7 @@ class CreateMediaTable extends Migration
             $table->string('name');
             $table->tinyInteger('type');
             $table->text('lyrics')->nullable();
+            $table->text('karaoke_lyrics')->nullable();
             $table->string('artist_name')->nullable();
             $table->string('lyrics_contributer_name')->nullable();
             $table->string('cover_image')->nullable();

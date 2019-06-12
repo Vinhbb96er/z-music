@@ -9,7 +9,7 @@
                         <div class="ms_width_off50 report-content">
                             <form @submit.prevent="submitReport" data-vv-scope="form-login">
                                 <div class="form-group kf_commet_field">
-                                    <label class="input-title">{{ $t('media.type') }}:</label>
+                                    <label class="input-title">Chọn nội dung báo cáo:</label>
                                     <div class="forms">
                                         <label for="rdo1">
                                             <input type="radio" name="type" value="Nội dung không phù hợp"  checked id="rdo1" v-model="content">
@@ -44,7 +44,7 @@
                                     </div>
                                     <span class="error"></span>
                                 </div>
-                                <div>
+                                <div class="text-right">
                                     <button type="submit" class="btn btn-info">Gửi</button>
                                 </div>
                             </form>
@@ -78,11 +78,9 @@
             ...mapActions(['reportMedia']),
             submitReport() {
                 confirmInfo({message: 'Bạn có chắc chắn muốn báo cáo không'}, () => {
-                    this.reportFunc(this.content).then(res => {
+                    this.reportFunc(this.content, () => {
                         $('#report-form').modal('hide');
                         this.content = 'Nội dung không phù hợp';
-                    }).catch(err => {
-                        reject(err);
                     });
                 });
             }

@@ -52,5 +52,6 @@ return [
         'music_playing' => '/frontend/images/music-playing.gif',
         'user_avatar_default' => '/frontend/images/user_avatar_default.png',
         'user_background_default' => '/frontend/images/user_bg_default.png',
+        'media_cover_image_default' => '/frontend/images/media_cover_image_default.jpg'
     ]
 ];

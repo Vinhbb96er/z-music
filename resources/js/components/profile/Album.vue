@@ -9,7 +9,10 @@
                 </div>
             </div>
             <div>
-                <div class="tab-pane active" v-for="album in mediaSearch.data" :key="album.id">
+                <div class="tab-pane active" v-if="!mediaSearch.data.length">
+                    {{ $t('home.no_results') }}
+                </div>
+                <div class="tab-pane active" v-for="album in mediaSearch.data" :key="album.id" v-else>
                     <div class="album-outer">
                         <!--Music Album List Thumb Start-->
                         <div class="album-list-thumb-outer">

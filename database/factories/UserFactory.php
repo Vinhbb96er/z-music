@@ -117,7 +117,7 @@ $factory->define(Media::class, function (Faker $faker) use ($musicData, $videoDa
         'album_id' => $albumId,
         'region_id' => Region::all()->random()->id,
         'user_id' => User::all()->random()->id,
-        'url' => empty($music) ? $video : $music['url'],
+        'url' => empty($music) ? $video : 'https://www.dropbox.com/s/rr1fgy0vt10mpk2/7OBIAdjXyXKgadqX6t3LZ254EumNqzWYGRw8j7R2.mpga?dl=1',
         'name' => empty($music) ? implode(' ', $faker->words(3)) : $faker->bothify($music['name'] . ' (#?)'),
         'type' => $type,
         'lyrics' => '',
@@ -127,7 +127,6 @@ $factory->define(Media::class, function (Faker $faker) use ($musicData, $videoDa
         'views' => $faker->numberBetween(100, 10000),
         'lyrics_contributer_name' => User::all()->random()->name,
         'path_media' => '',
-        'path_image' => ''
     ];
 });
 

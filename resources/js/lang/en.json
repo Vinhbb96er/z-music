@@ -43,7 +43,8 @@
         "tag_placeholder": "Search and add tag...",
         "lyrics_placeholder": "Type lyrics...",
         "upload_title": "Upload Music/Video/Album",
-        "music_video": "Music/Video"
+        "music_video": "Music/Video",
+        "karaoke_lyrics": "Karaoke"
     },
     "album": {
         "name": "Album",
@@ -80,7 +81,8 @@
         "comment": "Comment",
         "cancel": "Cancel",
         "edit": "Edit",
-        "upload": "Upload"
+        "upload": "Upload",
+        "save": "Save"
     },
     "playlist": {
         "name": "Playlist",
@@ -109,11 +111,17 @@
         "register_success": "Register new account success",
         "register_failed": "Failed! Email has been taken!",
         "register_error": "Register failed! Try again!",
-        "confirm_upload_media": "Are you sure want to upload Music/Video/Album?",
+        "confirm_upload_media": "Are you sure want to upload Music/Video?",
         "upload_media_success": "Upload success! Waiting for Administrator approve!",
         "upload_media_failed": "Upload failed! Try again!",
         "success": "Success!",
-        "failed": "Failed! Try again!"
+        "failed": "Failed! Try again!",
+        "confirm_delete_media": "Are you sure want to delete Music/Video?",
+        "delete_media_success": "Delete Music/Video success! If you want restore this Music/Video then contact Admin!",
+        "delete_media_failed": "Delete failed! Try again!",
+        "confirm_update_media": "Are you sure want to update Music/Video?",
+        "update_media_success": "Update Music/Video success!",
+        "update_media_failed": "Update failed! Try again!"
     },
     "auth": {
         "sign_in": "Sign in",

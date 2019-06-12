@@ -118,24 +118,16 @@
                 <div class="clear"></div>
                 <ul class="action-group-icon">
                     <router-link tag="li" :to="{name: 'musicDetail', params: {id: playlist[playingIndex].id}}">
-                        <a class="liked" @click.prevent>
-                            <i role="button" class="fa fa-info"></i>
-                        </a>
+                        <i role="button" class="fa fa-info"></i>
                     </router-link>
                     <li>
-                        <a class="liked">
-                            <i role="button" class="fa fa-heart-o"></i>
-                        </a>
+                        <i role="button" class="fa fa-heart-o"></i>
                     </li>
-                    <li>
-                        <a class="">
-                            <i role="button" class="fa fa-plus"></i>
-                        </a>
+                    <li :class="{'btn-active': karaokeMode}" @click="changeKaraokeMode">
+                        <i role="button" class="fa fa-microphone"></i>
                     </li>
-                    <li @click.prevent="downloadMedia(music.id)">
-                        <a role="button">
-                            <i role="button" class="fa fa-download"></i>
-                        </a>
+                    <li @click.prevent="downloadMedia(playlist[playingIndex].id)">
+                        <i role="button" class="fa fa-download"></i>
                     </li>
                 </ul>
                 <div class="music-info-block">
@@ -147,21 +139,26 @@
                             {{ playlist[playingIndex].user.name }}
                         </router-link>
                     </div>
+                    <div class="music-album" v-if="playlist[playingIndex].album">
+                        {{ $t('album.name') }}:
+                        <router-link tag="a" :to="{name: 'albumDetail', params: {id: playlist[playingIndex].album.id}}" role="button">
+                            {{ playlist[playingIndex].album.name }}
+                        </router-link>
+                    </div>
+                    <div class="music-kind">
+                        {{ $t('home.kind') }}:
+                        <a role="button" class="" href="#">
+                            {{ playlist[playingIndex].kinds_text }}
+                        </a>
+                    </div>
                     <div class="music-info">
-                        <div class="music-album" v-if="playlist[playingIndex].album">
-                            {{ $t('album.name') }}:
-                            <router-link tag="a" :to="{name: 'albumDetail', params: {id: playlist[playingIndex].album.id}}" role="button">
-                                {{ playlist[playingIndex].album.name }}
-                            </router-link>
-                        </div>
-                        <div class="music-kind">
-                            {{ $t('home.kind') }}:
-                            <a role="button" class="" href="#">
-                                {{ playlist[playingIndex].kinds_text }}
-                            </a>
-                        </div>
-                        <div class="music-lyrics">
+                        <div class="music-lyrics" v-show="!karaokeMode">
                             <p>{{ playlist[playingIndex].lyrics }}</p>
+                        </div>
+                        <div class="music-lyrics content" v-show="karaokeMode">
+                            <div class="lyrics">
+                                <div v-for="item in playlist[playingIndex].karaoke_lyrics">{{ item.line }}</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -171,6 +168,7 @@
 </template>
 <script>
     import {mapGetters} from 'vuex'
+    import {mapMutations} from 'vuex'
     import {mapActions} from 'vuex'
 
     export default {
@@ -179,7 +177,7 @@
                 images: {
                     track: window.Laravel.setting.images.track,
                     music_playing: window.Laravel.setting.images.music_playing
-                }
+                },
             }
         },
         computed: {
@@ -189,10 +187,12 @@
                 'randomMode',
                 'playingIndex',
                 'playlistLength',
-                'isPlaying'
+                'isPlaying',
+                'karaokeMode'
             ])
         },
         methods: {
+            ...mapMutations(['changeKaraokeMode']),
             ...mapActions([
                 'changeRepeatMode',
                 'changeRandomMode',
@@ -203,7 +203,7 @@
                 'removeMusicFromPlaylist',
                 'downloadMedia',
                 'addFavouriteList',
-                'removeAll'
+                'removeAll',
             ]),
             clickPlayMusic(index) {
                 if (index !== this.playingIndex) {
@@ -279,9 +279,19 @@
                 $('.music-player-element, music-playlist-element').addClass('hidden');
                 $('.playlist-container').append(`<p class="no-support">${$('#music-player').text()}</p>`);
             }
+        },
+        updated() {
+            var lyricHeight = $('.lyrics').height();
+
+            $(window).on('resize', function() {
+                if ($('.lyrics').height() != lyricHeight) {
+                    lyricHeight = $('.lyrics').height();
+                    alignKaraokeLyrics();
+                }
+            });
         }
     }
 </script>
-<style scoped>
+<style>
 
 </style>

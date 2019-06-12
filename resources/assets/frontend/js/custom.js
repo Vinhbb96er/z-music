@@ -718,13 +718,13 @@ function hideAnimationLoader() {
     $('.modal-backdrop').css('z-index', '');
 }
 
-function alignKaraokeLyrics() {
-    let a = $('.highlighted').height();
-    let c = $('.content').height();
-    let d = $('.highlighted').offset().top - $('.highlighted').parent().offset().top;
+function alignKaraokeLyrics(element) {
+    let a = $(element).find('.highlighted').height();
+    let c = $(element).height();
+    let d = $(element).find('.highlighted').offset().top - $(element).find('.highlighted').parent().offset().top;
     let e = d + (a / 2) - (c / 2);
 
-    $('.content').animate(
+    $(element).animate(
         {scrollTop: e + 'px'}, {easing: 'swing', duration: 250}
     );
 }

@@ -26,7 +26,8 @@ class Media extends Model
     ];
 
     protected $appends = [
-        'kinds_text'
+        'kinds_text',
+        'lyrics_text'
     ];
 
     public function favourites()
@@ -94,9 +95,9 @@ class Media extends Model
         return implode(', ', $this->kinds->pluck('name')->all());
     }
 
-    public function getLyricsAttribute()
+    public function getLyricsTextAttribute()
     {
-        return empty($this->attributes['lyrics']) ? trans('admin.empty_lyrics') : $this->attributes['lyrics'];
+        return empty($this->attributes['lyrics']) ? trans('admin.empty_lyrics') : nl2br(e($this->attributes['lyrics']));
     }
 
     public function getKaraokeLyricsAttribute()

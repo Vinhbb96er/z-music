@@ -12,6 +12,7 @@ const state = {
     mediaSuggest: [],
     mediaSearch: null,
     favouriteList: null,
+    listVideoView: []
 }
 
 const getters = {
@@ -83,6 +84,9 @@ const mutations = {
     },
     setFavouriteList(state, payload) {
         state.favouriteList = payload;
+    },
+    setListVideoView(state, id) {
+        state.listVideoView.push(id);
     }
 }
 
@@ -131,7 +135,7 @@ const actions = {
                 });
         });
     },
-    getMediaDetail({commit, dispatch}, data) {
+    getMediaDetail({commit, dispatch, state}, data) {
         return new Promise((resolve, reject) => {
             get(`media/${data.id}/show?type=${data.type}`)
                 .then(res => {
@@ -156,13 +160,20 @@ const actions = {
                         size = 9;
                     }
 
+                    let videoList = '';
+
+                    if (data.type == 2 && state.listVideoView.length) {
+                        videoList = state.listVideoView.join(',');
+                    }
+
                     dispatch('getMediaSuggest', {
                         type: type,
                         artist: res.data.user_id,
                         region: res.data.region_id,
                         media_id: mediaId,
                         kind: kindIds,
-                        size: size
+                        size: size,
+                        video_list: videoList
                     });
 
                     resolve();

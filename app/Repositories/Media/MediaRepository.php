@@ -187,7 +187,7 @@ class MediaRepository extends BaseRepository implements MediaInterface
 
             if (in_array('comments', $params['eagle_loading'])) {
                 $query->with(['comments' => function ($query) {
-                    $query->where('reply_id', 0)->with(['user', 'replies.user']);
+                    $query->where('reply_id', 0)->where('status', 1)->with(['user', 'replies.user']);
                 }]);
                 $params['eagle_loading'] = array_diff($params['eagle_loading'], ['comments']);
             }
@@ -221,7 +221,7 @@ class MediaRepository extends BaseRepository implements MediaInterface
 
             if (in_array('comments', $params['eagle_loading'])) {
                 $query->with(['comments' => function ($query) {
-                    $query->where('reply_id', 0)->with(['user', 'replies.user']);
+                    $query->where('reply_id', 0)->where('status', 1)->with(['user', 'replies.user']);
                 }]);
                 $params['eagle_loading'] = array_diff($params['eagle_loading'], ['comments']);
             }
@@ -263,7 +263,7 @@ class MediaRepository extends BaseRepository implements MediaInterface
 
             if (in_array('comments', $params['eagle_loading'])) {
                 $query->with(['comments' => function ($query) {
-                    $query->where('reply_id', 0)->with(['user', 'replies.user']);
+                    $query->where('reply_id', 0)->where('status', 1)->with(['user', 'replies.user']);
                 }]);
                 $params['eagle_loading'] = array_diff($params['eagle_loading'], ['comments']);
             }
@@ -280,7 +280,7 @@ class MediaRepository extends BaseRepository implements MediaInterface
 
     public function getMediaComment($mediaId, $size = 5)
     {
-        return $this->model->findOrFail($mediaId)->comments()->where('reply_id', 0)->with(['user', 'replies.user'])->orderBy('created_at', 'desc')->paginate($size);
+        return $this->model->findOrFail($mediaId)->comments()->where('reply_id', 0)->where('status', 1)->with(['user', 'replies.user'])->orderBy('created_at', 'desc')->paginate($size);
     }
 
     public function getMediaSuggest($params)
@@ -291,6 +291,11 @@ class MediaRepository extends BaseRepository implements MediaInterface
 
         if (isset($params['type'])) {
             $query->where('type', $params['type']);
+
+            if ($params['type'] == 2 && !empty($params['video_list'])) {
+                $videoListId = explode(',', $params['video_list']);
+                $query->whereNotIn('id', $videoListId);
+            }
         }
 
         $query->where(function ($query) use ($params) {

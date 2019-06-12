@@ -243,7 +243,7 @@
                         currentLine = past.length;
                         $('.edit-media-content .lyrics div').removeClass('highlighted');
                         $(`.edit-media-content .lyrics div:nth-child(${past.length})`).addClass('highlighted');
-                        alignKaraokeLyrics();
+                        alignKaraokeLyrics($('.edit-media-content .content'));
                     }
                 });
             }

@@ -548,6 +548,51 @@ $(document).ready(function(){
             });
         });
     });
+
+    $(document).on('change', '.comment-status', function () {
+        if ($(this).val() == $(this).data('old')) {
+            $(this).removeClass('changed');
+        } else {
+            $(this).addClass('changed');
+        }
+    });
+
+    $('.change-comment-status').on('click', function () {
+        var data = [];
+
+        $('select.comment-status.changed').each(function () {
+            data.push({
+                id: $(this).data('comment'),
+                status: $(this).val()
+            })
+        });
+
+        if (!data.length) {
+            alertWarning({message: 'Bạn chưa thay đổi trạng thái nào!'});
+
+            return false;
+        }
+
+        confirmInfo({message: 'Bạn có chắc chắn muốn thay đổi tất cả trạng thái này?'}, function () {
+            $.ajax({
+                url: '/ajax/comment/change-status',
+                method: 'POST',
+                data: {
+                    commentData: data
+                }
+            }).done(function (data) {
+                if (data.success) {
+                    alertSuccess({message: data.message}, function () {
+                        location.reload();
+                    });
+                } else {
+                    alertDanger({message: data.message}, function () {
+                        location.reload();
+                    });
+                }
+            });
+        });
+    });
 });
 
 function showAnimationLoader() {

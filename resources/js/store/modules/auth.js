@@ -50,13 +50,14 @@ const mutations = {
 }
 
 const actions = {
-    login({commit, state}, data) {
+    login({commit, state, dispatch}, data) {
         return new Promise((resolve, reject) => {
             post('login', data)
                 .then((res) => {
                     commit('setAuthenticated', res.data);
                     resolve(state.authenticated);
-                    location.reload();
+                    dispatch('getAuth');
+                    // location.reload();
                 })
                 .catch((err) => {
                     reject(err);

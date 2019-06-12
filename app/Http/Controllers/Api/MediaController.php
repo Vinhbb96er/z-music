@@ -227,7 +227,8 @@ class MediaController extends BaseApiController
                 'region',
                 'type',
                 'size',
-                'media_id'
+                'media_id',
+                'video_list'
             );
 
             $data = $this->mediaRepository->getMediaSuggest($params);

@@ -120,7 +120,7 @@
                     <router-link tag="li" :to="{name: 'musicDetail', params: {id: playlist[playingIndex].id}}">
                         <i role="button" class="fa fa-info"></i>
                     </router-link>
-                    <li>
+                    <li @click.prevent="likeMediaFunc({id: playlist[playingIndex].id, type: 1})" :class="{'btn-active': user && checkLiked(playlist[playingIndex].id, user.like_data.media)}">
                         <i role="button" class="fa fa-heart-o"></i>
                     </li>
                     <li :class="{'btn-active': karaokeMode}" @click="changeKaraokeMode">
@@ -153,7 +153,7 @@
                     </div>
                     <div class="music-info">
                         <div class="music-lyrics" v-show="!karaokeMode">
-                            <p>{{ playlist[playingIndex].lyrics }}</p>
+                            <p v-html="playlist[playingIndex].lyrics_text"></p>
                         </div>
                         <div class="music-lyrics content" v-show="karaokeMode">
                             <div class="lyrics">
@@ -188,7 +188,10 @@
                 'playingIndex',
                 'playlistLength',
                 'isPlaying',
-                'karaokeMode'
+                'karaokeMode',
+                'checkLiked',
+                'user',
+                'authenticated'
             ])
         },
         methods: {
@@ -204,6 +207,7 @@
                 'downloadMedia',
                 'addFavouriteList',
                 'removeAll',
+                'likeMedia'
             ]),
             clickPlayMusic(index) {
                 if (index !== this.playingIndex) {
@@ -267,6 +271,13 @@
                 $(document).on('click', '#music-playlist table tbody tr', function () {
                     clickPlayMusicFunc(parseInt($(this).index()));
                 });
+            },
+            likeMediaFunc(data) {
+                if (!this.authenticated) {
+                    $(document).click();
+                }
+
+                this.likeMedia(data);
             }
         },
         mounted() {
@@ -284,9 +295,9 @@
             var lyricHeight = $('.lyrics').height();
 
             $(window).on('resize', function() {
-                if ($('.lyrics').height() != lyricHeight) {
-                    lyricHeight = $('.lyrics').height();
-                    alignKaraokeLyrics();
+                if ($('.playlist-container .lyrics').height() != lyricHeight) {
+                    lyricHeight = $('.playlist-container .lyrics').height();
+                    alignKaraokeLyrics($('.playlist-container .content'));
                 }
             });
         }

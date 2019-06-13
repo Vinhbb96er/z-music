@@ -32,7 +32,7 @@
                 </div>
             </div>
             <div class="text lyrics-content">
-                <div class="lyrics-header">
+                <!-- <div class="lyrics-header">
                     <div>{{ $t('music.contribute_by') }} <span class="contributer">{{ video.lyrics_contributer_name }}</span></div>
                     <div class="btn-contribute-lyrics">
                         <a href="#">
@@ -40,8 +40,8 @@
                             {{ $t('button.contribute_lyrics') }}
                         </a>
                     </div>
-                </div>
-                <p>{{ video.lyrics }}</p>
+                </div> -->
+                <p v-html="video.lyrics_text"></p>
             </div>
         </div>
     </div>

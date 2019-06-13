@@ -45,7 +45,7 @@
             <th>@lang('admin.owner')</th>
             <th>Số lượng báo cáo</th>
             <th>Nội dung báo cáo</th>
-            <th>Status</th>
+            <th>@lang('admin.status')</th>
           </tr>
         </thead>
         <tbody>

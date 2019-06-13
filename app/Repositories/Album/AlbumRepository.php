@@ -173,7 +173,7 @@ class AlbumRepository extends BaseRepository implements AlbumInterface
 
                 if (in_array('comments', $params['eagle_loading'])) {
                     $query->with(['comments' => function ($query) {
-                        $query->where('reply_id', 0)->with(['user', 'replies.user']);
+                        $query->where('reply_id', 0)->where('status', 1)->with(['user', 'replies.user']);
                     }]);
                     $params['eagle_loading'] = array_diff($params['eagle_loading'], ['comments']);
                 }
@@ -223,7 +223,7 @@ class AlbumRepository extends BaseRepository implements AlbumInterface
 
     public function getAlbumComment($mediaId, $size = 5)
     {
-        return $this->model->findOrFail($mediaId)->comments()->where('reply_id', 0)->with(['user', 'replies.user'])->paginate($size);
+        return $this->model->findOrFail($mediaId)->comments()->where('reply_id', 0)->where('status', 1)->with(['user', 'replies.user'])->paginate($size);
     }
 
     public function like($data)

@@ -1,5 +1,5 @@
 <template>
-    <div id="report-form" class="modal fade" role="dialog" v-if="authenticated">
+    <div id="report-form" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->
             <div class="modal-content">

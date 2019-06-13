@@ -117,7 +117,7 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li><a href="#">Liên hệ</a></li>
+                            <!-- <li><a href="#">Liên hệ</a></li> -->
                         </ul>
                     </div>
                 </div>
@@ -172,7 +172,7 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li><a href="#">Liên hệ</a></li>
+                            <!-- <li><a href="#">Liên hệ</a></li> -->
                         </ul>
                     </nav>
                 </div>

@@ -34,14 +34,14 @@
             <div class="text lyrics-content">
                 <div class="lyrics-header">
                     <div>{{ $t('music.contribute_by') }} <span class="contributer">{{ music.lyrics_contributer_name }}</span></div>
-                    <div class="btn-contribute-lyrics">
+                    <!-- <div class="btn-contribute-lyrics">
                         <a href="#">
                             <i class="fa fa-file-text-o"></i>
                             {{ $t('button.contribute_lyrics') }}
                         </a>
-                    </div>
+                    </div> -->
                 </div>
-                <p>{{ music.lyrics }}</p>
+                <p v-html="music.lyrics_text"></p>
             </div>
         </div>
     </div>

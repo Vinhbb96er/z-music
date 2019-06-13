@@ -154,7 +154,7 @@ const actions = {
                 state.currentLine = past.length;
                 $('.playlist-container .lyrics div').removeClass('highlighted');
                 $(`.playlist-container .lyrics div:nth-child(${past.length})`).addClass('highlighted');
-                alignKaraokeLyrics();
+                alignKaraokeLyrics($('.playlist-container .content'));
             }
 
         }).on('pause', function () {

@@ -36,7 +36,17 @@
             <span class="fa-angle-right fa right-arrow text-right"></span>
           </a>
           <ul class="nav nav-list tree">
-            <li><a href="#">@lang('admin.left_bar.comment_list')</a></li>
+            <li><a href="{{ route('comment.index') }}">@lang('admin.left_bar.comment_list')</a></li>
+          </ul>
+        </li>
+        <li class="ripple">
+          <a class="tree-toggle nav-header">
+            <span class="fa-bars fa"></span> Quản lý danh mục
+            <span class="fa-angle-right fa right-arrow text-right"></span>
+          </a>
+          <ul class="nav nav-list tree">
+            <li><a href="{{ route('comment.index') }}">Thể loại</a></li>
+            <li><a href="{{ route('comment.index') }}">Thẻ</a></li>
           </ul>
         </li>
       </ul>

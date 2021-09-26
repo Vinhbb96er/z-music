@@ -232,7 +232,7 @@ const actions = {
     uploadMedia({commit, state}, data) {
         return new Promise((resolve, reject) => {
             axios.defaults.headers.common['Content-Type'] = 'multipart/form-data';
-            let formData = new FormData(data);
+            let formData = new FormData();
 
             for(var key in data) {
                 formData.append(key, data[key]);

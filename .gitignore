@@ -21,3 +21,5 @@ Homestead.json
 public/frontend
 public/fonts
 public/mix-manifest.json
+.docker/data
+.idea/

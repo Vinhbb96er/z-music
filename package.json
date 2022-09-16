@@ -23,7 +23,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
-        "bootstrap": "^3.3.5",
+        "bootstrap": "^3.4.1",
         "bootstrap-tagsinput": "^0.7.1",
         "font-awesome": "^4.7.0",
         "ngx-plyr": "^1.2.1",
